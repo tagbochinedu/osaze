@@ -1,0 +1,279 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+.marquee {
+  transform: translateX(100%);
+  animation: 30s linear 0s infinite normal none running my-animation;
+}
+
+@keyframes my-animation {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+#Collection {
+  background-position: center;
+  background-repeat: no-repeat;
+  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+    url(./Resources/collections.jpg);
+}
+
+.flip-card {
+  background-color: transparent;
+  perspective: 1000px;
+}
+
+.flip-card-inner {
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+  border-radius: 8px;
+}
+
+.flip-card-front,
+.flip-card-back {
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.footer {
+  background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)),
+    url(./Resources/footer.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.flip-card-back {
+  transform: rotateY(180deg);
+}
+
+.swiper {
+  width: 100%;
+  height: 85vh;
+}
+
+
+.slider1 {
+  background-image: url(./Resources/ss1.jpeg);
+  background-repeat: no-repeat;
+  background-position: center top;
+  background-size: contain;
+  background-color: rgb(32, 4, 19);
+  color: rgb(255, 255, 255);
+  height: 100%;
+}
+
+.slider2 {
+  background-image: url(./Resources/ss2-2.jpeg), url(./Resources/ss2-1.jpeg);
+  background-repeat: no-repeat;
+  background-position: left bottom, right top;
+  background-size: contain;
+  background-color: rgb(237, 193, 149);
+  color: rgb(255, 255, 255);
+  height: 100%;
+}
+
+.slider3 {
+  background-image: url(./Resources/ss3.png);
+  background-repeat: no-repeat;
+  background-position: center top;
+  background-size: contain;
+  background-color: rgb(43, 20, 7);
+  color: rgb(255, 255, 255);
+  height: 100%;
+}
+
+.slider4 {
+  background-image: url(./Resources/ss4-1.jpeg), url(./Resources/ss4-2.jpeg);
+  background-repeat: no-repeat;
+  background-position: left bottom, right top;
+  background-size: contain;
+  background-color: rgb(29, 17, 16);
+  color: rgb(255, 255, 255);
+  height: 100%;
+}
+
+@media (max-width: 1024px) {
+  .swiper {
+    width: 100%;
+    height: 100vh;
+  }
+
+  .slider1 {
+    background-image: url(./Resources/ss1.jpeg);
+    background-repeat: no-repeat;
+    background-position: center top;
+    background-size: cover;
+    background-color: rgb(32, 4, 19);
+    color: rgb(255, 255, 255);
+    height: 100%;
+  }
+
+  .slider2 {
+    background-image: url(./Resources/ss2-2.jpeg);
+    background-repeat: no-repeat;
+    background-position: center top;
+    background-size: cover;
+    background-color: rgb(237, 193, 149);
+    color: rgb(255, 255, 255);
+    height: 100%;
+  }
+
+  .slider3 {
+    background-image: url(./Resources/ss3.png);
+    background-repeat: no-repeat;
+    background-position: center top;
+    background-size: cover;
+    background-color: rgb(43, 20, 7);
+    color: rgb(255, 255, 255);
+    height: 100%;
+  }
+
+  .slider4 {
+    background-image: url(./Resources/ss4-1.jpeg);
+    background-repeat: no-repeat;
+    background-position: center top;
+    background-size: cover;
+    background-color: rgb(29, 17, 16);
+    color: rgb(255, 255, 255);
+    height: 100%;
+  }
+}
+
+/*FILTER DESIGNERS SCROLLBAR*/
+.scrollbar::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+.scrollbar::-webkit-scrollbar-thumb {
+  background: white;
+  border-radius: 100vh;
+}
+
+
+/*PRICE RANGE NUMBER BUTTONS*/
+.number::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+/*PRICE RANGE SCROLLBAR*/
+input[type=range] {
+  height: 0;
+  -webkit-appearance: none;
+  margin: 10px 0;
+  width: 100%;
+}
+input[type=range]:focus {
+  outline: none;
+}
+input[type=range]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 6px;
+  cursor: pointer;
+  background: #FFFFFF;
+  border-radius: 4px;
+  border: 2px solid #FFFFFF;
+}
+input[type=range]::-webkit-slider-thumb {
+
+  border: 2px solid #293355;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  background: #293355;
+  cursor: pointer;
+  -webkit-appearance: none;
+  margin-top: -11px;
+}
+input[type=range]:focus::-webkit-slider-runnable-track {
+  background: #FFFFFF;
+}
+input[type=range]::-moz-range-track {
+  width: 100%;
+  height: 12px;
+  cursor: pointer;
+ 
+  background: #FFFFFF;
+  border-radius: 4px;
+  border: 2px solid #FFFFFF;
+}
+input[type=range]::-moz-range-thumb {
+  box-shadow: 1px 1px 2px #A6A6A6;
+  border: 2px solid #293355;
+  height: 15px;
+  width: 15px;
+  border-radius: 0px;
+  background: #293355;
+  cursor: pointer;
+}
+input[type=range]::-ms-track {
+  width: 100%;
+  height: 12px;
+  cursor: pointer;
+  background: transparent;
+  border-color: transparent;
+  color: transparent;
+}
+input[type=range]::-ms-fill-lower {
+  background: #FFFFFF;
+  border: 2px solid #FFFFFF;
+  border-radius: 8px;
+ 
+}
+input[type=range]::-ms-fill-upper {
+  background: #FFFFFF;
+  border: 2px solid #FFFFFF;
+  border-radius: 8px; 
+}
+input[type=range]::-ms-thumb {
+  margin-top: 1px;
+  border: 2px solid #293355;
+  height: 15px;
+  width: 15px;
+  border-radius: 0px;
+  background: #293355;
+  cursor: pointer;
+}
+
+/*designers-only page*/
+.designers-only1 {
+  transform: translate3d(9px, 0px, 0px);
+}
+.designers-only2 {
+  transform: translate3d(344px, 0px, 0px);
+}
+.designers-only3 {
+  transform: translate3d(679px, 0px, 0px);
+}
+.designers-only4 {
+  transform: translate3d(1014px, 0px, 0px);
+}
+.designers-only5 {
+  transform: translate3d(9px, 227px, 0px);
+}
+.designers-only6 {
+  transform: translate3d(344px, 428px, 0px);
+}
