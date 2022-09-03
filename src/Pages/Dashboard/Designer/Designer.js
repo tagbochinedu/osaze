@@ -6,13 +6,41 @@ import Card from "../../../Components/UI/Card";
 
 const Designer = () => {
   const [images, setImages] = useState([]);
+  const [color, setColor] = useState("");
   const [imageDetails, setImageDetails] = useState({
     name: "",
     price: "",
     desc: "",
     image: undefined,
+    colors: [],
+    size: [],
   });
   const { setImageFullScreen, setImageSource } = useImageAuth();
+
+  const sizeChangeHandler = (e) => {
+    if (e.target.checked === true) {
+      setImageDetails({
+        name: imageDetails.name,
+        price: imageDetails.price,
+        desc: imageDetails.desc,
+        image: imageDetails.image,
+        size: [...imageDetails.size, e.target.value],
+        colors: imageDetails.colors,
+      });
+    } else {
+      const removeSize = imageDetails.size.filter((check) => {
+        return e.target.value !== check;
+      });
+      setImageDetails({
+        name: imageDetails.name,
+        price: imageDetails.price,
+        desc: imageDetails.desc,
+        image: imageDetails.image,
+        size: removeSize,
+        colors: imageDetails.colors,
+      });
+    }
+  };
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -23,6 +51,8 @@ const Designer = () => {
       price: 0,
       desc: "",
       image: undefined,
+      colors: [],
+      size: [],
     });
   };
 
@@ -179,6 +209,8 @@ const Designer = () => {
                               price: imageDetails.price,
                               desc: imageDetails.desc,
                               image: imageDetails.image,
+                              size: imageDetails.size,
+                              colors: imageDetails.colors,
                             });
                           }}
                           value={imageDetails.name}
@@ -202,6 +234,8 @@ const Designer = () => {
                               price: parseInt(e.target.value),
                               desc: imageDetails.desc,
                               image: imageDetails.image,
+                              size: imageDetails.size,
+                              colors: imageDetails.colors,
                             });
                           }}
                           value={imageDetails.price}
@@ -226,6 +260,8 @@ const Designer = () => {
                             price: imageDetails.price,
                             desc: e.target.value,
                             image: imageDetails.image,
+                            size: imageDetails.size,
+                            colors: imageDetails.colors,
                           });
                         }}
                         value={imageDetails.desc}
@@ -238,6 +274,165 @@ const Designer = () => {
                         Item Description
                       </label>
                     </div>
+                    <div className="relative z-0 mb-6 flex">
+                      <input
+                        type="text"
+                        className="block py-2.5 px-0 w-1/2 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-header peer"
+                        placeholder=" "
+                        onChange={(e) => {
+                          setColor(e.target.value);
+                        }}
+                        value={color}
+                      />
+                      <label
+                        htmlFor="floating_standard"
+                        className="absolute text-sm text-gray-500 duration-300 transform -translate-y-8 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-header peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-8"
+                      >
+                        Color
+                      </label>
+                      <button
+                        type="button"
+                        className="rounded text-white px-4 py-1 font-semibold bg-header active:bg-headerHover cursor-pointer ml-3"
+                        onClick={() => {
+                          setImageDetails({
+                            name: imageDetails.name,
+                            price: imageDetails.price,
+                            desc: imageDetails.desc,
+                            image: imageDetails.image,
+                            size: imageDetails.size,
+                            colors: [...imageDetails.colors, color],
+                          });
+                          setColor("");
+                        }}
+                      >
+                        ADD
+                      </button>
+                    </div>
+                    <div className="border-b border-white py-4 px-6 mx-auto">
+                      <h2 className="mb-2 ml-1 font-julius">Sizes</h2>
+                      <div className="form-check">
+                        <div className="my-2">
+                          <input
+                            className="form-check-input appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-headerHover focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
+                            type="checkbox"
+                            value="XS"
+                            id="flexCheckDefault1"
+                            onChange={sizeChangeHandler}
+                          />
+                          <label
+                            className="form-check-label inline-block text-gray-500"
+                            htmlFor="flexCheckDefault1"
+                          >
+                            XS
+                          </label>
+                        </div>
+                      </div>
+                      <div className="form-check">
+                        <div className="my-2">
+                          <input
+                            className="form-check-input appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-headerHover focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
+                            type="checkbox"
+                            value="S"
+                            id="flexCheckDefault2"
+                            onChange={sizeChangeHandler}
+                          />
+                          <label
+                            className="form-check-label inline-block text-gray-500"
+                            htmlFor="flexCheckDefault2"
+                          >
+                            S
+                          </label>
+                        </div>
+                      </div>
+                      <div className="form-check">
+                        <div className="my-2">
+                          <input
+                            className="form-check-input appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-headerHover focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
+                            type="checkbox"
+                            value="MD"
+                            id="flexCheckDefault3"
+                            onChange={sizeChangeHandler}
+                          />
+                          <label
+                            className="form-check-label inline-block text-gray-500"
+                            htmlFor="flexCheckDefault3"
+                          >
+                            MD
+                          </label>
+                        </div>
+                      </div>
+                      <div className="form-check ">
+                        <div className="my-2">
+                          <input
+                            className="form-check-input appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-headerHover focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
+                            type="checkbox"
+                            value="LG"
+                            id="flexCheckDefault4"
+                            onChange={sizeChangeHandler}
+                          />
+                          <label
+                            className="form-check-label inline-block text-gray-500"
+                            htmlFor="flexCheckDefault4"
+                          >
+                            LG
+                          </label>
+                        </div>
+                      </div>
+                      <div className="form-check">
+                        <div className="my-2">
+                          <input
+                            className="form-check-input appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-headerHover focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
+                            type="checkbox"
+                            value="XL"
+                            id="flexCheckDefault5"
+                            onChange={sizeChangeHandler}
+                          />
+                          <label
+                            className="form-check-label inline-block text-gray-500"
+                            htmlFor="flexCheckDefault5"
+                          >
+                            XL
+                          </label>
+                        </div>
+                      </div>
+                      <div className="form-check">
+                        <div className="my-2">
+                          <input
+                            className="form-check-input appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-headerHover focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
+                            type="checkbox"
+                            value="XXL"
+                            id="flexCheckDefault6"
+                            onChange={sizeChangeHandler}
+                          />
+                          <label
+                            className="form-check-label inline-block text-gray-500"
+                            htmlFor="flexCheckDefault6"
+                          >
+                            XXL
+                          </label>
+                        </div>
+                      </div>
+                      <div className="form-check">
+                        <div className="my-2">
+                          <input
+                            className="form-check-input appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-headerHover focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
+                            type="checkbox"
+                            value="custom"
+                            checked
+                            id="flexCheckDefault7"
+                            onChange={sizeChangeHandler}
+                          />
+                          <label
+                            className="form-check-label inline-block text-gray-500"
+                            htmlFor="flexCheckDefault7"
+                          >
+                            Custom Design(Please ensure to input your
+                            measurements on your profile page before using this
+                            option)
+                          </label>
+                        </div>
+                      </div>
+                    </div>
                     <div className="flex justify-end mb-2">
                       <input
                         type="reset"
@@ -249,6 +444,8 @@ const Designer = () => {
                             price: imageDetails.price,
                             desc: imageDetails.desc,
                             image: undefined,
+                            colors: imageDetails.colors,
+                            size: imageDetails.size,
                           });
                         }}
                       />
@@ -292,6 +489,8 @@ const Designer = () => {
                               price: imageDetails.price,
                               desc: imageDetails.desc,
                               image: e.target.files[0],
+                              colors: imageDetails.colors,
+                              size: imageDetails.size,
                             });
                           }}
                           required
