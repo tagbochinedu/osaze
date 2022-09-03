@@ -23,7 +23,7 @@ export const ImagePreview = [
 
 export const ImageGrid = [
   { name: "Princess", url: img1, id: 1, price: 250, designer: 'okwy', type: 'gown' },
-  { name: "Marry Me", url: img2, id: 2, price: 60, designer: 'okwy', type: 'suit'  },
+  { name: "Marry Me", url: img2, id: 2, price: 60, designer: 'okwy', type: 'Suits'  },
   { name: "Wed Me", url: img3, id: 3, price: 50, designer: 'okwy', type: 'gown' },
   { name: "Okay", url: img4, id: 4, price: 30, designer: 'nwando'},
   { name: "Emerald", url: img5, id: 5, price: 25, designer: 'nwando' },

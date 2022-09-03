@@ -8,40 +8,87 @@ import { ImageGrid } from "../../../Resources/Image";
 const MaleProducts = () => {
   const navigate = useNavigate();
   const [designerList, setDesignerList] = useState(DUMMY_DATA2);
+  const [menProducts, setMenProducts] = useState(ImageGrid);
   const [width, setWidth] = useState(window.innerWidth);
-
-  const grid = ImageGrid
 
   //SETTING UP THE FILTER
   const [filter, setFilter] = useState(false);
-  const [filterProducts, setFilterProducts] = useState({designers:[], category: [], range: 0})
+  const [filterProducts, setFilterProducts] = useState({
+    designers: [],
+    category: [],
+    range: 500000,
+  });
 
   const designerChangeHandler = (e) => {
     if (e.target.checked === true) {
-      setFilterProducts({designers: [...filterProducts.designers, e.target.value], category: [...filterProducts.category], range: filterProducts.range})
+      setFilterProducts({
+        designers: [...filterProducts.designers, e.target.value],
+        category: [...filterProducts.category],
+        range: filterProducts.range,
+      });
     } else {
-      const removeDesigner = filterProducts.designers.filter((check)=>{return e.target.value !== check})
-      setFilterProducts(
-        {designers:removeDesigner, category: [...filterProducts.category], range: filterProducts.range}
-      );
+      const removeDesigner = filterProducts.designers.filter((check) => {
+        return e.target.value !== check;
+      });
+      setFilterProducts({
+        designers: removeDesigner,
+        category: [...filterProducts.category],
+        range: filterProducts.range,
+      });
     }
   };
   const categoryChangeHandler = (e) => {
     if (e.target.checked === true) {
-      setFilterProducts({category: [...filterProducts.category, e.target.value], designers: [...filterProducts.designers], range: filterProducts.range})
+      setFilterProducts({
+        category: [...filterProducts.category, e.target.value],
+        designers: [...filterProducts.designers],
+        range: filterProducts.range,
+      });
     } else {
-      const removeCategory = filterProducts.category.filter((check)=>{return e.target.value !== check})
-      setFilterProducts(
-        {category:removeCategory, designers: [...filterProducts.designers], range: filterProducts.range}
-      );
+      const removeCategory = filterProducts.category.filter((check) => {
+        return e.target.value !== check;
+      });
+      setFilterProducts({
+        category: removeCategory,
+        designers: [...filterProducts.designers],
+        range: filterProducts.range,
+      });
     }
   };
   const priceRangeChangeHandler = (e) => {
-    setFilterProducts({designers: [...filterProducts.designers], category: [...filterProducts.category], range: parseInt(e.target.value)})
+    setFilterProducts({
+      designers: [...filterProducts.designers],
+      category: [...filterProducts.category],
+      range: parseInt(e.target.value),
+    });
   };
 
   //IMPLEMENTING THE FILTER
-  const imagegrid = ImageGrid.filter((check)=>{return filterProducts.designers.map((designer)=>{return check.designer === designer})})
+  const filterHandler = () => {
+    const filterItems = ImageGrid;
+    let filteredProducts = []
+    if (filterProducts.designers.length === 0) {
+      filteredProducts = filterItems
+    } else {
+    filteredProducts = filterItems.filter((item) => {
+      return filterProducts.designers.some((newitem) => {
+        return item.designer === newitem;
+      });
+    })}
+    const filteredProducts1 = filteredProducts.filter((item) => {
+      if (filterProducts.category.length === 0) {
+        return filteredProducts;
+      } else {
+        return filterProducts.category.some((newitem) => {
+          return item.type === newitem;
+        });
+      }
+    });
+    const finalStep = filteredProducts1.filter((item) => {
+      return item.price <= filterProducts.range;
+    });
+    setMenProducts(finalStep);
+  };
 
   //Screen-Resize Functionality
   const handleResize = () => {
@@ -49,8 +96,7 @@ const MaleProducts = () => {
   };
   useEffect(() => {
     window.addEventListener("resize", handleResize);
-    console.log(imagegrid)
-  }, [width, imagegrid]);
+  }, [width]);
 
   //Designer-Filter Functionality
   const filterChangeHandler = (e) => {
@@ -281,6 +327,7 @@ const MaleProducts = () => {
                 />
               </div>
             </div>
+            <button onClick={filterHandler}>button</button>
           </div>
         ) : (
           <div
@@ -490,13 +537,15 @@ const MaleProducts = () => {
 
         <div className="w-full xl:w-9/12 w-full justify-items-center text-white grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 px-2 py-4">
           {" "}
-          {grid.map((gridImage) => {
+          {menProducts.map((gridImage) => {
             return (
               <div
                 className="flip-card w-44 md:w-56 h-80 mx-1 md:mx-2  my-0 md:my-4 hover:rounded-md cursor-pointer"
                 key={gridImage.id}
                 onClick={() => {
-                  navigate(`/men/${gridImage.id}`, {state: {name: 'hello'}});
+                  navigate(`/men/${gridImage.id}`, {
+                    state: { name: "hello" },
+                  });
                 }}
               >
                 <div className="flip-card-inner h-full w-full relative text-center rounded-md">

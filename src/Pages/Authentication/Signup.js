@@ -42,6 +42,8 @@ const Signup = () => {
       setEmailIsValid(true);
     } else if (emailRef.current.value.trim() !== "") {
       setEmailIsValid(false);
+    } else if(emailRef.current.value.trim() ==='') {
+      setEmailIsValid(true)
     }
     setEmailFocus(false);
   };
@@ -55,6 +57,8 @@ const Signup = () => {
       setPasswordIsValid(true);
     } else if (passwordRef.current.value.trim() !== "") {
       setPasswordIsValid(false);
+    } else if(passwordRef.current.value.trim() ==='') {
+      setPasswordIsValid(true)
     }
     setPasswordFocus(false);
   };
@@ -67,10 +71,11 @@ const Signup = () => {
       setPasswordConfirmIsValid(true);
     } else if (passwordConfirmRef.current.value.trim() !== "") {
       setPasswordConfirmIsValid(false);
+    } else if(passwordConfirmRef.current.value.trim() ==='') {
+      setPasswordConfirmIsValid(true)
     }
     setPasswordConfirmFocus(false);
   };
-
   const submitHandler = async (e) => {
     e.preventDefault();
     if (emailIsValid && passwordConfirmIsValid && passwordIsValid) {
@@ -163,7 +168,26 @@ const Signup = () => {
               onFocus={() => {
                 setEmailFocus(true);
               }}
+              ari-describedby='emailNote'
             />
+                        <p
+              id="emailNote"
+              className={
+                !emailFocus && !emailIsValid
+                  ? "border border-gray-400 bg-header text-white text-sm rounded-lg mt-2 px-3 py-2 max-w-max"
+                  : "hidden"
+              }
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 512 512"
+                fill="currentColor"
+                className="w-3.5 inline-block mr-1 h-3.5 text-white"
+              >
+                <path d="M256 512c141.4 0 256-114.6 256-256S397.4 0 256 0S0 114.6 0 256S114.6 512 256 512zM216 336h24V272H216c-13.3 0-24-10.7-24-24s10.7-24 24-24h48c13.3 0 24 10.7 24 24v88h8c13.3 0 24 10.7 24 24s-10.7 24-24 24H216c-13.3 0-24-10.7-24-24s10.7-24 24-24zm40-144c-17.7 0-32-14.3-32-32s14.3-32 32-32s32 14.3 32 32s-14.3 32-32 32z" />
+              </svg>
+              Email should follow the pattern 'abc@ghi.xyz'
+            </p>
             <label
               htmlFor="floating_email"
               className="peer-focus:font-medium font-merri absolute text-sm text-gray-500 duration-300 transform -translate-y-8 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-header peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-8"
@@ -450,7 +474,7 @@ const Signup = () => {
                 id="city"
                 className="block font-merri py-2.5 px-0 w-full text-md text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-header peer"
                 placeholder=" "
-                required=""
+                required
                 ref={cityRef}
               />
               <label
@@ -562,8 +586,7 @@ const Signup = () => {
                 id="floating_confirmpassword"
                 className={`${"block py-2.5 px-0 font-merri w-full text-md  border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-header peer"} ${
                   !passwordConfirmFocus &&
-                  !passwordConfirmIsValid &&
-                  passwordRef.current.value.trim() !== ""
+                  !passwordConfirmIsValid
                     ? "bg-red-200 text-red-800"
                     : "bg-transparent text-header"
                 }`}

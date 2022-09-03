@@ -77,7 +77,7 @@ export const DUMMY_DATA3 = [
     id: 2,
     price: 60,
     designer: "okwy",
-    type: "suit",
+    type: "suits",
   },
   {
     name: "Wed Me",
