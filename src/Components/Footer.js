@@ -122,7 +122,7 @@ const Footer = () => {
             >
               Learn why working with OSAZE beats working alone{" "}
               <Link
-                to='/designers-sign-up'
+                to='/designers-only'
                 className="underline"
               >
                 here

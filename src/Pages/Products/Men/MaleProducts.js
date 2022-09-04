@@ -66,15 +66,16 @@ const MaleProducts = () => {
   //IMPLEMENTING THE FILTER
   const filterHandler = () => {
     const filterItems = ImageGrid;
-    let filteredProducts = []
+    let filteredProducts = [];
     if (filterProducts.designers.length === 0) {
-      filteredProducts = filterItems
+      filteredProducts = filterItems;
     } else {
-    filteredProducts = filterItems.filter((item) => {
-      return filterProducts.designers.some((newitem) => {
-        return item.designer === newitem;
+      filteredProducts = filterItems.filter((item) => {
+        return filterProducts.designers.some((newitem) => {
+          return item.designer === newitem;
+        });
       });
-    })}
+    }
     const filteredProducts1 = filteredProducts.filter((item) => {
       if (filterProducts.category.length === 0) {
         return filteredProducts;
@@ -109,9 +110,6 @@ const MaleProducts = () => {
     });
     setDesignerList(filteredDesigners);
   };
-
-  //Add-to-Cart Functionality
-  const cartHandler = () => {};
 
   return (
     <>
@@ -540,7 +538,7 @@ const MaleProducts = () => {
           {menProducts.map((gridImage) => {
             return (
               <div
-                className="flip-card w-44 md:w-56 h-80 mx-1 md:mx-2  my-0 md:my-4 hover:rounded-md cursor-pointer"
+                className="flip-card w-44 md:w-56 h-80 mx-1 md:mx-2  my-0 md:my-4 hover:rounded-sm cursor-pointer"
                 key={gridImage.id}
                 onClick={() => {
                   navigate(`/men/${gridImage.id}`, {
@@ -548,29 +546,26 @@ const MaleProducts = () => {
                   });
                 }}
               >
-                <div className="flip-card-inner h-full w-full relative text-center rounded-md">
+                <div className="flip-card-inner h-full w-full relative text-center rounded-sm">
                   <div className="flip-card-front absolute w-full h-full rounded-md text-black">
                     <img
                       src={gridImage.url}
                       alt={gridImage.name}
-                      className="w-full h-full rounded-md"
+                      className="w-full h-full rounded-sm"
                     />
                   </div>
                   <div
-                    style={{ backgroundImage: `url(${gridImage.url})` }}
-                    className="flip-card-back bg-cover absolute w-full h-full rounded-md text-white font-merri rounded-md md:px-8 py-12"
+                    style={{
+                      background: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(${gridImage.url})`,
+                      backgroundRepeat: "no-repeat",
+                      backgroundPosition: "cover",
+                    }}
+                    className="flip-card-back bg-cover absolute w-full h-full rounded-md text-white font-merri rounded-sm md:px-8 py-12"
                   >
                     <h1 className="text-2xl font-semibold">{gridImage.name}</h1>
                     <p className="text-lg mt-4 mb-4 font-semibold">
                       N{gridImage.price}
                     </p>
-
-                    <button
-                      className="bg-white text-black text-md font-semibold mt-6 px-2 py-2 uppercase"
-                      onClick={cartHandler}
-                    >
-                      Add to Cart
-                    </button>
                   </div>
                 </div>
               </div>

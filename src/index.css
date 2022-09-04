@@ -62,7 +62,7 @@ code {
 .footer {
   background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)),
     url(./Resources/footer.jpg);
-  background-position: center;
+  background-position: center center;
   background-repeat: no-repeat;
 }
 

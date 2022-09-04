@@ -13,6 +13,9 @@ const MaleProductItems = () => {
     );
   }, [params.id]);
 
+    //Add-to-Cart Functionality
+    const cartHandler = () => {};
+
   return (
     <div className="px-6 py-4 bg-black text-white ">
       {menProductItem.map((menItem) => {
@@ -33,7 +36,7 @@ const MaleProductItems = () => {
               <div className="w-5/12">
                 <h1 className="text-4xl font-semibold mb-5">{menItem.name}</h1>
                 <p className="text-2xl my-5">{menItem.price}</p>
-                <p className="text-xl font-semibold min-h-[250px] my-5 border border-white">
+                <p className="text-xl font-semibold min-h-[250px] my-5">
                   {menItem.desc}
                 </p>
                 <select className="bg-black outline outline-white w-full h-12 text-xl">
@@ -50,6 +53,12 @@ const MaleProductItems = () => {
                     );
                   })}{" "}
                 </select>
+                <button
+                      className="bg-white text-black text-md font-semibold mt-6 px-2 py-2 uppercase"
+                      onClick={cartHandler}
+                    >
+                      Purchase
+                    </button>
               </div>
             </div>
           </div>
