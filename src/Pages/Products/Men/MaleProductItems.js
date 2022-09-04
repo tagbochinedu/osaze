@@ -54,7 +54,7 @@ const MaleProductItems = () => {
                   })}{" "}
                 </select>
                 <button
-                      className="bg-white text-black text-md font-semibold mt-6 px-2 py-2 uppercase"
+                      className="bg-white text-black text-md w-full hover:bg-inherit hover:outline hover:outline-white  hover:text-white transitin-all ease-in-out duration-500 font-semibold mt-6 px-2 py-2 uppercase"
                       onClick={cartHandler}
                     >
                       Purchase

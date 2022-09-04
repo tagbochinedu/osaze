@@ -1,42 +1,51 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { uid } from "uid";
 import { DUMMY_DATA4 } from "../../../DummyData";
 import { useImageAuth } from "../../../Context/ImageContext";
 import Card from "../../../Components/UI/Card";
 
 const Designer = () => {
+  const uuid = uid();
   const [images, setImages] = useState([]);
   const [color, setColor] = useState("");
+  const [fabric, setFabric] = useState("");
   const [imageDetails, setImageDetails] = useState({
+    id: uuid,
     name: "",
     price: "",
     desc: "",
     image: undefined,
     colors: [],
-    size: [],
+    customization: [],
+    fabric: [],
   });
-  const { setImageFullScreen, setImageSource } = useImageAuth();
+  const { setImageFullScreen, setImageSource, setImageID } = useImageAuth();
 
   const sizeChangeHandler = (e) => {
     if (e.target.checked === true) {
       setImageDetails({
+        id: imageDetails.id,
         name: imageDetails.name,
         price: imageDetails.price,
         desc: imageDetails.desc,
         image: imageDetails.image,
-        size: [...imageDetails.size, e.target.value],
+        customization: [...imageDetails.customization, e.target.value],
+        fabric: imageDetails.fabric,
         colors: imageDetails.colors,
       });
     } else {
-      const removeSize = imageDetails.size.filter((check) => {
+      const removeCustomization = imageDetails.customization.filter((check) => {
         return e.target.value !== check;
       });
       setImageDetails({
+        id: imageDetails.id,
         name: imageDetails.name,
         price: imageDetails.price,
         desc: imageDetails.desc,
         image: imageDetails.image,
-        size: removeSize,
+        fabric: imageDetails.fabric,
+        customization: removeCustomization,
         colors: imageDetails.colors,
       });
     }
@@ -45,14 +54,18 @@ const Designer = () => {
   const submitHandler = (e) => {
     e.preventDefault();
     console.log(imageDetails);
-    setImages((prev) => [...prev, imageDetails.image]);
+    setImages((prev) => [
+      ...prev,
+      { img: imageDetails.image, id: imageDetails.id },
+    ]);
     setImageDetails({
       name: "",
       price: 0,
       desc: "",
       image: undefined,
       colors: [],
-      size: [],
+      customization: [],
+      fabric: [],
     });
   };
 
@@ -192,7 +205,7 @@ const Designer = () => {
               <div className="border border-gray-300 rounded-sm py-6">
                 <div className="px-3">
                   <h2 className="text-center font-semibold">
-                    Product Upload Forum
+                    Product Upload Form
                   </h2>
                 </div>
                 <form onSubmit={submitHandler}>
@@ -205,11 +218,13 @@ const Designer = () => {
                           placeholder=" "
                           onChange={(e) => {
                             setImageDetails({
+                              id: imageDetails.id,
                               name: e.target.value,
                               price: imageDetails.price,
                               desc: imageDetails.desc,
                               image: imageDetails.image,
-                              size: imageDetails.size,
+                              customization: imageDetails.customization,
+                              fabric: imageDetails.fabric,
                               colors: imageDetails.colors,
                             });
                           }}
@@ -230,11 +245,13 @@ const Designer = () => {
                           placeholder=" "
                           onChange={(e) => {
                             setImageDetails({
+                              id: imageDetails.id,
                               name: imageDetails.name,
                               price: parseInt(e.target.value),
                               desc: imageDetails.desc,
                               image: imageDetails.image,
-                              size: imageDetails.size,
+                              customization: imageDetails.customization,
+                              fabric: imageDetails.fabric,
                               colors: imageDetails.colors,
                             });
                           }}
@@ -256,11 +273,13 @@ const Designer = () => {
                         placeholder=" "
                         onChange={(e) => {
                           setImageDetails({
+                            id: imageDetails.id,
                             name: imageDetails.name,
                             price: imageDetails.price,
                             desc: e.target.value,
                             image: imageDetails.image,
-                            size: imageDetails.size,
+                            customization: imageDetails.customization,
+                            fabric: imageDetails.fabric,
                             colors: imageDetails.colors,
                           });
                         }}
@@ -274,40 +293,82 @@ const Designer = () => {
                         Item Description
                       </label>
                     </div>
-                    <div className="relative z-0 mb-6 flex">
-                      <input
-                        type="text"
-                        className="block py-2.5 px-0 w-1/2 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-header peer"
-                        placeholder=" "
-                        onChange={(e) => {
-                          setColor(e.target.value);
-                        }}
-                        value={color}
-                      />
-                      <label
-                        htmlFor="floating_standard"
-                        className="absolute text-sm text-gray-500 duration-300 transform -translate-y-8 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-header peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-8"
-                      >
-                        Color
-                      </label>
-                      <button
-                        type="button"
-                        className="rounded text-white px-4 py-1 font-semibold bg-header active:bg-headerHover cursor-pointer ml-3"
-                        onClick={() => {
-                          setImageDetails({
-                            name: imageDetails.name,
-                            price: imageDetails.price,
-                            desc: imageDetails.desc,
-                            image: imageDetails.image,
-                            size: imageDetails.size,
-                            colors: [...imageDetails.colors, color],
-                          });
-                          alert('color has been added')
-                          setColor("");
-                        }}
-                      >
-                        ADD
-                      </button>
+                    <div className="flex justify-between">
+                      <div className="relative z-0 mb-6 flex w-6/12 mr-3">
+                        <input
+                          type="text"
+                          className="block py-2.5 px-0 w-10/12  text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-header peer"
+                          placeholder=" "
+                          onChange={(e) => {
+                            setColor(e.target.value);
+                          }}
+                          value={color}
+                        />
+                        <label
+                          htmlFor="floating_standard"
+                          className="absolute text-sm text-gray-500 duration-300 transform -translate-y-8 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-header peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-8"
+                        >
+                          Color
+                        </label>
+                        <button
+                          type="button"
+                          className="rounded text-white w-2/12 px-4 py-1 font-semibold bg-header active:bg-headerHover cursor-pointer ml-3"
+                          onClick={() => {
+                            setImageDetails({
+                              id: imageDetails.id,
+                              name: imageDetails.name,
+                              price: imageDetails.price,
+                              desc: imageDetails.desc,
+                              image: imageDetails.image,
+                              customization: imageDetails.customization,
+                              fabric: imageDetails.fabric,
+                              colors: [...imageDetails.colors, color],
+                            });
+                            alert("color has been added");
+                            setColor("");
+                          }}
+                        >
+                          ADD
+                        </button>
+                      </div>
+
+                      <div className="relative z-0 mb-6 flex w-6/12 ml-3">
+                        <input
+                          type="text"
+                          className="block py-2.5 px-0 w-10/12 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-header peer"
+                          placeholder=" "
+                          onChange={(e) => {
+                            setFabric(e.target.value);
+                          }}
+                          value={fabric}
+                        />
+                        <label
+                          htmlFor="floating_standard"
+                          className="absolute text-sm text-gray-500 duration-300 transform -translate-y-8 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-header peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-8"
+                        >
+                          Fabric
+                        </label>
+                        <button
+                          type="button"
+                          className="rounded text-white w-2/12 px-4 py-1 font-semibold bg-header active:bg-headerHover cursor-pointer ml-3"
+                          onClick={() => {
+                            setImageDetails({
+                              id: imageDetails.id,
+                              name: imageDetails.name,
+                              price: imageDetails.price,
+                              desc: imageDetails.desc,
+                              image: imageDetails.image,
+                              customization: imageDetails.customization,
+                              colors: imageDetails.colors,
+                              fabric: [...imageDetails.fabric, fabric],
+                            });
+                            alert("fabric has been added");
+                            setFabric("");
+                          }}
+                        >
+                          ADD
+                        </button>
+                      </div>
                     </div>
                     <div className="border-b border-white py-4 px-6 mx-auto">
                       <h2 className="mb-2 ml-1 font-julius">Sizes</h2>
@@ -316,7 +377,7 @@ const Designer = () => {
                           <input
                             className="form-check-input appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-headerHover focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
                             type="checkbox"
-                            value="XS"
+                            value="Fit To Size"
                             id="flexCheckDefault1"
                             onChange={sizeChangeHandler}
                           />
@@ -324,7 +385,7 @@ const Designer = () => {
                             className="form-check-label inline-block text-gray-500"
                             htmlFor="flexCheckDefault1"
                           >
-                            XS
+                            Fit To Size
                           </label>
                         </div>
                       </div>
@@ -333,7 +394,7 @@ const Designer = () => {
                           <input
                             className="form-check-input appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-headerHover focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
                             type="checkbox"
-                            value="S"
+                            value="No Sleeves"
                             id="flexCheckDefault2"
                             onChange={sizeChangeHandler}
                           />
@@ -341,7 +402,7 @@ const Designer = () => {
                             className="form-check-label inline-block text-gray-500"
                             htmlFor="flexCheckDefault2"
                           >
-                            S
+                            No Sleeves
                           </label>
                         </div>
                       </div>
@@ -350,7 +411,7 @@ const Designer = () => {
                           <input
                             className="form-check-input appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-headerHover focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
                             type="checkbox"
-                            value="MD"
+                            value="Short Sleeves"
                             id="flexCheckDefault3"
                             onChange={sizeChangeHandler}
                           />
@@ -358,7 +419,7 @@ const Designer = () => {
                             className="form-check-label inline-block text-gray-500"
                             htmlFor="flexCheckDefault3"
                           >
-                            MD
+                            Short Sleeves
                           </label>
                         </div>
                       </div>
@@ -367,7 +428,7 @@ const Designer = () => {
                           <input
                             className="form-check-input appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-headerHover focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
                             type="checkbox"
-                            value="LG"
+                            value="Medium Sleeves - Elbow Length"
                             id="flexCheckDefault4"
                             onChange={sizeChangeHandler}
                           />
@@ -375,7 +436,7 @@ const Designer = () => {
                             className="form-check-label inline-block text-gray-500"
                             htmlFor="flexCheckDefault4"
                           >
-                            LG
+                            Medium Sleeves - Elbow Length
                           </label>
                         </div>
                       </div>
@@ -384,7 +445,7 @@ const Designer = () => {
                           <input
                             className="form-check-input appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-headerHover focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
                             type="checkbox"
-                            value="XL"
+                            value="Long Sleeves - Wrist Length"
                             id="flexCheckDefault5"
                             onChange={sizeChangeHandler}
                           />
@@ -392,7 +453,7 @@ const Designer = () => {
                             className="form-check-label inline-block text-gray-500"
                             htmlFor="flexCheckDefault5"
                           >
-                            XL
+                            Long Sleeves - Wrist Length
                           </label>
                         </div>
                       </div>
@@ -401,7 +462,7 @@ const Designer = () => {
                           <input
                             className="form-check-input appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-headerHover focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
                             type="checkbox"
-                            value="XXL"
+                            value="Pleated Skirt Base"
                             id="flexCheckDefault6"
                             onChange={sizeChangeHandler}
                           />
@@ -409,7 +470,7 @@ const Designer = () => {
                             className="form-check-label inline-block text-gray-500"
                             htmlFor="flexCheckDefault6"
                           >
-                            XXL
+                            Pleated Skirt Base
                           </label>
                         </div>
                       </div>
@@ -418,10 +479,7 @@ const Designer = () => {
                           <input
                             className="form-check-input appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-headerHover focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
                             type="checkbox"
-                            value="custom(Please ensure to input your
-                              measurements on your profile page before using this
-                              option)"
-                            
+                            value="Knee Length"
                             id="flexCheckDefault7"
                             onChange={sizeChangeHandler}
                           />
@@ -429,7 +487,24 @@ const Designer = () => {
                             className="form-check-label inline-block text-gray-500"
                             htmlFor="flexCheckDefault7"
                           >
-                            Custom Design (Create this design specific to the user's measurements)
+                            Knee Length
+                          </label>
+                        </div>
+                      </div>
+                      <div className="form-check">
+                        <div className="my-2">
+                          <input
+                            className="form-check-input appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-headerHover focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
+                            type="checkbox"
+                            value="Others (Please specify below)"
+                            id="flexCheckDefault7"
+                            onChange={sizeChangeHandler}
+                          />
+                          <label
+                            className="form-check-label inline-block text-gray-500"
+                            htmlFor="flexCheckDefault7"
+                          >
+                            Others (Please specify below)
                           </label>
                         </div>
                       </div>
@@ -441,12 +516,14 @@ const Designer = () => {
                         value="Clear"
                         onClick={() => {
                           setImageDetails({
+                            id: imageDetails.id,
                             name: imageDetails.name,
                             price: imageDetails.price,
                             desc: imageDetails.desc,
                             image: undefined,
                             colors: imageDetails.colors,
-                            size: imageDetails.size,
+                            customization: imageDetails.customization,
+                            fabric: imageDetails.fabric,
                           });
                         }}
                       />
@@ -486,12 +563,14 @@ const Designer = () => {
                           accept=".jpeg,.jpg,.png"
                           onChange={(e) => {
                             setImageDetails({
+                              id: imageDetails.id,
                               name: imageDetails.name,
                               price: imageDetails.price,
                               desc: imageDetails.desc,
                               image: e.target.files[0],
                               colors: imageDetails.colors,
-                              size: imageDetails.size,
+                              customization: imageDetails.customization,
+                              fabric: imageDetails.fabric,
                             });
                           }}
                           required

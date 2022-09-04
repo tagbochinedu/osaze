@@ -17,14 +17,17 @@ export const ModalOverlay = () => {
         </div>
       )}
       {imageFullScreen && (
-        <img
-          src={URL.createObjectURL(imageSource)}
-          onClick={() => {
-            setImageFullScreen(false);
-          }}
-          className="w-96 mx-auto h-auto"
-          alt='preview'
-        />
+        <div className="bg-white px-4 py-2 relative">
+          <img
+            src={URL.createObjectURL(imageSource)}
+            onClick={() => {
+              setImageFullScreen(false);
+            }}
+            className="w-96 mx-auto h-auto"
+            alt="preview"
+          />
+
+        </div>
       )}
     </div>
   );
