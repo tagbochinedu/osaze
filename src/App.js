@@ -29,6 +29,8 @@ import WishList from "./Pages/Dashboard/Customer/WishList";
 import Inbox from "./Pages/Dashboard/Customer/Inbox";
 
 import Designer from "./Pages/Dashboard/Designer/Designer";
+import DesignerProductUpload from "./Pages/Dashboard/Designer/DesignerProductUpload";
+
 import DesignersOnly from "./Pages/DesignersOnly";
 import DesignersSignup from "./Pages/Authentication/DesignersSignup";
 
@@ -93,6 +95,7 @@ function App() {
           <Route exact path="/profile/wishlist" element={<WishList />} />
           <Route exact path="/profile/inbox" element={<Inbox />} />
           <Route exact path="/profile/designer" element={<Designer />} />
+          <Route exact path="/profile/designer-product-upload" element={<DesignerProductUpload />} />
         </Route>
         <Route exact path="/men" element={<MaleProducts />} />
         <Route exact path="/men/:id" element={<MaleProductItems />} />

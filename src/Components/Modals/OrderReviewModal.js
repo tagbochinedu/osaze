@@ -1,4 +1,5 @@
 import ReactDOM from "react-dom";
+import {Link} from 'react-router-dom'
 import { useModalAuth } from "../../Context/ModalContext";
 import { useImageAuth } from "../../Context/ImageContext";
 
@@ -7,7 +8,7 @@ import StatusReview from "./StatusReview";
 
 export const ModalOverlay = () => {
   const { reviewModal, statusModal } = useModalAuth();
-  const { setImageFullScreen, imageSource, imageFullScreen } = useImageAuth();
+  const { setImageFullScreen, imageSource, imageFullScreen, imageID } = useImageAuth();
   return (
     <div className="top-1/4 w-full z-10 fixed md:w-2/4 md:left-1/4">
       {(reviewModal || statusModal) && (
@@ -23,10 +24,10 @@ export const ModalOverlay = () => {
             onClick={() => {
               setImageFullScreen(false);
             }}
-            className="w-96 mx-auto h-auto"
+            className="w-48 mx-auto h-auto"
             alt="preview"
           />
-
+          <Link to={`men/${imageID}`}>View ProductItem</Link>
         </div>
       )}
     </div>
