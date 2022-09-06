@@ -17,9 +17,6 @@ const Dashboard = () => {
             <NavLink to="/profile/orders" className={({ isActive }) => (isActive ? 'bg-gray-100 text-black border-x-4 text-sm flex justify-center md:justify-start md:items-center py-6 md:px-5' : 'flex justify-center md:justify-start md:items-center py-6 md:px-5')}>Orders</NavLink>
           </li>
           <li className="border-b border-gray-300 hover:bg-gray-100 hover:text-black hover:border-x-4 hover:text-sm">
-            <NavLink to="/profile/wishlist" className={({ isActive }) => (isActive ? 'bg-gray-100 text-black border-x-4 text-sm flex justify-center md:justify-start md:items-center py-6 md:px-5' : 'flex justify-center md:justify-start md:items-center py-6 md:px-5')}>WishList</NavLink>
-          </li>
-          <li className="border-b border-gray-300 hover:bg-gray-100 hover:text-black hover:border-x-4 hover:text-sm">
             <NavLink to="/profile/inbox" className={({ isActive }) => (isActive ? 'bg-gray-100 text-black border-x-4 text-sm flex justify-center md:justify-start md:items-center py-6 md:px-5' : 'flex justify-center md:justify-start md:items-center py-6 md:px-5')}>Inbox</NavLink>
           </li>
           <li className="border-b border-gray-300 hover:bg-gray-100 hover:text-black hover:border-x-4 hover:text-sm">

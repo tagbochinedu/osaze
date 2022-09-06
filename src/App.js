@@ -25,7 +25,6 @@ import Orders from "./Pages/Dashboard/Customer/Orders/Orders";
 import PendingOrders from "./Pages/Dashboard/Customer/Orders/PendingOrders";
 import CompletedOrders from "./Pages/Dashboard/Customer/Orders/CompletedOrders";
 
-import WishList from "./Pages/Dashboard/Customer/WishList";
 import Inbox from "./Pages/Dashboard/Customer/Inbox";
 
 import Designer from "./Pages/Dashboard/Designer/Designer";
@@ -33,6 +32,8 @@ import DesignerProductUpload from "./Pages/Dashboard/Designer/DesignerProductUpl
 
 import DesignersOnly from "./Pages/DesignersOnly";
 import DesignerSignup from "./Pages/Authentication/DesignerSignup";
+
+import NoMatch from "./Pages/NoMatch";
 
 import OrderReviewModal from "./Components/Modals/OrderReviewModal";
 import { useModalAuth } from "./Context/ModalContext";
@@ -55,8 +56,8 @@ function App() {
         <Route exact path="/login" element={<Login />} />
         <Route exact path="/signup" element={<Signup />} />
         <Route exact path="/cart" element={<Cart />} />
-        <Route exact path='/designers-only' element={<DesignersOnly/>}/>
-        <Route exact path='/designers-sign-up' element={<DesignerSignup/>}/>
+        <Route exact path="/designers-only" element={<DesignersOnly />} />
+        <Route exact path="/designers-sign-up" element={<DesignerSignup />} />
         <Route exact path="/profile" element={<Dashboard />}>
           <Route
             exact
@@ -92,15 +93,19 @@ function App() {
               element={<CompletedOrders />}
             />
           </Route>
-          <Route exact path="/profile/wishlist" element={<WishList />} />
           <Route exact path="/profile/inbox" element={<Inbox />} />
           <Route exact path="/profile/designer" element={<Designer />} />
-          <Route exact path="/profile/designer-product-upload" element={<DesignerProductUpload />} />
+          <Route
+            exact
+            path="/profile/designer-product-upload"
+            element={<DesignerProductUpload />}
+          />
         </Route>
         <Route exact path="/men" element={<MaleProducts />} />
         <Route exact path="/men/:id" element={<MaleProductItems />} />
         <Route exact path="/women" element={<Women />} />
         <Route exact path="/accessories" element={<Accessories />} />
+        <Route path="*" element={<NoMatch />} />
       </Routes>
       <Footer />
     </>

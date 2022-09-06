@@ -6,9 +6,7 @@ import { DUMMY_DATA4 } from "../../../DummyData";
 import Card from "../../../Components/UI/Card";
 
 const Designer = () => {
-  
-
-  return (
+    return (
     <Card pageTitle="Designer">
       <div className="px-6 py-4">
         <div className="border-2 border-border-gray-300 rounded-sm max-h-40 mb-6">

@@ -10,11 +10,15 @@ import img5 from "./Resources/img5.jpeg";
 export const DUMMY_DATA = [
   {
     signupData: {
+      id: '20',
       firstName: "Chinedu",
       lastName: "Tagbo",
       eMail: "johntagbo2@gmail.com",
-      address: ["New Road, Borikiri", "choba"],
-      phoneNumber: ["08145803311", "08020769335"],
+      country: 'Nigeria',
+      state: 'Rivers',
+      city: 'Port Harcourt',
+      houseAddress: "New Road, Borikiri",
+      phoneNumber: "08145803311", 
     },
     bodyData: {
       bust: 1,

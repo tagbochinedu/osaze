@@ -1,7 +1,9 @@
 import { useState, useRef } from "react";
+import { uid } from "uid";
 import { useNavigate } from "react-router-dom";
 
 const DesignersSignup = () => {
+  const uuid = uid();
   const [phoneNumberCode, setPhoneNumberCode] = useState();
   //password visibility state
   const [passwordShown, setPasswordShown] = useState(false);
@@ -51,8 +53,8 @@ const DesignersSignup = () => {
       setEmailIsValid(true);
     } else if (emailRef.current.value.trim() !== "") {
       setEmailIsValid(false);
-    } else if(emailRef.current.value.trim() ==='') {
-      setEmailIsValid(true)
+    } else if (emailRef.current.value.trim() === "") {
+      setEmailIsValid(true);
     }
     setEmailFocus(false);
   };
@@ -66,8 +68,8 @@ const DesignersSignup = () => {
       setPasswordIsValid(true);
     } else if (passwordRef.current.value.trim() !== "") {
       setPasswordIsValid(false);
-    } else if(passwordRef.current.value.trim() ==='') {
-      setPasswordIsValid(true)
+    } else if (passwordRef.current.value.trim() === "") {
+      setPasswordIsValid(true);
     }
     setPasswordFocus(false);
   };
@@ -80,8 +82,8 @@ const DesignersSignup = () => {
       setPasswordConfirmIsValid(true);
     } else if (passwordConfirmRef.current.value.trim() !== "") {
       setPasswordConfirmIsValid(false);
-    } else if(passwordConfirmRef.current.value.trim() ==='') {
-      setPasswordConfirmIsValid(true)
+    } else if (passwordConfirmRef.current.value.trim() === "") {
+      setPasswordConfirmIsValid(true);
     }
     setPasswordConfirmFocus(false);
   };
@@ -92,6 +94,7 @@ const DesignersSignup = () => {
     if (emailIsValid && passwordConfirmIsValid && passwordIsValid) {
       try {
         setDesignerData({
+          id: uuid,
           firstName: firstNameRef.current.value,
           lastName: lastNameRef.current.value,
           eMail: emailRef.current.value,
@@ -117,8 +120,8 @@ const DesignersSignup = () => {
           body: JSON.stringify(designerData),
           headers: { "Content-type": "application/json" },
         });
-        const response = await designersignup.json()
-        console.log(response)
+        const response = await designersignup.json();
+        console.log(response);
         navigate("/login");
       } catch {}
     } else if (!emailIsValid) {
@@ -136,7 +139,7 @@ const DesignersSignup = () => {
         <h1 className="text-2xl text-center text-header my-6 font-bold font-julius">
           Register as a Designer
         </h1>
-        <form onSubmit={submitHandler} autoComplete='off'>
+        <form onSubmit={submitHandler} autoComplete="off">
           <div className="relative z-0 mb-6 w-full group">
             <input
               type="hidden"
