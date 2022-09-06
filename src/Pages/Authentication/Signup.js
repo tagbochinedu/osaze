@@ -90,6 +90,7 @@ const Signup = () => {
           city: cityRef.current.value,
           houseAddress: houseAddressRef.current.value,
           password: passwordRef.current.value,
+          deliveryAddress: [houseAddressRef.current.value+','+cityRef.current.value+','+stateRef.current.value+','+countryRef.current.value],
           type: "USER",
         });
         const usersignup = await fetch("", {

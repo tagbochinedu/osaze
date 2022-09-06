@@ -32,7 +32,7 @@ import Designer from "./Pages/Dashboard/Designer/Designer";
 import DesignerProductUpload from "./Pages/Dashboard/Designer/DesignerProductUpload";
 
 import DesignersOnly from "./Pages/DesignersOnly";
-import DesignersSignup from "./Pages/Authentication/DesignersSignup";
+import DesignerSignup from "./Pages/Authentication/DesignerSignup";
 
 import OrderReviewModal from "./Components/Modals/OrderReviewModal";
 import { useModalAuth } from "./Context/ModalContext";
@@ -56,7 +56,7 @@ function App() {
         <Route exact path="/signup" element={<Signup />} />
         <Route exact path="/cart" element={<Cart />} />
         <Route exact path='/designers-only' element={<DesignersOnly/>}/>
-        <Route exact path='/designers-sign-up' element={<DesignersSignup/>}/>
+        <Route exact path='/designers-sign-up' element={<DesignerSignup/>}/>
         <Route exact path="/profile" element={<Dashboard />}>
           <Route
             exact
