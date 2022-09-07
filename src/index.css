@@ -139,10 +139,6 @@ code {
   -webkit-appearance: none;
 }
 
-.number2::-webkit-inner-spin-button {
-  -webkit-appearance: 
-}
-
 /*PRICE RANGE SCROLLBAR*/
 input[type=range] {
   height: 0;
