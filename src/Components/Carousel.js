@@ -33,7 +33,7 @@ export default function Carousel() {
               </p>{" "}
               <Link
                 className="bg-black text-white p-3.5 text-xl font-semibold"
-                to="/WomenCategory"
+                to="/women"
               >
                 Shop Now
               </Link>
@@ -49,7 +49,7 @@ export default function Carousel() {
               </p>{" "}
               <Link
                 className="bg-black text-white p-3.5 text-xl font-semibold"
-                to="/MenCategory"
+                to="/men"
               >
                 Shop Men
               </Link>
@@ -61,11 +61,11 @@ export default function Carousel() {
             <div className="bg-white text-black lg:w-max rounded-tl-md rounded-br-md rounded-tr-3xl rounded-bl-3xl pt-4 pb-10 px-6 relative top-56">
               <h4 className="text-4xl font-bold">Women</h4>
               <p className="mt-4 mb-6 text-xl">
-                Step out in game changing designs that make you look the best
+                Wear the best accessories
               </p>{" "}
               <Link
                 className="bg-black text-white p-3.5 text-xl font-semibold"
-                to="/WomenCategory"
+                to="/accessories"
               >
                 Shop Now
               </Link>
@@ -77,12 +77,10 @@ export default function Carousel() {
             {" "}
             <div className="bg-white text-black w-max rounded-tl-md rounded-br-md rounded-tr-3xl rounded-bl-3xl pt-4 pb-10 px-6 relative top-56">
               <h4 className="text-4xl font-bold">Men</h4>
-              <p className="mt-4 mb-6 text-xl">
-                Shop trends across the world
-              </p>{" "}
+              <p className="mt-4 mb-6 text-xl">Don't just follow the trends, lead them</p>{" "}
               <Link
                 className="bg-black text-white p-3.5 text-xl font-semibold"
-                to="/MenCategory"
+                to="/Accessories"
               >
                 Shop Now
               </Link>

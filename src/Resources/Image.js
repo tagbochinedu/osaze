@@ -30,7 +30,9 @@ export const ImageGrid = [
     designer: "okwy",
     type: "gown",
     desc: "hello",
-    colors: ["red", "yellow", "green"],
+    colors: [],
+    fabrics: [img1, img2, img3],
+    customization: ['No Sleeves', 'Short Sleeves', 'Long Sleeves - Wrist Length'] 
   },
   {
     name: "Marry Me",

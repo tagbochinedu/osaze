@@ -87,9 +87,9 @@ code {
 }
 
 .slider2 {
-  background-image: url(./Resources/ss2-2.jpeg), url(./Resources/ss2-1.jpeg);
+  background-image: url(./Resources/ss2-2.jpeg);
   background-repeat: no-repeat;
-  background-position: left bottom, right top;
+  background-position: center top;
   background-size: contain;
   background-color: rgb(237, 193, 149);
   color: rgb(255, 255, 255);
@@ -97,21 +97,21 @@ code {
 }
 
 .slider3 {
-  background-image: url(./Resources/ss3.png);
+  background-image: url(https://i0.wp.com/sveltemag.com/wp-content/uploads/2020/03/jewelry-for-black-woman.jpg?resize=540%2C728&ssl=1);
   background-repeat: no-repeat;
   background-position: center top;
   background-size: contain;
-  background-color: rgb(43, 20, 7);
+  background-color: #5C7186;
   color: rgb(255, 255, 255);
   height: 100%;
 }
 
 .slider4 {
-  background-image: url(./Resources/ss4-1.jpeg), url(./Resources/ss4-2.jpeg);
+  background-image: url(https://i.pinimg.com/736x/09/7d/0e/097d0e8094628f1a13b3e68195e4cae4.jpg);
   background-repeat: no-repeat;
-  background-position: left bottom, right top;
+  background-position: center top;
   background-size: contain;
-  background-color: rgb(29, 17, 16);
+  background-color: #BA9974;
   color: rgb(255, 255, 255);
   height: 100%;
 }
@@ -120,46 +120,6 @@ code {
   .swiper {
     width: 100%;
     height: 100vh;
-  }
-
-  .slider1 {
-    background-image: url(./Resources/ss1.jpeg);
-    background-repeat: no-repeat;
-    background-position: center top;
-    background-size: cover;
-    background-color: rgb(32, 4, 19);
-    color: rgb(255, 255, 255);
-    height: 100%;
-  }
-
-  .slider2 {
-    background-image: url(./Resources/ss2-2.jpeg);
-    background-repeat: no-repeat;
-    background-position: center top;
-    background-size: cover;
-    background-color: rgb(237, 193, 149);
-    color: rgb(255, 255, 255);
-    height: 100%;
-  }
-
-  .slider3 {
-    background-image: url(./Resources/ss3.png);
-    background-repeat: no-repeat;
-    background-position: center top;
-    background-size: cover;
-    background-color: rgb(43, 20, 7);
-    color: rgb(255, 255, 255);
-    height: 100%;
-  }
-
-  .slider4 {
-    background-image: url(./Resources/ss4-1.jpeg);
-    background-repeat: no-repeat;
-    background-position: center top;
-    background-size: cover;
-    background-color: rgb(29, 17, 16);
-    color: rgb(255, 255, 255);
-    height: 100%;
   }
 }
 
@@ -177,6 +137,10 @@ code {
 /*PRICE RANGE NUMBER BUTTONS*/
 .number::-webkit-inner-spin-button {
   -webkit-appearance: none;
+}
+
+.number2::-webkit-inner-spin-button {
+  -webkit-appearance: 
 }
 
 /*PRICE RANGE SCROLLBAR*/
