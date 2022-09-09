@@ -564,7 +564,7 @@ const DesignersSignup = () => {
                 value="maybe"
                 id="sketch3"
                 onChange={(e) => {
-                  setSketch(e.target.value);
+                  setSketch(e.target.value)
                 }}
               />
               <label

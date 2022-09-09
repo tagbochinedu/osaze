@@ -25,6 +25,9 @@ const Dashboard = () => {
           <li className="border-b border-gray-300 hover:bg-gray-100 hover:text-black hover:border-x-4 hover:text-sm">
             <NavLink to="/profile/designer-product-upload" className={({ isActive }) => (isActive ? 'bg-gray-100 text-black border-x-4 text-sm flex justify-center md:justify-start md:items-center py-6 md:px-5' : 'flex justify-center md:justify-start md:items-center py-6 md:px-5')}>Product Upload</NavLink>
           </li>
+          <li className="border-b border-gray-300 hover:bg-gray-100 hover:text-black hover:border-x-4 hover:text-sm">
+            <NavLink to="/profile/designer-orders" className={({ isActive }) => (isActive ? 'bg-gray-100 text-black border-x-4 text-sm flex justify-center md:justify-start md:items-center py-6 md:px-5' : 'flex justify-center md:justify-start md:items-center py-6 md:px-5')}>Designer Orders</NavLink>
+          </li>
         </ul>
       </div>
       <Outlet />

@@ -29,6 +29,9 @@ import Inbox from "./Pages/Dashboard/Customer/Inbox";
 
 import Designer from "./Pages/Dashboard/Designer/Designer";
 import DesignerProductUpload from "./Pages/Dashboard/Designer/DesignerProductUpload";
+import DesignerOrders from "./Pages/Dashboard/Designer/Orders/DesignerOrders";
+import OpenOrders from "./Pages/Dashboard/Designer/Orders/OpenOrders";
+import FinishedOrders from "./Pages/Dashboard/Designer/Orders/FinishedOrders";
 
 import DesignersOnly from "./Pages/DesignersOnly";
 import DesignerSignup from "./Pages/Authentication/DesignerSignup";
@@ -100,6 +103,27 @@ function App() {
             path="/profile/designer-product-upload"
             element={<DesignerProductUpload />}
           />
+          <Route
+            exact
+            path="/profile/designer-orders"
+            element={<DesignerOrders />}
+          >
+            <Route
+              exact
+              path="/profile/designer-orders"
+              element={<Navigate to="/profile/designer-orders/open-orders" />}
+            />
+            <Route
+              exact
+              path="/profile/designer-orders/open-orders"
+              element={<OpenOrders />}
+            />
+            <Route
+              exact
+              path="/profile/designer-orders/finished-orders"
+              element={<FinishedOrders />}
+            />
+          </Route>
         </Route>
         <Route exact path="/men" element={<MaleProducts />} />
         <Route exact path="/men/:id" element={<MaleProductItems />} />

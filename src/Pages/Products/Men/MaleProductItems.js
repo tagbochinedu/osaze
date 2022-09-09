@@ -6,11 +6,13 @@ const MaleProductItems = () => {
   const params = useParams();
   const [selected, setSelected] = useState("");
   const [cartItem, setCartItem] = useState({
+    ItemDesigner: '',
     itemName: "",
     itemPrice: "",
     customDesign: "",
     fabric: "",
     quantity: 0,
+    size: "",
   });
 
   const [menProductItem, setMenProductItem] = useState([]);
@@ -36,7 +38,9 @@ const MaleProductItems = () => {
         return (
           <div key={menItem.id}>
             <h1 className="text-lg font-semibold mb-6 ml-20">
-              <Link to="/men" className='hover:underline'>Men</Link>
+              <Link to="/men" className="hover:underline">
+                Men
+              </Link>
               {">"}
               {menItem.name}
             </h1>
@@ -54,33 +58,73 @@ const MaleProductItems = () => {
                 <p className="text-xl font-semibold min-h-[250px] my-4">
                   {menItem.desc}
                 </p>
+                <div className="my-4">
+                  <h2 className="mb-3 font-merri text-white text-xl">Sizes</h2>
+                  <div className="grid grid-cols-3 gap-2">
+                    {menItem.sizes.map((size) => {
+                      return (
+                        <div className="form-check my-2" key={size}>
+                          <input
+                            className="form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 bg-white checked:bg-headerHover checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
+                            type="radio"
+                            name="sizes"
+                            value={size}
+                            required
+                            onChange={(e) =>{
+                              setCartItem({
+                                ItemDesigner: menItem.designer,
+                                itemName: menItem.name,
+                                itemPrice: menItem.price,
+                                customDesign: cartItem.customDesign,
+                                fabric: cartItem.fabric,
+                                quantity: cartItem.quantity,
+                                size: e.target.value,
+                              });
+                            }}
+                          />
+                          <label className="form-check-label inline-block text-white text-lg">
+                            {size}
+                          </label>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+
                 <select
                   className="bg-black outline outline-white w-full h-12 text-xl my-4"
                   onChange={(e) => {
                     console.log(e.target.value);
                     setCartItem({
+                        ItemDesigner: menItem.designer,
                       itemName: menItem.name,
                       itemPrice: menItem.price,
                       customDesign: e.target.value,
                       fabric: cartItem.fabric,
                       quantity: cartItem.quantity,
+                      size: cartItem.size,
                     });
                   }}
                 >
-                  <option className="h-12" disabled selected hidden >Choose A Custom Design</option>
-                  <option className="h-12" value='No Custom Design'>No Custom Design</option>
+                  <option className="h-12" disabled defaultValue hidden>
+                    Choose A Custom Design
+                  </option>
+                  <option className="h-12" value="No Custom Design">
+                    No Custom Design
+                  </option>
                   {menItem.customization.map((custom) => {
                     return (
                       <option
                         key={custom}
                         value={custom}
-                        className="h-12 bg-black hover:bg-black"
+                        className="h-12 bg-black hover:bg-black text-lg"
                       >
                         {custom}
                       </option>
                     );
                   })}{" "}
                 </select>
+
                 <div className="my-4">
                   <h4 className="font-merri mb-2 mt- text-xl">Fabric</h4>
                   <div className="flex">
@@ -99,11 +143,13 @@ const MaleProductItems = () => {
                             onChange={() => {
                               setSelected(fabric);
                               setCartItem({
+                                ItemDesigner: menItem.designer,
                                 itemName: menItem.name,
                                 itemPrice: menItem.price,
                                 customDesign: cartItem.customDesign,
                                 fabric: fabric,
                                 quantity: cartItem.quantity,
+                                size: cartItem.size,
                               });
                             }}
                           />
@@ -129,11 +175,13 @@ const MaleProductItems = () => {
                     className="border border-white bg-black text-white text-center h-12 w-24"
                     onChange={(e) => {
                       setCartItem({
+                        ItemDesigner: menItem.designer,
                         itemName: menItem.name,
                         itemPrice: menItem.price,
                         customDesign: cartItem.customDesign,
                         fabric: cartItem.fabric,
                         quantity: parseInt(e.target.value),
+                        size: cartItem.size,
                       });
                     }}
                   />

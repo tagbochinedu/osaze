@@ -32,7 +32,12 @@ export const ImageGrid = [
     desc: "hello",
     colors: [],
     fabrics: [img1, img2, img3],
-    customization: ['No Sleeves', 'Short Sleeves', 'Long Sleeves - Wrist Length'] 
+    customization: [
+      "No Sleeves",
+      "Short Sleeves",
+      "Long Sleeves - Wrist Length",
+    ],
+    sizes: ["XS", "S", "MD", "LG", "XL", "XXL", "Custom"],
   },
   {
     name: "Marry Me",
