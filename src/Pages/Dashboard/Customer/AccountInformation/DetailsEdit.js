@@ -10,14 +10,8 @@ const DetailsEdit = () => {
     firstName: DUMMY_DATA[0].signupData.firstName,
     lastName: DUMMY_DATA[0].signupData.lastName,
     eMail: DUMMY_DATA[0].signupData.eMail,
-    address: [
-      DUMMY_DATA[0].signupData.address[0],
-      DUMMY_DATA[0].signupData.address[1],
-    ],
-    phoneNumber: [
-      DUMMY_DATA[0].signupData.phoneNumber[0],
-      DUMMY_DATA[0].signupData.phoneNumber[1],
-    ],
+    address: DUMMY_DATA[0].signupData.houseAddress,
+    phoneNumber: DUMMY_DATA[0].signupData.phoneNumber,
   });
   const [focus, setFocus] = useState(false);
   const [focus2, setFocus2] = useState(false);
@@ -32,7 +26,7 @@ const DetailsEdit = () => {
       firstName: e.target.value,
       lastName: newDetails.lastName,
       eMail: newDetails.eMail,
-      address: [newDetails.address[0], newDetails.address[1]],
+      address: newDetails.houseAddress,
       phoneNumber: [newDetails.phoneNumber[0], newDetails.phoneNumber[1]],
     });
   };

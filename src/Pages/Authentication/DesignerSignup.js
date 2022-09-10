@@ -113,7 +113,6 @@ const DesignersSignup = () => {
           url: urlRef.current.value,
           image: file,
           password: passwordRef.current.value,
-          type: "DESIGNER",
         });
         const designersignup = await fetch("", {
           method: "POST",

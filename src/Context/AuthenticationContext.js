@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 const AuthenticationContext = React.createContext();
 
 export function useAuth() {
@@ -6,9 +6,9 @@ export function useAuth() {
 }
 
 export function AuthenticationProvider({ children }) {
-  
+  const[cart, setCart] = useState([])
 
-  const value = {};
+  const value = {cart, setCart};
   return (
     <AuthenticationContext.Provider value={value}>
       {children}

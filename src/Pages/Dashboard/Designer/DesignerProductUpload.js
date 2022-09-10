@@ -8,6 +8,7 @@ const DesignerProductUpload = () => {
   const [images, setImages] = useState([]);
   const [imageValue, setImageValue] = useState("");
   const [imageValue2, setImageValue2] = useState("");
+  const [category, setCategory] = useState("");
   const [fabric, setFabric] = useState("");
   const [sizeChecked1, setSizeChecked1] = useState(false);
   const [sizeChecked2, setSizeChecked2] = useState(false);
@@ -48,6 +49,7 @@ const DesignerProductUpload = () => {
         customization: [...imageDetails.customization, e.target.value],
         fabric: imageDetails.fabric,
         sizes: imageDetails.sizes,
+        category: imageDetails.category
       });
     } else {
       const removeCustomization = imageDetails.customization.filter((check) => {
@@ -62,6 +64,7 @@ const DesignerProductUpload = () => {
         fabric: imageDetails.fabric,
         customization: removeCustomization,
         sizes: imageDetails.sizes,
+        category: imageDetails.category
       });
     }
   };
@@ -76,6 +79,7 @@ const DesignerProductUpload = () => {
         sizes: [...imageDetails.sizes, e.target.value],
         fabric: imageDetails.fabric,
         customization: imageDetails.customization,
+        category: imageDetails.category
       });
     } else {
       const removeSizes = imageDetails.sizes.filter((check) => {
@@ -90,6 +94,7 @@ const DesignerProductUpload = () => {
         fabric: imageDetails.fabric,
         sizes: removeSizes,
         customization: imageDetails.customization,
+        category: imageDetails.category
       });
     }
   };
@@ -103,6 +108,7 @@ const DesignerProductUpload = () => {
       { img: imageDetails.image, id: imageDetails.id },
     ]);
     setImageDetails({
+      id: uuid,
       name: "",
       price: 0,
       desc: "",
@@ -126,6 +132,7 @@ const DesignerProductUpload = () => {
     setCustomChecked5(false);
     setCustomChecked6(false);
     setCustomChecked7(false);
+    setCategory('')
   };
   return (
     <Card pageTitle="Product Uploader">
@@ -137,7 +144,7 @@ const DesignerProductUpload = () => {
           </div>
           <div className="min-h-[150px]">
             {images.length === 0 ? (
-              <div className="h-[150px] text-gray-200 flex justify-center items-center font-semibold text-xl">
+              <div className="h-[150px] text-gray-300 flex justify-center items-center font-semibold text-xl">
                 <h2>No products have been uploaded yet</h2>
               </div>
             ) : (
@@ -258,7 +265,7 @@ const DesignerProductUpload = () => {
                     Item Description
                   </label>
                 </div>
-                <div className="flex justify-between">
+                <div className="flex justify-between mb-6">
                   <div className="relative z-0 mb-2 flex w-6/12 ml-3">
                     <input
                       type="file"
@@ -270,7 +277,6 @@ const DesignerProductUpload = () => {
                         setFabric(e.target.files[0]);
                         setImageValue(e.target.value);
                       }}
-                      required
                     />
                     <label
                       htmlFor="floating_standard"
@@ -290,8 +296,8 @@ const DesignerProductUpload = () => {
                           desc: imageDetails.desc,
                           image: imageDetails.image,
                           customization: imageDetails.customization,
-                          colors: imageDetails.colors,
                           fabric: [...imageDetails.fabric, fabric],
+                          sizes: imageDetails.sizes,
                           category: imageDetails.category,
                         });
 
@@ -302,21 +308,6 @@ const DesignerProductUpload = () => {
                       ADD
                     </button>
                   </div>
-                </div>
-                <div className="mb-6 flex items-center">
-                  <div>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 448 512"
-                      fill="currentColor"
-                      className="w-2 h-2 text-red-700"
-                    >
-                      <path d="M417.1 368c-4.437 7.688-12.5 12-20.81 12c-4.062 0-8.188-1.031-11.97-3.219L248 297.6V456c0 13.25-10.75 24-23.1 24S200 469.3 200 456V297.6l-137.2 79.22C59 378.1 54.88 380 50.81 380c-8.312 0-16.37-4.312-20.81-12c-6.625-11.47-2.687-26.16 8.781-32.78L176 256l-137.2-79.22C27.31 170.2 23.38 155.5 29.1 144C36.59 132.6 51.28 128.5 62.78 135.2L200 214.4V56C200 42.75 210.8 32 224 32S248 42.75 248 56v158.4l137.2-79.22C396.8 128.5 411.4 132.6 417.1 144c6.625 11.47 2.688 26.16-8.781 32.78L271.1 256l137.2 79.22C420.7 341.8 424.6 356.5 417.1 368z" />
-                    </svg>
-                  </div>
-                  <span className="text-xs text-gray-500">
-                    Color or fabric can be added but not both{" "}
-                  </span>
                 </div>
                 <div className="mb-8">
                   <h2 className="mb-3 font-merri uppercase text-gray-500">
@@ -611,7 +602,9 @@ const DesignerProductUpload = () => {
                       value="men"
                       id="men"
                       required
+                      checked={category === "men"}
                       onChange={(e) => {
+                        setCategory(e.target.value);
                         setImageDetails({
                           id: imageDetails.id,
                           name: imageDetails.name,
@@ -620,7 +613,7 @@ const DesignerProductUpload = () => {
                           image: imageDetails.image,
                           customization: imageDetails.customization,
                           fabric: imageDetails.fabric,
-                          colors: imageDetails.colors,
+                          sizes: imageDetails.sizes,
                           category: e.target.value,
                         });
                       }}
@@ -639,7 +632,9 @@ const DesignerProductUpload = () => {
                       name="category"
                       value="women"
                       id="women"
+                      checked={category === "women"}
                       onChange={(e) => {
+                        setCategory("women");
                         setImageDetails({
                           id: imageDetails.id,
                           name: imageDetails.name,
@@ -648,7 +643,7 @@ const DesignerProductUpload = () => {
                           image: imageDetails.image,
                           customization: imageDetails.customization,
                           fabric: imageDetails.fabric,
-                          colors: imageDetails.colors,
+                          sizes: imageDetails.sizes,
                           category: e.target.value,
                         });
                       }}
@@ -667,7 +662,9 @@ const DesignerProductUpload = () => {
                       name="category"
                       value="accessories"
                       id="accesories"
+                      checked={category === "accessories"}
                       onChange={(e) => {
+                        setCategory("accessories");
                         setImageDetails({
                           id: imageDetails.id,
                           name: imageDetails.name,
@@ -676,7 +673,7 @@ const DesignerProductUpload = () => {
                           image: imageDetails.image,
                           customization: imageDetails.customization,
                           fabric: imageDetails.fabric,
-                          colors: imageDetails.colors,
+                          sizes: imageDetails.sizes,
                           category: e.target.value,
                         });
                       }}
@@ -701,9 +698,9 @@ const DesignerProductUpload = () => {
                         price: imageDetails.price,
                         desc: imageDetails.desc,
                         image: undefined,
-                        colors: imageDetails.colors,
                         customization: imageDetails.customization,
                         fabric: imageDetails.fabric,
+                        sizes: imageDetails.sizes,
                         category: imageDetails.category,
                       });
                     }}
@@ -751,9 +748,9 @@ const DesignerProductUpload = () => {
                           price: imageDetails.price,
                           desc: imageDetails.desc,
                           image: e.target.files[0],
-                          colors: imageDetails.colors,
                           customization: imageDetails.customization,
                           fabric: imageDetails.fabric,
+                          sizes: imageDetails.sizes,
                           category: imageDetails.category,
                         });
                       }}
