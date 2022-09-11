@@ -1,15 +1,37 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { uid } from "uid";
 import { useImageAuth } from "../../../Context/ImageContext";
 import Card from "../../../Components/UI/Card";
 
 const DesignerProductUpload = () => {
   const uuid = uid();
+  const { setImageFullScreen, setImageSource, setImageID } = useImageAuth();
   const [images, setImages] = useState([]);
+
+  //product upload state
+  const [name, setName] = useState("");
+  const [price, setPrice] = useState(0);
+  const [desc, setDesc] = useState("");
+  const [fabric, setFabric] = useState("");
+  const [fabricArray, setFabricArray] = useState([]);
+  const [customization, setCustomization] = useState([]);
+  const [sizes, setSizes] = useState([]);
+  const [category, setCategory] = useState("");
+  const [image, setImage] = useState("");
   const [imageValue, setImageValue] = useState("");
   const [imageValue2, setImageValue2] = useState("");
-  const [category, setCategory] = useState("");
-  const [fabric, setFabric] = useState("");
+  const [imageDetails, setImageDetails] = useState({
+    name: "",
+    price: "",
+    desc: "",
+    image: undefined,
+    sizes: [],
+    customization: [],
+    fabric: [],
+    category: "",
+  });
+
+  //state for clearing form
   const [sizeChecked1, setSizeChecked1] = useState(false);
   const [sizeChecked2, setSizeChecked2] = useState(false);
   const [sizeChecked3, setSizeChecked3] = useState(false);
@@ -25,99 +47,51 @@ const DesignerProductUpload = () => {
   const [customChecked6, setCustomChecked6] = useState(false);
   const [customChecked7, setCustomChecked7] = useState(false);
 
-  const [imageDetails, setImageDetails] = useState({
-    id: uuid,
-    name: "",
-    price: "",
-    desc: "",
-    image: undefined,
-    sizes: [],
-    customization: [],
-    fabric: [],
-    category: "",
-  });
-  const { setImageFullScreen, setImageSource, setImageID } = useImageAuth();
+  useEffect(() => {
+    console.log(imageDetails);
+  }, [imageDetails]);
 
+  //handler functions
   const customizationChangeHandler = (e) => {
     if (e.target.checked === true) {
-      setImageDetails({
-        id: imageDetails.id,
-        name: imageDetails.name,
-        price: imageDetails.price,
-        desc: imageDetails.desc,
-        image: imageDetails.image,
-        customization: [...imageDetails.customization, e.target.value],
-        fabric: imageDetails.fabric,
-        sizes: imageDetails.sizes,
-        category: imageDetails.category
-      });
+      setCustomization((prev) => [...prev, e.target.value]);
     } else {
-      const removeCustomization = imageDetails.customization.filter((check) => {
+      const removeCustomization = customization.filter((check) => {
         return e.target.value !== check;
       });
-      setImageDetails({
-        id: imageDetails.id,
-        name: imageDetails.name,
-        price: imageDetails.price,
-        desc: imageDetails.desc,
-        image: imageDetails.image,
-        fabric: imageDetails.fabric,
-        customization: removeCustomization,
-        sizes: imageDetails.sizes,
-        category: imageDetails.category
-      });
+      setCustomization(removeCustomization);
     }
   };
   const sizeChangeHandler = (e) => {
     if (e.target.checked === true) {
-      setImageDetails({
-        id: imageDetails.id,
-        name: imageDetails.name,
-        price: imageDetails.price,
-        desc: imageDetails.desc,
-        image: imageDetails.image,
-        sizes: [...imageDetails.sizes, e.target.value],
-        fabric: imageDetails.fabric,
-        customization: imageDetails.customization,
-        category: imageDetails.category
-      });
+      setSizes((prev) => [...prev, e.target.value]);
     } else {
-      const removeSizes = imageDetails.sizes.filter((check) => {
-        return e.target.value !== check;
+      const removeSizes = sizes.filter((size) => {
+        return e.target.value !== size;
       });
-      setImageDetails({
-        id: imageDetails.id,
-        name: imageDetails.name,
-        price: imageDetails.price,
-        desc: imageDetails.desc,
-        image: imageDetails.image,
-        fabric: imageDetails.fabric,
-        sizes: removeSizes,
-        customization: imageDetails.customization,
-        category: imageDetails.category
-      });
+      setSizes(removeSizes);
     }
   };
 
   const submitHandler = (e) => {
     e.preventDefault();
-    setImageValue2("");
-    console.log(imageDetails);
-    setImages((prev) => [
-      ...prev,
-      { img: imageDetails.image, id: imageDetails.id },
-    ]);
+    
+    setImages((prev) => [...prev, { img: image, id: uuid }]);
     setImageDetails({
-      id: uuid,
-      name: "",
-      price: 0,
-      desc: "",
-      image: undefined,
-      sizes: [],
-      customization: [],
-      fabric: [],
-      category: "",
+      name: name,
+      price: price,
+      desc: desc,
+      image: image,
+      sizes: sizes,
+      customization: customization,
+      fabric: fabricArray,
+      category: category,
     });
+    setName("");
+    setPrice(0);
+    setDesc("");
+    setImage("");
+    setImageValue2("");
     setSizeChecked1(false);
     setSizeChecked2(false);
     setSizeChecked3(false);
@@ -132,7 +106,7 @@ const DesignerProductUpload = () => {
     setCustomChecked5(false);
     setCustomChecked6(false);
     setCustomChecked7(false);
-    setCategory('')
+    setCategory("");
   };
   return (
     <Card pageTitle="Product Uploader">
@@ -186,19 +160,9 @@ const DesignerProductUpload = () => {
                       className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-header peer"
                       placeholder=" "
                       onChange={(e) => {
-                        setImageDetails({
-                          id: imageDetails.id,
-                          name: e.target.value,
-                          price: imageDetails.price,
-                          desc: imageDetails.desc,
-                          image: imageDetails.image,
-                          customization: imageDetails.customization,
-                          fabric: imageDetails.fabric,
-                          sizes: imageDetails.sizes,
-                          category: imageDetails.category,
-                        });
+                        setName(e.target.value);
                       }}
-                      value={imageDetails.name}
+                      value={name}
                       required
                     />
                     <label
@@ -214,19 +178,9 @@ const DesignerProductUpload = () => {
                       className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-header peer"
                       placeholder=" "
                       onChange={(e) => {
-                        setImageDetails({
-                          id: imageDetails.id,
-                          name: imageDetails.name,
-                          price: parseInt(e.target.value),
-                          desc: imageDetails.desc,
-                          image: imageDetails.image,
-                          customization: imageDetails.customization,
-                          fabric: imageDetails.fabric,
-                          sizes: imageDetails.sizes,
-                          category: imageDetails.category,
-                        });
+                        setPrice(e.target.value);
                       }}
-                      value={imageDetails.price}
+                      value={price}
                       required
                     />
                     <label
@@ -243,19 +197,9 @@ const DesignerProductUpload = () => {
                     className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-header peer"
                     placeholder=" "
                     onChange={(e) => {
-                      setImageDetails({
-                        id: imageDetails.id,
-                        name: imageDetails.name,
-                        price: imageDetails.price,
-                        desc: e.target.value,
-                        image: imageDetails.image,
-                        customization: imageDetails.customization,
-                        fabric: imageDetails.fabric,
-                        sizes: imageDetails.sizes,
-                        category: imageDetails.category,
-                      });
+                      setDesc(e.target.value);
                     }}
-                    value={imageDetails.desc}
+                    value={desc}
                     required
                   />
                   <label
@@ -287,20 +231,9 @@ const DesignerProductUpload = () => {
                     <button
                       type="button"
                       className="rounded text-white w-2/12 px-4 py-1 font-semibold bg-header active:bg-headerHover cursor-pointer ml-3"
-                      onClick={(e) => {
+                      onClick={() => {
                         setImageValue("");
-                        setImageDetails({
-                          id: imageDetails.id,
-                          name: imageDetails.name,
-                          price: imageDetails.price,
-                          desc: imageDetails.desc,
-                          image: imageDetails.image,
-                          customization: imageDetails.customization,
-                          fabric: [...imageDetails.fabric, fabric],
-                          sizes: imageDetails.sizes,
-                          category: imageDetails.category,
-                        });
-
+                        setFabricArray((prev) => [...prev, fabric]);
                         alert("fabric has been added");
                         setFabric("");
                       }}
@@ -605,17 +538,6 @@ const DesignerProductUpload = () => {
                       checked={category === "men"}
                       onChange={(e) => {
                         setCategory(e.target.value);
-                        setImageDetails({
-                          id: imageDetails.id,
-                          name: imageDetails.name,
-                          price: imageDetails.price,
-                          desc: imageDetails.desc,
-                          image: imageDetails.image,
-                          customization: imageDetails.customization,
-                          fabric: imageDetails.fabric,
-                          sizes: imageDetails.sizes,
-                          category: e.target.value,
-                        });
                       }}
                     />
                     <label
@@ -634,18 +556,7 @@ const DesignerProductUpload = () => {
                       id="women"
                       checked={category === "women"}
                       onChange={(e) => {
-                        setCategory("women");
-                        setImageDetails({
-                          id: imageDetails.id,
-                          name: imageDetails.name,
-                          price: imageDetails.price,
-                          desc: imageDetails.desc,
-                          image: imageDetails.image,
-                          customization: imageDetails.customization,
-                          fabric: imageDetails.fabric,
-                          sizes: imageDetails.sizes,
-                          category: e.target.value,
-                        });
+                        setCategory(e.target.value);
                       }}
                     />
                     <label
@@ -664,18 +575,7 @@ const DesignerProductUpload = () => {
                       id="accesories"
                       checked={category === "accessories"}
                       onChange={(e) => {
-                        setCategory("accessories");
-                        setImageDetails({
-                          id: imageDetails.id,
-                          name: imageDetails.name,
-                          price: imageDetails.price,
-                          desc: imageDetails.desc,
-                          image: imageDetails.image,
-                          customization: imageDetails.customization,
-                          fabric: imageDetails.fabric,
-                          sizes: imageDetails.sizes,
-                          category: e.target.value,
-                        });
+                        setCategory(e.target.value);
                       }}
                     />
                     <label
@@ -692,24 +592,14 @@ const DesignerProductUpload = () => {
                     className="rounded text-white px-4 py font-semibold bg-header active:bg-headerHover cursor-pointer"
                     value="Clear"
                     onClick={() => {
-                      setImageDetails({
-                        id: imageDetails.id,
-                        name: imageDetails.name,
-                        price: imageDetails.price,
-                        desc: imageDetails.desc,
-                        image: undefined,
-                        customization: imageDetails.customization,
-                        fabric: imageDetails.fabric,
-                        sizes: imageDetails.sizes,
-                        category: imageDetails.category,
-                      });
+                      setImage("");
                     }}
                   />
                 </div>
                 <div className="flex items-center justify-center w-full">
                   <label className="flex flex-col w-full min-h-32 border-4 border-dashed hover:bg-gray-100 hover:border-gray-300">
                     <div className="flex flex-col items-center justify-center pt-7">
-                      {!imageDetails.image ? (
+                      {!image ? (
                         <>
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -729,7 +619,7 @@ const DesignerProductUpload = () => {
                         </>
                       ) : (
                         <img
-                          src={URL.createObjectURL(imageDetails.image)}
+                          src={URL.createObjectURL(image)}
                           alt="fullbody"
                           className="w-3/12 h-auto"
                         />
@@ -742,17 +632,7 @@ const DesignerProductUpload = () => {
                       accept=".jpeg,.jpg,.png"
                       onChange={(e) => {
                         setImageValue2(e.target.value);
-                        setImageDetails({
-                          id: imageDetails.id,
-                          name: imageDetails.name,
-                          price: imageDetails.price,
-                          desc: imageDetails.desc,
-                          image: e.target.files[0],
-                          customization: imageDetails.customization,
-                          fabric: imageDetails.fabric,
-                          sizes: imageDetails.sizes,
-                          category: imageDetails.category,
-                        });
+                        setImage(e.target.files[0]);
                       }}
                       required
                     />
