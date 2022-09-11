@@ -1,9 +1,8 @@
 import { useState, useRef } from "react";
-import { uid } from "uid";
 import { useNavigate } from "react-router-dom";
 
 const DesignersSignup = () => {
-  const uuid = uid();
+ 
   const [phoneNumberCode, setPhoneNumberCode] = useState();
   //password visibility state
   const [passwordShown, setPasswordShown] = useState(false);
@@ -94,7 +93,6 @@ const DesignersSignup = () => {
     if (emailIsValid && passwordConfirmIsValid && passwordIsValid) {
       try {
         setDesignerData({
-          id: uuid,
           firstName: firstNameRef.current.value,
           lastName: lastNameRef.current.value,
           eMail: emailRef.current.value,

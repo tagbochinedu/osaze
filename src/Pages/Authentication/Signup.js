@@ -1,9 +1,7 @@
 import { useState, useRef } from "react";
-import { uid } from "uid";
 import { useNavigate, Link } from "react-router-dom";
 
 const Signup = () => {
-  const uuid = uid();
   const [phoneNumberCode, setPhoneNumberCode] = useState();
   //password visibility state
   const [passwordShown, setPasswordShown] = useState(false);
@@ -83,7 +81,6 @@ const Signup = () => {
     if (emailIsValid && passwordConfirmIsValid && passwordIsValid) {
       try {
         setUserData({
-          id: uuid,
           firstName: firstNameRef.current.value,
           lastName: lastNameRef.current.value,
           eMail: emailRef.current.value,

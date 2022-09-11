@@ -1,10 +1,8 @@
 import { useState, useEffect } from "react";
-import { uid } from "uid";
 import { useImageAuth } from "../../../Context/ImageContext";
 import Card from "../../../Components/UI/Card";
 
 const DesignerProductUpload = () => {
-  const uuid = uid();
   const { setImageFullScreen, setImageSource, setImageID } = useImageAuth();
   const [images, setImages] = useState([]);
 
@@ -76,7 +74,7 @@ const DesignerProductUpload = () => {
   const submitHandler = (e) => {
     e.preventDefault();
     
-    setImages((prev) => [...prev, { img: image, id: uuid }]);
+    setImages((prev) => [...prev, image]);
     setImageDetails({
       name: name,
       price: price,

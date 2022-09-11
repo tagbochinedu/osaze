@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import ReactPaginate from "react-paginate";
 
 import { DUMMY_DATA2 } from "../../../DummyData";
 import { XIcon } from "@heroicons/react/solid";
@@ -10,6 +11,22 @@ const MaleProducts = () => {
   const [designerList, setDesignerList] = useState(DUMMY_DATA2);
   const [menProducts, setMenProducts] = useState(ImageGrid);
   const [width, setWidth] = useState(window.innerWidth);
+  //NEEDED FOR PAGINATION
+  const [currentItems, setCurrentItems] = useState([]);
+  const [pageCount, setPageCount] = useState(0);
+  const [itemOffset, setItemOffset] = useState(0);
+  const itemsPerPage = 8;
+
+  useEffect(() => {
+    const endOffset = itemOffset + itemsPerPage;
+    setCurrentItems(menProducts.slice(itemOffset, endOffset));
+    setPageCount(Math.ceil(menProducts.length / itemsPerPage));
+  }, [itemOffset, itemsPerPage, menProducts]);
+
+  const handlePageClick = (event) => {
+    const newOffset = (event.selected * itemsPerPage) % designerList.length;
+    setItemOffset(newOffset);
+  };
 
   //SETTING UP THE FILTER
   const [filter, setFilter] = useState(false);
@@ -532,45 +549,62 @@ const MaleProducts = () => {
             </div>
           </div>
         )}
-
-        <div className="w-full xl:w-9/12 w-full justify-items-center text-white grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 px-2 py-4">
-          {" "}
-          {menProducts.map((gridImage) => {
-            return (
-              <div
-                className="flip-card w-44 md:w-56 h-80 mx-1 md:mx-2  my-0 md:my-4 hover:rounded-sm cursor-pointer"
-                key={gridImage.id}
-                onClick={() => {
-                  navigate(`/men/${gridImage.id}`, {
-                    state: { name: "hello" },
-                  });
-                }}
-              >
-                <div className="flip-card-inner h-full w-full relative text-center rounded-sm">
-                  <div className="flip-card-front absolute w-full h-full rounded-md text-black">
-                    <img
-                      src={gridImage.url}
-                      alt={gridImage.name}
-                      className="w-full h-full rounded-sm"
-                    />
-                  </div>
-                  <div
-                    style={{
-                      background: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(${gridImage.url})`,
-                      backgroundRepeat: "no-repeat",
-                      backgroundPosition: "cover",
-                    }}
-                    className="flip-card-back bg-cover absolute w-full h-full rounded-md text-white font-merri rounded-sm md:px-8 py-12"
-                  >
-                    <h1 className="text-2xl font-semibold">{gridImage.name}</h1>
-                    <p className="text-lg mt-4 mb-4 font-semibold">
-                      N{gridImage.price}
-                    </p>
+        <div className="w-full xl:w-9/12 w-full">
+          <div className=" justify-items-center text-white grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 px-2 py-4">
+            {" "}
+            {currentItems.map((gridImage) => {
+              return (
+                <div
+                  className="flip-card w-44 md:w-56 h-80 mx-1 md:mx-2  my-0 md:my-4 hover:rounded-sm cursor-pointer"
+                  key={gridImage.id}
+                  onClick={() => {
+                    navigate(`/men/${gridImage.id}`, {
+                      state: { name: "hello" },
+                    });
+                  }}
+                >
+                  <div className="flip-card-inner h-full w-full relative text-center rounded-sm">
+                    <div className="flip-card-front absolute w-full h-full rounded-md text-black">
+                      <img
+                        src={gridImage.url}
+                        alt={gridImage.name}
+                        className="w-full h-full rounded-sm"
+                      />
+                    </div>
+                    <div
+                      style={{
+                        background: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(${gridImage.url})`,
+                        backgroundRepeat: "no-repeat",
+                        backgroundPosition: "cover",
+                      }}
+                      className="flip-card-back bg-cover absolute w-full h-full rounded-md text-white font-merri rounded-sm md:px-8 py-12"
+                    >
+                      <h1 className="text-2xl font-semibold">
+                        {gridImage.name}
+                      </h1>
+                      <p className="text-lg mt-4 mb-4 font-semibold">
+                        N{gridImage.price}
+                      </p>
+                    </div>
                   </div>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
+          <ReactPaginate
+            breakLabel="..."
+            nextLabel="next"
+            onPageChange={handlePageClick}
+            pageRangeDisplayed={2}
+            pageCount={pageCount}
+            previousLabel="previous"
+            renderOnZeroPageCount={null}
+            containerClassName=' text-white w-4/12 mx-auto flex bg-black'
+            pageClassName='border-x-2 border-white px-4 py-3'
+            previousClassName='border-x-2 border-white px-4 py-3'
+            nextClassName='border-x-2 border-white px-4 py-3'
+            activeLinkClassName='active'
+          />
         </div>
       </div>
     </>
