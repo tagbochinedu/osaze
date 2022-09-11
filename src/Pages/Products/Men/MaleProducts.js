@@ -600,7 +600,7 @@ const MaleProducts = () => {
             previousLabel="previous"
             renderOnZeroPageCount={null}
             containerClassName=' text-white w-4/12 mx-auto flex bg-black'
-            pageClassName='border-x-2 border-white px-4 py-3'
+            pageClassName='border-x-2 border-white px-4 py-2'
             previousClassName='border-x-2 border-white px-4 py-3'
             nextClassName='border-x-2 border-white px-4 py-3'
             activeLinkClassName='active'

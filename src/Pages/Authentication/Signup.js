@@ -29,6 +29,10 @@ const Signup = () => {
   const [userData, setUserData] = useState({});
 
   const navigate = useNavigate();
+  
+  //error state
+  const [errMsg, setErrMsg] = useState("");
+  const [err, setErr] = useState(false);
 
   const codeHandler = (e) => {
     setPhoneNumberCode(e.target.value);
@@ -83,23 +87,31 @@ const Signup = () => {
         setUserData({
           firstName: firstNameRef.current.value,
           lastName: lastNameRef.current.value,
-          eMail: emailRef.current.value,
+          email: emailRef.current.value,
           phoneNumber: phoneNumberCode + phoneNumberRef.current.value,
           country: countryRef.current.value,
           state: stateRef.current.value,
           city: cityRef.current.value,
           houseAddress: houseAddressRef.current.value,
           password: passwordRef.current.value,
-          type: "USER",
         });
-        const usersignup = await fetch("", {
+        const usersignup = await fetch("https://osazeapi.herokuapp.com/api/customer/signup", {
           method: "POST",
           body: JSON.stringify(userData),
           headers: { "Content-type": "application/json" },
         });
         const response = await usersignup.json()
         console.log(response)
-        navigate("/login");
+        if (response.status === "success") {
+          navigate("/login");
+        } else {
+          setErrMsg(response.message);
+          setErr(true);
+          setTimeout(() => {
+            setErr(false);
+            setErrMsg("");
+          }, 3000);
+        }
       } catch {}
     } else if (!emailIsValid) {
       alert("Entered email is invalid. Use the info box to correct this");
@@ -111,6 +123,16 @@ const Signup = () => {
   };
   return (
     <div className="w-full">
+      <div className="text-center fixed top-32 right-[45%] z-20">
+        {err && (
+          <div
+            className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4"
+            role="alert"
+          >
+            <h3>{errMsg}</h3>
+          </div>
+        )}
+      </div>
       <div className="max-w-xs md:max-w-lg border-2 rounded-lg my-20 shadow-lg glass pt-4 pb-8 px-6 shadow-gray-200 mx-auto">
         <h1 className="text-2xl text-center text-header my-6 font-bold font-julius">
           Create Account

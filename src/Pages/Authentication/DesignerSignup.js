@@ -2,7 +2,6 @@ import { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
 const DesignersSignup = () => {
- 
   const [phoneNumberCode, setPhoneNumberCode] = useState();
   //password visibility state
   const [passwordShown, setPasswordShown] = useState(false);
@@ -35,9 +34,14 @@ const DesignersSignup = () => {
   const [sewing, setSewing] = useState();
   const brandNameRef = useRef();
   const brandLocationRef = useRef();
+  const brandInfoRef = useRef();
   const [willingness, setWillingness] = useState("no");
   const urlRef = useRef();
   const [file, setFile] = useState("");
+
+  //error state
+  const [errMsg, setErrMsg] = useState("");
+  const [err, setErr] = useState(false);
 
   const codeHandler = (e) => {
     setPhoneNumberCode(e.target.value);
@@ -95,7 +99,7 @@ const DesignersSignup = () => {
         setDesignerData({
           firstName: firstNameRef.current.value,
           lastName: lastNameRef.current.value,
-          eMail: emailRef.current.value,
+          email: emailRef.current.value,
           phoneNumber: phoneNumberCode + phoneNumberRef.current.value,
           country: countryRef.current.value,
           state: stateRef.current.value,
@@ -103,23 +107,36 @@ const DesignersSignup = () => {
           houseAddress: houseAddressRef.current.value,
           sketch: sketch,
           sew: sew,
-          sketching: sketching,
-          sewing: sewing,
+          sketchSkill: sketching,
+          sewSkill: sewing,
           brandName: brandNameRef.current.value,
           brandLocation: brandLocationRef.current.value,
+          brandInfo: brandInfoRef.current.value,
           willingness: willingness,
           url: urlRef.current.value,
           image: file,
           password: passwordRef.current.value,
         });
-        const designersignup = await fetch("", {
-          method: "POST",
-          body: JSON.stringify(designerData),
-          headers: { "Content-type": "application/json" },
-        });
+        const designersignup = await fetch(
+          "https://osazeapi.herokuapp.com/api/designer/signup",
+          {
+            method: "POST",
+            body: JSON.stringify(designerData),
+            headers: { "Content-type": "application/json" },
+          }
+        );
         const response = await designersignup.json();
         console.log(response);
-        navigate("/login");
+        if (response.status === "success") {
+          navigate("/login");
+        } else {
+          setErrMsg(response.message);
+          setErr(true);
+          setTimeout(() => {
+            setErr(false);
+            setErrMsg("");
+          }, 3000);
+        }
       } catch {}
     } else if (!emailIsValid) {
       alert("Entered email is invalid. Use the info box to correct this");
@@ -132,11 +149,27 @@ const DesignersSignup = () => {
 
   return (
     <div className="w-full">
+      <div className="text-center fixed top-32 right-[45%] z-20">
+        {err && (
+          <div
+            className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4"
+            role="alert"
+          >
+            <h3>{errMsg}</h3>
+          </div>
+        )}
+      </div>
       <div className="max-w-xs md:max-w-xl border-2 rounded-lg my-20 shadow-lg glass pt-4 pb-8 px-6 shadow-gray-200 mx-auto">
         <h1 className="text-2xl text-center text-header my-6 font-bold font-julius">
           Register as a Designer
         </h1>
         <form onSubmit={submitHandler} autoComplete="off">
+          <input
+            autoComplete="false"
+            name="hidden"
+            type="text"
+            className="hidden"
+          />
           <div className="relative z-0 mb-6 w-full group">
             <input
               type="hidden"
@@ -561,7 +594,7 @@ const DesignersSignup = () => {
                 value="maybe"
                 id="sketch3"
                 onChange={(e) => {
-                  setSketch(e.target.value)
+                  setSketch(e.target.value);
                 }}
               />
               <label
@@ -795,6 +828,20 @@ const DesignersSignup = () => {
             >
               Where is your business located?
             </label>
+          </div>
+          <div className="mb-3">
+            <label
+              htmlFor="exampleFormControlTextarea1"
+              className="form-label inline-block mb-2 text-gray-500"
+            >
+              Tell us about your brand
+            </label>
+            <textarea
+              className="block py-2.5 px-0 font-merri w-full text-md text-gray-900 bg-transparent border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-header peer"
+              rows="3"
+              placeholder="Your message"
+              ref={brandInfoRef}
+            />
           </div>
           <div className="mb-8">
             <div>
