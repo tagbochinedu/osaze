@@ -11,7 +11,6 @@ const Login = () => {
   const { setUserData, loading, setLoading } = useAuth();
   const emailRef = useRef();
   const passwordRef = useRef();
-  const [loginDetails, setLoginDetails] = useState({});
   //error state
   const [errMsg, setErrMsg] = useState("");
   const [err, setErr] = useState(false);
@@ -20,10 +19,10 @@ const Login = () => {
   const submitHandler = async (e) => {
     e.preventDefault();
     setLoading(true);
-    setLoginDetails({
+    const loginDetails = {
       email: emailRef.current.value,
       password: passwordRef.current.value,
-    });
+    };
     try {
       const endpoint = "https://osazeapi.herokuapp.com/api/customer/login";
       const requestConfiguration = {
@@ -50,6 +49,7 @@ const Login = () => {
         brandInfo: response.designer.businessInfo.brandInfo,
         url: "",
         role: response.designer.userObject.role,
+        id: response.designer.id
       };
       localStorage.setItem("userObject", JSON.stringify(userObject));
       console.log(response);

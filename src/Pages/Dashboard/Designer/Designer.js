@@ -1,14 +1,16 @@
 
 import { Link } from "react-router-dom";
 
-import { DUMMY_DATA4 } from "../../../DummyData";
+import { useAuth } from "../../../Context/AuthenticationContext";
 
 import Card from "../../../Components/UI/Card";
 
 const Designer = () => {
+  const {userData} = useAuth()
+  const userdata = [userData]
     return (
     <Card pageTitle="Designer">
-      <div className="px-6 py-4">
+      <div className="px-6 py-4 grid grid-cols-2 gap-4">
         <div className="border-2 border-border-gray-300 rounded-sm max-h-40 mb-6">
           <div className=" border-b-2 border-gray-300 flex justify-between py-1 px-2 ">
             <h2 className="w-11/12 text-lg font-semibold">
@@ -26,81 +28,83 @@ const Designer = () => {
             </Link>
           </div>
           <div className="py-2 px-6 flex justify-center">
-            {DUMMY_DATA4.map((data) => {
+            {userdata.map((designer) => {
               return (
-                <div className="py-5" key={data.accountInformation.firstName}>
+                <div className="py-5" key={designer.id}>
                   <h3 className="text-lg font-semibold">
-                    {data.accountInformation.firstName}{" "}
-                    {data.accountInformation.lastName}
+                    {designer.firstName}{" "}
+                    {designer.lastName}
                   </h3>
                   <p className="text-header text-sm mt-4">
-                    {data.accountInformation.eMail}
+                    {designer.email}
                   </p>
                 </div>
               );
             })}
           </div>
         </div>
-        <div className="border-2 border-border-gray-300 rounded-sm max-h-40 mb-6">
+        <div className="border-2 border-border-gray-300 rounded-sm min-h-40 mb-6">
           <div className=" border-b-2 border-gray-300 py-1 px-2 ">
             <h2 className="w-11/12 text-lg font-semibold">
               Business Information
             </h2>
           </div>
           <div className="py-2 px-6 flex justify-center">
-            {DUMMY_DATA4.map((data) => {
+            {userdata.map((designer) => {
               return (
-                <div className="py-5" key={data.accountInformation.firstName}>
+                <div className="py-5" key={designer.id}>
                   <h3 className="text-lg font-semibold">
-                    {data.accountInformation.firstName}{" "}
-                    {data.accountInformation.lastName}
+                    {designer.brandName}
                   </h3>
                   <p className="text-header text-sm mt-4">
-                    {data.accountInformation.eMail}
+                    {designer.brandInfo}
+                  </p>
+                  <p className="text-header text-sm mt-4">
+                    {designer.brandLocation}
                   </p>
                 </div>
               );
             })}
           </div>
         </div>
-        <div className="border-2 border-border-gray-300 rounded-sm mb-6">
-          <div className=" border-b-2 border-gray-300">
+        <div className="border-2 border-border-gray-300 rounded-sm mb-6 ">
+          <div className=" border-b-2 border-gray-300 py-1 px-2">
             <h2 className="w-11/12 text-lg font-semibold">
               Contact Information
             </h2>
           </div>
-          <div className="py-2 px-6 flex justify-center">
-            {DUMMY_DATA4.map((data) => {
+          <div className="py-1 px-2 flex justify-center">
+            {userdata.map((designer) => {
               return (
                 <div
                   className="py-5 text-lg"
-                  key={data.contactInformation.address}
+                  key={designer.id}
                 >
                   <h3 className="text-lg">
                     Country:{" "}
                     <span className="font-semibold">
-                      {data.contactInformation.address.country}
+                      {designer.country}
                     </span>
                   </h3>
                   <h3>
                     State/Province:{" "}
                     <span className="font-semibold">
-                      {data.contactInformation.address.state}
+                      {designer.state}
                     </span>
                   </h3>
                   <h3>
                     City:{" "}
                     <span className="font-semibold">
-                      {data.contactInformation.address.city}
+                      {designer.city}
                     </span>
                   </h3>
                   <h3>
                     House Address:{" "}
                     <span className="font-semibold">
-                      {data.contactInformation.address.houseAddress}
+                      {designer.houseAddress}
                     </span>
                   </h3>
-                  <h3>Phone Number: {data.contactInformation.phoneNumber}</h3>
+                  <h3>Phone Number: {designer.phoneNumber}</h3>
                 </div>
               );
             })}

@@ -28,7 +28,6 @@ const Signup = () => {
   const stateRef = useRef();
   const cityRef = useRef();
   const houseAddressRef = useRef();
-  const [customerData, setCustomerData] = useState({});
 
   const navigate = useNavigate();
   
@@ -85,7 +84,7 @@ const Signup = () => {
   const submitHandler = async (e) => {
     e.preventDefault();
     if (emailIsValid && passwordConfirmIsValid && passwordIsValid) {
-      setCustomerData({
+      const customerData ={
           firstName: firstNameRef.current.value,
           lastName: lastNameRef.current.value,
           email: emailRef.current.value,
@@ -95,7 +94,7 @@ const Signup = () => {
           city: cityRef.current.value,
           houseAddress: houseAddressRef.current.value,
           password: passwordRef.current.value,
-        });
+        };
       try {
         const endpoint = "https://osazeapi.herokuapp.com/api/customer/signup";
         const requestConfiguration = {

@@ -20,8 +20,7 @@ const DesignersSignup = () => {
   const [passwordConfirmIsValid, setPasswordConfirmIsValid] = useState(true);
   const [passwordConfirmFocus, setPasswordConfirmFocus] = useState(false);
   const passwordConfirmRef = useRef();
-  //form submission state
-  const [designerData, setDesignerData] = useState({});
+
   //Refs & State
   const firstNameRef = useRef();
   const lastNameRef = useRef();
@@ -97,7 +96,7 @@ const DesignersSignup = () => {
   const submitHandler = async (e) => {
     e.preventDefault();
     if (emailIsValid && passwordConfirmIsValid && passwordIsValid) {
-      setDesignerData({
+      const designerData = {
         firstName: firstNameRef.current.value,
         lastName: lastNameRef.current.value,
         email: emailRef.current.value,
@@ -117,7 +116,7 @@ const DesignersSignup = () => {
         url: urlRef.current.value,
         image: file,
         password: passwordRef.current.value,
-      });
+      };
       try {
         const endpoint = "https://osazeapi.herokuapp.com/api/designer/signup";
         const requestConfiguration = {
@@ -163,7 +162,11 @@ const DesignersSignup = () => {
         <h1 className="text-2xl text-center text-header my-6 font-bold font-julius">
           Register as a Designer
         </h1>
-        <form onSubmit={submitHandler} autoComplete="off" className='text-sm md:text-md'>
+        <form
+          onSubmit={submitHandler}
+          autoComplete="off"
+          className="text-sm md:text-md"
+        >
           <div className="grid md:grid-cols-2 md:gap-6">
             <div className="relative z-0 mb-6 w-full group">
               <input

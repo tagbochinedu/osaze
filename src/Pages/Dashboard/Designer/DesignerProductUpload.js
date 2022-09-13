@@ -3,7 +3,7 @@ import { useImageAuth } from "../../../Context/ImageContext";
 import Card from "../../../Components/UI/Card";
 
 const DesignerProductUpload = () => {
-  const { setImageFullScreen, setImageSource, setImageID } = useImageAuth();
+  const { setImageFullScreen, setImageSource} = useImageAuth();
   const [images, setImages] = useState([]);
 
   //product upload state
@@ -128,13 +128,12 @@ const DesignerProductUpload = () => {
                       key={index}
                     >
                       <img
-                        src={URL.createObjectURL(img.img)}
+                        src={URL.createObjectURL(img)}
                         className="h-auto max-h-48 mx-auto"
                         alt="gallery"
                         onClick={() => {
                           setImageFullScreen(true);
-                          setImageSource(img.img);
-                          setImageID(img.id);
+                          setImageSource(img);
                         }}
                       />
                     </li>
