@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useAuth } from "../Context/AuthenticationContext";
 
 import { NavLink, Link } from "react-router-dom";
 import { MenuAlt4Icon } from "@heroicons/react/solid";
@@ -7,6 +8,7 @@ import logo from "../Resources/logo.jpeg";
 import SideNav from "./Sidenav";
 
 const Header = () => {
+  const { userData } = useAuth();
   const [width, setWidth] = useState(window.innerWidth);
   const [menu, setMenu] = useState(false);
   const [accountDropDown, setAccountDropDown] = useState(false);
@@ -128,95 +130,174 @@ const Header = () => {
                       setAccountDropDown(false);
                       setMenu(false);
                     }}
-                    to="/signup"
+                    to="/login"
                     className="bg-header rounded-md w-full block text-white py-1 px-0.5"
                   >
                     Log In
                   </Link>
                 </li>
-                <li className=" py-2">
-                  <NavLink
-                    end
-                    to="/profile"
-                    className="flex items-center"
-                    onClick={() => {
-                      setAccountDropDown(false);
-                      setMenu(false);
-                    }}
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 448 512"
-                      fill="currentColor"
-                      className="w-5 h-5"
+                {!userData || userData.role === "customer" ? (
+                  <>
+                    <li className=" py-2">
+                      <NavLink
+                        end
+                        to="/profile"
+                        className="flex items-center"
+                        onClick={() => {
+                          setAccountDropDown(false);
+                          setMenu(false);
+                        }}
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 448 512"
+                          fill="currentColor"
+                          className="w-5 h-5"
+                        >
+                          <path d="M224 256c70.7 0 128-57.31 128-128s-57.3-128-128-128C153.3 0 96 57.31 96 128S153.3 256 224 256zM274.7 304H173.3C77.61 304 0 381.6 0 477.3c0 19.14 15.52 34.67 34.66 34.67h378.7C432.5 512 448 496.5 448 477.3C448 381.6 370.4 304 274.7 304z" />
+                        </svg>{" "}
+                        <p className="w-10/12 ml-3">My Account</p>
+                      </NavLink>
+                    </li>
+                    <li className="py-2">
+                      <NavLink
+                        end
+                        to="/profile/orders"
+                        className="flex items-center"
+                        onClick={() => {
+                          setAccountDropDown(false);
+                          setMenu(false);
+                        }}
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 640 512"
+                          fill="currentColor"
+                          className="w-5 h-5"
+                        >
+                          <path d="M75.23 33.4L320 63.1L564.8 33.4C571.5 32.56 578 36.06 581.1 42.12L622.8 125.5C631.7 143.4 622.2 165.1 602.9 170.6L439.6 217.3C425.7 221.2 410.8 215.4 403.4 202.1L320 63.1L236.6 202.1C229.2 215.4 214.3 221.2 200.4 217.3L37.07 170.6C17.81 165.1 8.283 143.4 17.24 125.5L58.94 42.12C61.97 36.06 68.5 32.56 75.23 33.4H75.23zM321.1 128L375.9 219.4C390.8 244.2 420.5 255.1 448.4 248L576 211.6V378.5C576 400.5 561 419.7 539.6 425.1L335.5 476.1C325.3 478.7 314.7 478.7 304.5 476.1L100.4 425.1C78.99 419.7 64 400.5 64 378.5V211.6L191.6 248C219.5 255.1 249.2 244.2 264.1 219.4L318.9 128H321.1z" />
+                        </svg>{" "}
+                        <p className="w-10/12 ml-3">Orders</p>
+                      </NavLink>
+                    </li>
+                    <li className="py-2">
+                      <NavLink
+                        end
+                        to="/"
+                        className="flex items-center"
+                        onClick={() => {
+                          setMenu(false);
+                        }}
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 512 512"
+                          fill="CurrentColor"
+                          className="w-5 h-5"
+                        >
+                          <path d="M464 64C490.5 64 512 85.49 512 112C512 127.1 504.9 141.3 492.8 150.4L275.2 313.6C263.8 322.1 248.2 322.1 236.8 313.6L19.2 150.4C7.113 141.3 0 127.1 0 112C0 85.49 21.49 64 48 64H464zM217.6 339.2C240.4 356.3 271.6 356.3 294.4 339.2L512 176V384C512 419.3 483.3 448 448 448H64C28.65 448 0 419.3 0 384V176L217.6 339.2z" />
+                        </svg>
+                        <p className="w-10/12 ml-3">Inbox</p>
+                      </NavLink>
+                    </li>
+                  </>
+                ) : (
+                  <></>
+                )}
+                {!userData || userData.role === "customer" ? (
+                  <>
+                    <li className=" py-2">
+                      <NavLink
+                        end
+                        to="/profile"
+                        className="flex items-center"
+                        onClick={() => {
+                          setAccountDropDown(false);
+                          setMenu(false);
+                        }}
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 448 512"
+                          fill="currentColor"
+                          className="w-5 h-5"
+                        >
+                          <path d="M224 256c70.7 0 128-57.31 128-128s-57.3-128-128-128C153.3 0 96 57.31 96 128S153.3 256 224 256zM274.7 304H173.3C77.61 304 0 381.6 0 477.3c0 19.14 15.52 34.67 34.66 34.67h378.7C432.5 512 448 496.5 448 477.3C448 381.6 370.4 304 274.7 304z" />
+                        </svg>{" "}
+                        <p className="w-10/12 ml-3">My Account</p>
+                      </NavLink>
+                    </li>
+                    <li className="py-2">
+                      <NavLink
+                        end
+                        to="/profile/orders"
+                        className="flex items-center"
+                        onClick={() => {
+                          setAccountDropDown(false);
+                          setMenu(false);
+                        }}
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 640 512"
+                          fill="currentColor"
+                          className="w-5 h-5"
+                        >
+                          <path d="M75.23 33.4L320 63.1L564.8 33.4C571.5 32.56 578 36.06 581.1 42.12L622.8 125.5C631.7 143.4 622.2 165.1 602.9 170.6L439.6 217.3C425.7 221.2 410.8 215.4 403.4 202.1L320 63.1L236.6 202.1C229.2 215.4 214.3 221.2 200.4 217.3L37.07 170.6C17.81 165.1 8.283 143.4 17.24 125.5L58.94 42.12C61.97 36.06 68.5 32.56 75.23 33.4H75.23zM321.1 128L375.9 219.4C390.8 244.2 420.5 255.1 448.4 248L576 211.6V378.5C576 400.5 561 419.7 539.6 425.1L335.5 476.1C325.3 478.7 314.7 478.7 304.5 476.1L100.4 425.1C78.99 419.7 64 400.5 64 378.5V211.6L191.6 248C219.5 255.1 249.2 244.2 264.1 219.4L318.9 128H321.1z" />
+                        </svg>{" "}
+                        <p className="w-10/12 ml-3">Orders</p>
+                      </NavLink>
+                    </li>
+                    <li className="py-2">
+                      <NavLink
+                        end
+                        to="/profile/inbox"
+                        className="flex items-center"
+                        onClick={() => {
+                          setMenu(false);
+                        }}
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 512 512"
+                          fill="CurrentColor"
+                          className="w-5 h-5"
+                        >
+                          <path d="M464 64C490.5 64 512 85.49 512 112C512 127.1 504.9 141.3 492.8 150.4L275.2 313.6C263.8 322.1 248.2 322.1 236.8 313.6L19.2 150.4C7.113 141.3 0 127.1 0 112C0 85.49 21.49 64 48 64H464zM217.6 339.2C240.4 356.3 271.6 356.3 294.4 339.2L512 176V384C512 419.3 483.3 448 448 448H64C28.65 448 0 419.3 0 384V176L217.6 339.2z" />
+                        </svg>
+                        <p className="w-10/12 ml-3">Inbox</p>
+                      </NavLink>
+                    </li>
+                  </>
+                ) : (
+                  <></>
+                )}
+                {userData?.role === "designer" ? (
+                  <li className="py-2">
+                    <NavLink
+                      end
+                      to="/profile/wishlist"
+                      className="flex items-center"
+                      onClick={() => {
+                        setAccountDropDown(false);
+                        setMenu(false);
+                      }}
+                      
                     >
-                      <path d="M224 256c70.7 0 128-57.31 128-128s-57.3-128-128-128C153.3 0 96 57.31 96 128S153.3 256 224 256zM274.7 304H173.3C77.61 304 0 381.6 0 477.3c0 19.14 15.52 34.67 34.66 34.67h378.7C432.5 512 448 496.5 448 477.3C448 381.6 370.4 304 274.7 304z" />
-                    </svg>{" "}
-                    <p className="w-10/12 ml-3">My Account</p>
-                  </NavLink>
-                </li>
-                <li className="py-2">
-                  <NavLink
-                    end
-                    to="/profile/orders"
-                    className="flex items-center"
-                    onClick={() => {
-                      setAccountDropDown(false);
-                      setMenu(false);
-                    }}
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 640 512"
-                      fill="currentColor"
-                      className="w-5 h-5"
-                    >
-                      <path d="M75.23 33.4L320 63.1L564.8 33.4C571.5 32.56 578 36.06 581.1 42.12L622.8 125.5C631.7 143.4 622.2 165.1 602.9 170.6L439.6 217.3C425.7 221.2 410.8 215.4 403.4 202.1L320 63.1L236.6 202.1C229.2 215.4 214.3 221.2 200.4 217.3L37.07 170.6C17.81 165.1 8.283 143.4 17.24 125.5L58.94 42.12C61.97 36.06 68.5 32.56 75.23 33.4H75.23zM321.1 128L375.9 219.4C390.8 244.2 420.5 255.1 448.4 248L576 211.6V378.5C576 400.5 561 419.7 539.6 425.1L335.5 476.1C325.3 478.7 314.7 478.7 304.5 476.1L100.4 425.1C78.99 419.7 64 400.5 64 378.5V211.6L191.6 248C219.5 255.1 249.2 244.2 264.1 219.4L318.9 128H321.1z" />
-                    </svg>{" "}
-                    <p className="w-10/12 ml-3">Orders</p>
-                  </NavLink>
-                </li>
-                <li className="py-2">
-                  <NavLink
-                    end
-                    to="/profile/wishlist"
-                    className="flex items-center"
-                    onClick={() => {
-                      setAccountDropDown(false);
-                      setMenu(false);
-                    }}
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 512 512"
-                      fill="currentColor"
-                      className="w-5 h-5"
-                    >
-                      <path d="M0 190.9V185.1C0 115.2 50.52 55.58 119.4 44.1C164.1 36.51 211.4 51.37 244 84.02L256 96L267.1 84.02C300.6 51.37 347 36.51 392.6 44.1C461.5 55.58 512 115.2 512 185.1V190.9C512 232.4 494.8 272.1 464.4 300.4L283.7 469.1C276.2 476.1 266.3 480 256 480C245.7 480 235.8 476.1 228.3 469.1L47.59 300.4C17.23 272.1 .0003 232.4 .0003 190.9L0 190.9z" />
-                    </svg>{" "}
-                    <p className="w-10/12 ml-3">WishList</p>
-                  </NavLink>
-                </li>
-                <li className="py-2">
-                  <NavLink
-                    end
-                    to="/profile/inbox"
-                    className="flex items-center"
-                    onClick={() => {
-                      setMenu(false);
-                    }}
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 512 512"
-                      fill="CurrentColor"
-                      className="w-5 h-5"
-                    >
-                      <path d="M464 64C490.5 64 512 85.49 512 112C512 127.1 504.9 141.3 492.8 150.4L275.2 313.6C263.8 322.1 248.2 322.1 236.8 313.6L19.2 150.4C7.113 141.3 0 127.1 0 112C0 85.49 21.49 64 48 64H464zM217.6 339.2C240.4 356.3 271.6 356.3 294.4 339.2L512 176V384C512 419.3 483.3 448 448 448H64C28.65 448 0 419.3 0 384V176L217.6 339.2z" />
-                    </svg>
-                    <p className="w-10/12 ml-3">Inbox</p>
-                  </NavLink>
-                </li>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 512 512"
+                        className="w-5 h-5"
+                        fill='CurrentColor'
+                      >
+                        <path d="M256 192l-39.5-39.5c4.9-12.6 7.5-26.2 7.5-40.5C224 50.1 173.9 0 112 0S0 50.1 0 112s50.1 112 112 112c14.3 0 27.9-2.7 40.5-7.5L192 256l-39.5 39.5c-12.6-4.9-26.2-7.5-40.5-7.5C50.1 288 0 338.1 0 400s50.1 112 112 112s112-50.1 112-112c0-14.3-2.7-27.9-7.5-40.5L499.2 76.8c7.1-7.1 7.1-18.5 0-25.6c-28.3-28.3-74.1-28.3-102.4 0L256 192zm22.6 150.6L396.8 460.8c28.3 28.3 74.1 28.3 102.4 0c7.1-7.1 7.1-18.5 0-25.6L342.6 278.6l-64 64zM160 112c0 26.5-21.5 48-48 48s-48-21.5-48-48s21.5-48 48-48s48 21.5 48 48zM112 448c-26.5 0-48-21.5-48-48s21.5-48 48-48s48 21.5 48 48s-21.5 48-48 48z" />
+                      </svg>{" "}
+                      <p className="w-10/12 ml-3">Designer</p>
+                    </NavLink>
+                  </li>
+                ) : (
+                  <></>
+                )}
               </ul>
             </div>
             <li className="cursor-pointer">
