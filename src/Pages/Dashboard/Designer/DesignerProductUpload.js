@@ -87,7 +87,7 @@ const DesignerProductUpload = () => {
     });
     setName("");
     setPrice(0);
-    setDesc("");
+    setDescription("");
     setImage("");
     setImageValue2("");
     setSizeChecked1(false);
