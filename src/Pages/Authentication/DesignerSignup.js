@@ -148,7 +148,7 @@ const DesignersSignup = () => {
   };
 
   return (
-    <div className="w-full">
+    <div className="w-full px-3">
       <div className="text-center fixed top-32 right-[45%] z-20">
         {err && (
           <div
@@ -159,27 +159,11 @@ const DesignersSignup = () => {
           </div>
         )}
       </div>
-      <div className="max-w-xs md:max-w-xl border-2 rounded-lg my-20 shadow-lg glass pt-4 pb-8 px-6 shadow-gray-200 mx-auto">
+      <div className="max-w-md md:max-w-xl border-2 rounded-lg my-20 shadow-lg glass pt-4 pb-8 px-3  md:px-6 shadow-gray-200 mx-auto">
         <h1 className="text-2xl text-center text-header my-6 font-bold font-julius">
           Register as a Designer
         </h1>
-        <form onSubmit={submitHandler} autoComplete="off">
-          <input
-            autoComplete="false"
-            name="hidden"
-            type="text"
-            className="hidden"
-          />
-          <div className="relative z-0 mb-6 w-full group">
-            <input
-              type="hidden"
-              id="hidden"
-              className="block font-merri py-2.5 px-0 w-full text-md text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-header peer"
-              placeholder=" "
-              value="DESIGNER"
-              required
-            />
-          </div>
+        <form onSubmit={submitHandler} autoComplete="off" className='text-sm md:text-md'>
           <div className="grid md:grid-cols-2 md:gap-6">
             <div className="relative z-0 mb-6 w-full group">
               <input
@@ -665,20 +649,20 @@ const DesignersSignup = () => {
               </label>
             </div>
           </div>
-          <div className="mb-6">
-            <div className="flex text-gray-500 text-center items-center">
-              <div className="w-2/12 p-1"></div>
+          <div className="mb-6 flex">
+            <div className="md:flex w-4/12 md:w-full text-gray-500 text-center text-xs md:text-md items-center">
+              <div className="w-2/12 p-1 opacity-0 mb-2 md:mb-auto">Empty</div>
               <div className="w-2/12 p-1">Satisfactory</div>
               <div className="w-2/12 p-1">Good</div>
               <div className="w-2/12 p-1">Proficient</div>
               <div className="w-2/12 p-1">Highly Proficient</div>
               <div className="w-2/12 p-1">Expert</div>
             </div>
-            <div className="flex text-gray-500 items-center">
-              <div className="w-2/12 p-1">
+            <div className="flex flex-col w-3/12 md:w-full md:flex-row text-gray-500 items-center">
+              <div className="md:w-2/12 p-1">
                 <p>Sketching</p>
               </div>
-              <div className="w-2/12 p-1 text-center flex justify-center">
+              <div className="md:w-2/12 p-1 text-center flex justify-center">
                 <input
                   className="form-check-input appearance-none rounded-full h-4 w-4 border border-gray-500 bg-white checked:bg-headerHover focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left cursor-pointer"
                   type="radio"
@@ -690,9 +674,9 @@ const DesignersSignup = () => {
                   }}
                 />
               </div>
-              <div className="w-2/12 p-1 flex justify-center">
+              <div className="md:w-2/12 p-1 text-center flex justify-center">
                 <input
-                  className="form-check-input appearance-none rounded-full h-4 w-4 border border-gray-500 bg-white checked:bg-headerHover focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
+                  className="form-check-input appearance-none rounded-full h-4 w-4 border border-gray-500 bg-white checked:bg-headerHover focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left md:mr-2 cursor-pointer"
                   type="radio"
                   name="sketching"
                   value="good"
@@ -701,9 +685,9 @@ const DesignersSignup = () => {
                   }}
                 />
               </div>
-              <div className="w-2/12 p-1 flex justify-center">
+              <div className="md:w-2/12 p-1 text-center flex justify-center">
                 <input
-                  className="form-check-input appearance-none rounded-full h-4 w-4 border border-gray-500 bg-white checked:bg-headerHover focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
+                  className="form-check-input appearance-none rounded-full h-4 w-4 border border-gray-500 bg-white checked:bg-headerHover focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left md:mr-2 cursor-pointer"
                   type="radio"
                   name="sketching"
                   value="proficient"
@@ -712,9 +696,9 @@ const DesignersSignup = () => {
                   }}
                 />
               </div>
-              <div className="w-2/12 p-1 flex justify-center">
+              <div className="md:w-2/12 p-1 text-center flex justify-center">
                 <input
-                  className="form-check-input appearance-none rounded-full h-4 w-4 border border-gray-500 bg-white checked:bg-headerHover focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
+                  className="form-check-input appearance-none rounded-full h-4 w-4 border border-gray-500 bg-white checked:bg-headerHover focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left md:mr-2 cursor-pointer"
                   type="radio"
                   value="highly proficient"
                   name="sketching"
@@ -723,9 +707,9 @@ const DesignersSignup = () => {
                   }}
                 />
               </div>
-              <div className="w-2/12 p-1 flex justify-center">
+              <div className="md:w-2/12 p-1 text-center flex justify-center">
                 <input
-                  className="form-check-input appearance-none rounded-full h-4 w-4 border border-gray-500 bg-white checked:bg-headerHover focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
+                  className="form-check-input appearance-none rounded-full h-4 w-4 border border-gray-500 bg-white checked:bg-headerHover focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left md:mr-2 cursor-pointer"
                   type="radio"
                   name="sketching"
                   value="expert"
@@ -735,11 +719,11 @@ const DesignersSignup = () => {
                 />
               </div>
             </div>
-            <div className="flex text-gray-500 items-center">
-              <div className="w-2/12 p-1">
+            <div className="flex flex-col w-3/12 md:w-full md:flex-row text-gray-500 items-center">
+              <div className="md:w-2/12 p-1">
                 <p>Sewing</p>
               </div>
-              <div className="w-2/12 p-1 text-center flex justify-center">
+              <div className="md:w-2/12 p-1 text-center flex justify-center">
                 <input
                   className="form-check-input appearance-none rounded-full h-4 w-4 border border-gray-500 bg-white checked:bg-headerHover focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left cursor-pointer"
                   type="radio"
@@ -751,9 +735,10 @@ const DesignersSignup = () => {
                   }}
                 />
               </div>
-              <div className="w-2/12 p-1 flex justify-center">
+              <div className="md:w-2/12 p-1 text-center flex justify-center">
                 <input
-                  className="form-check-input appearance-none rounded-full h-4 w-4 border border-gray-500 bg-white checked:bg-headerHover focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
+                  className="form-check-input appearance-none rounded-full h-4 w-4 border border-gray-500 bg-white checked:bg-headerHover focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left
+                  md:mr-2 cursor-pointer"
                   type="radio"
                   name="sewing"
                   value="good"
@@ -762,9 +747,9 @@ const DesignersSignup = () => {
                   }}
                 />
               </div>
-              <div className="w-2/12 p-1 flex justify-center">
+              <div className="md:w-2/12 p-1 text-center flex justify-center">
                 <input
-                  className="form-check-input appearance-none rounded-full h-4 w-4 border border-gray-500 bg-white checked:bg-headerHover focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
+                  className="form-check-input appearance-none rounded-full h-4 w-4 border border-gray-500 bg-white checked:bg-headerHover focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left md:mr-2 cursor-pointer"
                   type="radio"
                   name="sewing"
                   value="proficient"
@@ -773,9 +758,9 @@ const DesignersSignup = () => {
                   }}
                 />
               </div>
-              <div className="w-2/12 p-1 flex justify-center">
+              <div className="md:w-2/12 p-1 text-center flex justify-center">
                 <input
-                  className="form-check-input appearance-none rounded-full h-4 w-4 border border-gray-500 bg-white checked:bg-headerHover focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
+                  className="form-check-input appearance-none rounded-full h-4 w-4 border border-gray-500 bg-white checked:bg-headerHover focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left md:mr-2 cursor-pointer"
                   type="radio"
                   name="sewing"
                   value="highly proficient"
@@ -784,9 +769,9 @@ const DesignersSignup = () => {
                   }}
                 />
               </div>
-              <div className="w-2/12 p-1 flex justify-center">
+              <div className="md:w-2/12 p-1 text-center flex justify-center">
                 <input
-                  className="form-check-input appearance-none rounded-full h-4 w-4 border border-gray-500 bg-white checked:bg-headerHover focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
+                  className="form-check-input appearance-none rounded-full h-4 w-4 border border-gray-500 bg-white checked:bg-headerHover focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left md:mr-2 cursor-pointer"
                   type="radio"
                   value="expert"
                   name="sewing"

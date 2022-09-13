@@ -32,7 +32,7 @@ const Login = () => {
         body: loginDetails,
       };
       const response = await fetchHandler(endpoint, requestConfiguration);
-      setUserData({
+      const userObject = {
         firstName: response.designer.userObject.firstName,
         lastName: response.designer.userObject.lastName,
         email: response.designer.userObject.email,
@@ -50,11 +50,14 @@ const Login = () => {
         brandInfo: response.designer.businessInfo.brandInfo,
         url: "",
         role: response.designer.userObject.role,
-      });
+      };
+      localStorage.setItem("userObject", JSON.stringify(userObject));
       console.log(response);
-      navigate(from, {replace: true})
+      const userData = localStorage.getItem("userObject");
+      setUserData(JSON.parse(userData));
       if (response.status === "success") {
-        return
+        setLoading(false);
+        navigate(from, { replace: true });
       } else {
         setErrMsg(response.message);
         setErr(true);
@@ -62,6 +65,7 @@ const Login = () => {
           setErr(false);
           setErrMsg("");
         }, 3000);
+        setLoading(false)
       }
     } catch {}
     setLoading(false)
@@ -79,7 +83,7 @@ const Login = () => {
           </div>
         )}
       </div>
-      <div className=" max-w-xs md:max-w-lg border-2 rounded-lg my-20 shadow-lg glass pt-4 pb-8 px-6 shadow-gray-200 mx-auto">
+      <div className=" max-w-md md:max-w-lg border-2 rounded-lg my-20 shadow-lg glass pt-4 pb-8 px-6 shadow-gray-200 mx-auto">
         <h1 className="text-2xl text-center text-header my-6 font-bold font-julius">
           Sign In
         </h1>
@@ -122,12 +126,12 @@ const Login = () => {
             className="text-white bg-header active:bg-headerHover mx-1 transition ease-in-out duration-150 font-medium rounded-lg text-sm block w-full px-5 py-2.5 text-center"
           >
             {loading ? (
-              <div class="flex justify-center items-center">
+              <div className="flex justify-center items-center">
                 <div
-                  class="spinner-border animate-spin inline-block w-8 h-8 border-4 rounded-full"
+                  className="spinner-border animate-spin inline-block w-8 h-8 border-4 rounded-full"
                   role="status"
                 >
-                  <span class="bg-header ml-2 text-xs text-header">Load</span>
+                  <span className="bg-header ml-2 text-xs text-header">Load</span>
                 </div>
               </div>
             ) : (

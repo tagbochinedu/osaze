@@ -8,7 +8,7 @@ import logo from "../Resources/logo.jpeg";
 import SideNav from "./Sidenav";
 
 const Header = () => {
-  const { userData } = useAuth();
+  const { userData, Logout } = useAuth();
   const [width, setWidth] = useState(window.innerWidth);
   const [menu, setMenu] = useState(false);
   const [accountDropDown, setAccountDropDown] = useState(false);
@@ -127,21 +127,24 @@ const Header = () => {
                 <li className="border-b text-center py-2">
                   <Link
                     onClick={() => {
+                      if (userData) {
+                        Logout();
+                      }
                       setAccountDropDown(false);
                       setMenu(false);
                     }}
-                    to="/login"
+                    to={userData ? "/" : "/login"}
                     className="bg-header rounded-md w-full block text-white py-1 px-0.5"
                   >
-                    Log In
+                    {!userData ? <>Sign In</> : <>Log Out</>}
                   </Link>
                 </li>
-                {!userData || userData.role === "customer" ? (
+                {!userData ? (
                   <>
                     <li className=" py-2">
                       <NavLink
                         end
-                        to="/profile"
+                        to="/login"
                         className="flex items-center"
                         onClick={() => {
                           setAccountDropDown(false);
@@ -162,7 +165,7 @@ const Header = () => {
                     <li className="py-2">
                       <NavLink
                         end
-                        to="/profile/orders"
+                        to="/login"
                         className="flex items-center"
                         onClick={() => {
                           setAccountDropDown(false);
@@ -183,7 +186,7 @@ const Header = () => {
                     <li className="py-2">
                       <NavLink
                         end
-                        to="/"
+                        to="/login"
                         className="flex items-center"
                         onClick={() => {
                           setMenu(false);
@@ -204,7 +207,7 @@ const Header = () => {
                 ) : (
                   <></>
                 )}
-                {!userData || userData.role === "customer" ? (
+                {userData?.role === "customer" ? (
                   <>
                     <li className=" py-2">
                       <NavLink
@@ -273,28 +276,51 @@ const Header = () => {
                   <></>
                 )}
                 {userData?.role === "designer" ? (
-                  <li className="py-2">
-                    <NavLink
-                      end
-                      to="/profile/wishlist"
-                      className="flex items-center"
-                      onClick={() => {
-                        setAccountDropDown(false);
-                        setMenu(false);
-                      }}
-                      
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 512 512"
-                        className="w-5 h-5"
-                        fill='CurrentColor'
+                  <>
+                    <li className="py-2">
+                      <NavLink
+                        end
+                        to="/profile/designer"
+                        className="flex items-center"
+                        onClick={() => {
+                          setAccountDropDown(false);
+                          setMenu(false);
+                        }}
                       >
-                        <path d="M256 192l-39.5-39.5c4.9-12.6 7.5-26.2 7.5-40.5C224 50.1 173.9 0 112 0S0 50.1 0 112s50.1 112 112 112c14.3 0 27.9-2.7 40.5-7.5L192 256l-39.5 39.5c-12.6-4.9-26.2-7.5-40.5-7.5C50.1 288 0 338.1 0 400s50.1 112 112 112s112-50.1 112-112c0-14.3-2.7-27.9-7.5-40.5L499.2 76.8c7.1-7.1 7.1-18.5 0-25.6c-28.3-28.3-74.1-28.3-102.4 0L256 192zm22.6 150.6L396.8 460.8c28.3 28.3 74.1 28.3 102.4 0c7.1-7.1 7.1-18.5 0-25.6L342.6 278.6l-64 64zM160 112c0 26.5-21.5 48-48 48s-48-21.5-48-48s21.5-48 48-48s48 21.5 48 48zM112 448c-26.5 0-48-21.5-48-48s21.5-48 48-48s48 21.5 48 48s-21.5 48-48 48z" />
-                      </svg>{" "}
-                      <p className="w-10/12 ml-3">Designer</p>
-                    </NavLink>
-                  </li>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 512 512"
+                          className="w-5 h-5"
+                          fill="CurrentColor"
+                        >
+                          <path d="M256 192l-39.5-39.5c4.9-12.6 7.5-26.2 7.5-40.5C224 50.1 173.9 0 112 0S0 50.1 0 112s50.1 112 112 112c14.3 0 27.9-2.7 40.5-7.5L192 256l-39.5 39.5c-12.6-4.9-26.2-7.5-40.5-7.5C50.1 288 0 338.1 0 400s50.1 112 112 112s112-50.1 112-112c0-14.3-2.7-27.9-7.5-40.5L499.2 76.8c7.1-7.1 7.1-18.5 0-25.6c-28.3-28.3-74.1-28.3-102.4 0L256 192zm22.6 150.6L396.8 460.8c28.3 28.3 74.1 28.3 102.4 0c7.1-7.1 7.1-18.5 0-25.6L342.6 278.6l-64 64zM160 112c0 26.5-21.5 48-48 48s-48-21.5-48-48s21.5-48 48-48s48 21.5 48 48zM112 448c-26.5 0-48-21.5-48-48s21.5-48 48-48s48 21.5 48 48s-21.5 48-48 48z" />
+                        </svg>{" "}
+                        <p className="w-10/12 ml-3">Designer</p>
+                      </NavLink>
+                    </li>
+
+                    <li className="py-2">
+                      <NavLink
+                        end
+                        to="/profile/designer-product-upload"
+                        className="flex items-center"
+                        onClick={() => {
+                          setAccountDropDown(false);
+                          setMenu(false);
+                        }}
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 384 512"
+                          className="w-5 h-5"
+                          fill="CurrentColor"
+                        >
+                          <path d="M64 0C28.7 0 0 28.7 0 64V448c0 35.3 28.7 64 64 64H320c35.3 0 64-28.7 64-64V160H256c-17.7 0-32-14.3-32-32V0H64zM256 0V128H384L256 0zM216 408c0 13.3-10.7 24-24 24s-24-10.7-24-24V305.9l-31 31c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l72-72c9.4-9.4 24.6-9.4 33.9 0l72 72c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-31-31V408z" />
+                        </svg>{" "}
+                        <p className="w-10/12 ml-3">Products</p>
+                      </NavLink>
+                    </li>
+                  </>
                 ) : (
                   <></>
                 )}
