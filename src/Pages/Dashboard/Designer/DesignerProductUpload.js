@@ -9,7 +9,7 @@ const DesignerProductUpload = () => {
   //product upload state
   const [name, setName] = useState("");
   const [price, setPrice] = useState(0);
-  const [desc, setDesc] = useState("");
+  const [description, setDescription] = useState("");
   const [fabric, setFabric] = useState("");
   const [fabricArray, setFabricArray] = useState([]);
   const [customization, setCustomization] = useState([]);
@@ -21,11 +21,11 @@ const DesignerProductUpload = () => {
   const [imageDetails, setImageDetails] = useState({
     name: "",
     price: "",
-    desc: "",
+    description: "",
     image: undefined,
     sizes: [],
     customization: [],
-    fabric: [],
+    fabrics: [],
     category: "",
   });
 
@@ -78,11 +78,11 @@ const DesignerProductUpload = () => {
     setImageDetails({
       name: name,
       price: price,
-      desc: desc,
+      description: description,
       image: image,
       sizes: sizes,
       customization: customization,
-      fabric: fabricArray,
+      fabrics: fabricArray,
       category: category,
     });
     setName("");
@@ -184,7 +184,7 @@ const DesignerProductUpload = () => {
                       htmlFor="floating_standard"
                       className="absolute text-sm text-gray-500 duration-300 transform -translate-y-8 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-header peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-8"
                     >
-                      Item Price
+                      Item Price($)
                     </label>
                   </div>
                 </div>
@@ -194,9 +194,9 @@ const DesignerProductUpload = () => {
                     className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-header peer"
                     placeholder=" "
                     onChange={(e) => {
-                      setDesc(e.target.value);
+                      setDescription(e.target.value);
                     }}
-                    value={desc}
+                    value={description}
                     required
                   />
                   <label
