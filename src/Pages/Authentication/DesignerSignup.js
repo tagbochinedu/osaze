@@ -1,7 +1,9 @@
 import { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
+import useFetch from "../../CustomHooks/useFetch";
 
 const DesignersSignup = () => {
+  const fetchHandler = useFetch();
   const [phoneNumberCode, setPhoneNumberCode] = useState();
   //password visibility state
   const [passwordShown, setPasswordShown] = useState(false);
@@ -95,37 +97,35 @@ const DesignersSignup = () => {
   const submitHandler = async (e) => {
     e.preventDefault();
     if (emailIsValid && passwordConfirmIsValid && passwordIsValid) {
+      setDesignerData({
+        firstName: firstNameRef.current.value,
+        lastName: lastNameRef.current.value,
+        email: emailRef.current.value,
+        phoneNumber: phoneNumberCode + phoneNumberRef.current.value,
+        country: countryRef.current.value,
+        state: stateRef.current.value,
+        city: cityRef.current.value,
+        houseAddress: houseAddressRef.current.value,
+        sketch: sketch,
+        sew: sew,
+        sketchSkill: sketching,
+        sewSkill: sewing,
+        brandName: brandNameRef.current.value,
+        brandLocation: brandLocationRef.current.value,
+        brandInfo: brandInfoRef.current.value,
+        willingness: willingness,
+        url: urlRef.current.value,
+        image: file,
+        password: passwordRef.current.value,
+      });
       try {
-        setDesignerData({
-          firstName: firstNameRef.current.value,
-          lastName: lastNameRef.current.value,
-          email: emailRef.current.value,
-          phoneNumber: phoneNumberCode + phoneNumberRef.current.value,
-          country: countryRef.current.value,
-          state: stateRef.current.value,
-          city: cityRef.current.value,
-          houseAddress: houseAddressRef.current.value,
-          sketch: sketch,
-          sew: sew,
-          sketchSkill: sketching,
-          sewSkill: sewing,
-          brandName: brandNameRef.current.value,
-          brandLocation: brandLocationRef.current.value,
-          brandInfo: brandInfoRef.current.value,
-          willingness: willingness,
-          url: urlRef.current.value,
-          image: file,
-          password: passwordRef.current.value,
-        });
-        const designersignup = await fetch(
-          "https://osazeapi.herokuapp.com/api/designer/signup",
-          {
-            method: "POST",
-            body: JSON.stringify(designerData),
-            headers: { "Content-type": "application/json" },
-          }
-        );
-        const response = await designersignup.json();
+        const endpoint = "https://osazeapi.herokuapp.com/api/designer/signup";
+        const requestConfiguration = {
+          method: "POST",
+          headers: { "Content-type": "application/json" },
+          body: designerData,
+        };
+        const response = await fetchHandler(endpoint, requestConfiguration);
         console.log(response);
         if (response.status === "success") {
           navigate("/login");

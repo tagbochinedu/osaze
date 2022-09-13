@@ -1,12 +1,84 @@
-import { useNavigate, Link } from "react-router-dom";
+import { useState, useRef } from "react";
+import { useNavigate, Link, useLocation } from "react-router-dom";
+import useFetch from "../../CustomHooks/useFetch";
+import { useAuth } from "../../Context/AuthenticationContext";
 
 const Login = () => {
+  const fetchHandler = useFetch();
   const navigate = useNavigate();
-  const submitHandler = () => {
-    navigate("/");
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
+  const { setUserData, loading, setLoading } = useAuth();
+  const emailRef = useRef();
+  const passwordRef = useRef();
+  const [loginDetails, setLoginDetails] = useState({});
+  //error state
+  const [errMsg, setErrMsg] = useState("");
+  const [err, setErr] = useState(false);
+  //loading state
+
+  const submitHandler = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setLoginDetails({
+      email: emailRef.current.value,
+      password: passwordRef.current.value,
+    });
+    try {
+      const endpoint = "https://osazeapi.herokuapp.com/api/customer/login";
+      const requestConfiguration = {
+        method: "POST",
+        headers: { "Content-type": "application/json" },
+        body: loginDetails,
+      };
+      const response = await fetchHandler(endpoint, requestConfiguration);
+      setUserData({
+        firstName: response.designer.userObject.firstName,
+        lastName: response.designer.userObject.lastName,
+        email: response.designer.userObject.email,
+        phoneNumber: response.designer.userObject.phoneNumber,
+        country: response.designer.address.country,
+        state: response.designer.address.state,
+        city: response.designer.address.city,
+        houseAddress: response.designer.address.houseAddress,
+        sketch: response.designer.businessInfo.sketch,
+        sketchSkill: response.designer.businessInfo.sketchSkill,
+        sew: response.designer.businessInfo.sew,
+        sewSkill: response.designer.businessInfo.sewSkill,
+        brandName: response.designer.businessInfo.brandName,
+        brandLocation: response.designer.businessInfo.brandLocation,
+        brandInfo: response.designer.businessInfo.brandInfo,
+        url: "",
+        role: response.designer.userObject.role,
+      });
+      console.log(response);
+      navigate(from, {replace: true})
+      if (response.status === "success") {
+        return
+      } else {
+        setErrMsg(response.message);
+        setErr(true);
+        setTimeout(() => {
+          setErr(false);
+          setErrMsg("");
+        }, 3000);
+      }
+    } catch {}
+    setLoading(false)
   };
+
   return (
     <div className="w-full">
+      <div className="text-center fixed top-32 right-[45%] z-20">
+        {err && (
+          <div
+            className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4"
+            role="alert"
+          >
+            <h3>{errMsg}</h3>
+          </div>
+        )}
+      </div>
       <div className=" max-w-xs md:max-w-lg border-2 rounded-lg my-20 shadow-lg glass pt-4 pb-8 px-6 shadow-gray-200 mx-auto">
         <h1 className="text-2xl text-center text-header my-6 font-bold font-julius">
           Sign In
@@ -15,11 +87,11 @@ const Login = () => {
           <div className="relative z-0 mb-6 w-full group">
             <input
               type="email"
-             
               id="floating_email1"
               className="block py-2.5 px-0 font-merri w-full text-md text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-header peer"
               placeholder=" "
               required=""
+              ref={emailRef}
             />
             <label
               htmlFor="floating_email1"
@@ -36,6 +108,7 @@ const Login = () => {
               className="block py-2.5 px-0 w-full font-merri text-md text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-header peer"
               placeholder=" "
               required=""
+              ref={passwordRef}
             />
             <label
               htmlFor="floating_password"
@@ -48,7 +121,18 @@ const Login = () => {
             type="submit"
             className="text-white bg-header active:bg-headerHover mx-1 transition ease-in-out duration-150 font-medium rounded-lg text-sm block w-full px-5 py-2.5 text-center"
           >
-            Sign In
+            {loading ? (
+              <div class="flex justify-center items-center">
+                <div
+                  class="spinner-border animate-spin inline-block w-8 h-8 border-4 rounded-full"
+                  role="status"
+                >
+                  <span class="bg-header ml-2 text-xs text-header">Load</span>
+                </div>
+              </div>
+            ) : (
+              <p>Sign In</p>
+            )}
           </button>
           <div>
             <div className="flex items-center my-4 before:flex-1 before:border-t before:border-gray-300 before:mt-0.5 after:flex-1 after:border-t after:border-gray-300 after:mt-0.5">
@@ -85,7 +169,12 @@ const Login = () => {
                 data-mdb-ripple-color="light"
                 className="inline-block p-3 bg-header text-white font-medium text-xs leading-tight uppercase rounded-full shadow-md active:bg-headerHover mx-1 transition ease-in-out duration-150"
               >
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 488 512" fill='currentColor' className='w-4 h-4'>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 488 512"
+                  fill="currentColor"
+                  className="w-4 h-4"
+                >
                   <path d="M488 261.8C488 403.3 391.1 504 248 504 110.8 504 0 393.2 0 256S110.8 8 248 8c66.8 0 123 24.5 166.3 64.9l-67.5 64.9C258.5 52.6 94.3 116.6 94.3 256c0 86.5 69.1 156.6 153.7 156.6 98.2 0 135-70.4 140.8-106.9H248v-85.3h236.1c2.3 12.7 3.9 24.9 3.9 41.4z" />
                 </svg>
               </button>
@@ -115,7 +204,12 @@ const Login = () => {
             </div>
           </div>
         </form>
-        <p className='text-gray-500 text-end mt-4'>Don't have an account? Sign up <Link to='/signup' className='underline text-header'>here</Link></p>
+        <p className="text-gray-500 text-end mt-4">
+          Don't have an account? Sign up{" "}
+          <Link to="/signup" className="underline text-header">
+            here
+          </Link>
+        </p>
       </div>
     </div>
   );

@@ -6,9 +6,10 @@ export function useAuth() {
 }
 
 export function AuthenticationProvider({ children }) {
-  const[cart, setCart] = useState([])
+  const [userData, setUserData] = useState()
+  const [loading, setLoading] = useState(false)
 
-  const value = {cart, setCart};
+  const value = {userData, setUserData, loading, setLoading};
   return (
     <AuthenticationContext.Provider value={value}>
       {children}

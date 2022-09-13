@@ -1,7 +1,9 @@
 import { useState, useRef } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import useFetch from "../../CustomHooks/useFetch";
 
 const Signup = () => {
+  const fetchHandler = useFetch();
   const [phoneNumberCode, setPhoneNumberCode] = useState();
   //password visibility state
   const [passwordShown, setPasswordShown] = useState(false);
@@ -26,7 +28,7 @@ const Signup = () => {
   const stateRef = useRef();
   const cityRef = useRef();
   const houseAddressRef = useRef();
-  const [userData, setUserData] = useState({});
+  const [customerData, setCustomerData] = useState({});
 
   const navigate = useNavigate();
   
@@ -83,8 +85,7 @@ const Signup = () => {
   const submitHandler = async (e) => {
     e.preventDefault();
     if (emailIsValid && passwordConfirmIsValid && passwordIsValid) {
-      try {
-        setUserData({
+      setCustomerData({
           firstName: firstNameRef.current.value,
           lastName: lastNameRef.current.value,
           email: emailRef.current.value,
@@ -95,12 +96,14 @@ const Signup = () => {
           houseAddress: houseAddressRef.current.value,
           password: passwordRef.current.value,
         });
-        const usersignup = await fetch("https://osazeapi.herokuapp.com/api/customer/signup", {
+      try {
+        const endpoint = "https://osazeapi.herokuapp.com/api/customer/signup";
+        const requestConfiguration = {
           method: "POST",
-          body: JSON.stringify(userData),
           headers: { "Content-type": "application/json" },
-        });
-        const response = await usersignup.json()
+          body: customerData,
+        };
+        const response = await fetchHandler(endpoint, requestConfiguration);
         console.log(response)
         if (response.status === "success") {
           navigate("/login");

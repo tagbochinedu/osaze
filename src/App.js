@@ -2,6 +2,8 @@ import { Route, Routes, Navigate } from "react-router-dom";
 
 import Footer from "./Components/Footer";
 import Header from "./Components/Header";
+import PrivateRoute from "./Components/PrivateRoute/PrivateRoute";
+import AuthorizedRoute from "./Components/PrivateRoute/AuthorizedRoute";
 
 import Home from "./Pages/Home";
 
@@ -36,7 +38,8 @@ import FinishedOrders from "./Pages/Dashboard/Designer/Orders/FinishedOrders";
 import DesignersOnly from "./Pages/DesignersOnly";
 import DesignerSignup from "./Pages/Authentication/DesignerSignup";
 
-import NoMatch from "./Pages/NoMatch";
+import NoMatch from "./Pages/ErrorPage/NoMatch";
+import Unauthorized from "./Pages/ErrorPage/Unauthorized";
 
 import OrderReviewModal from "./Components/Modals/OrderReviewModal";
 import { useModalAuth } from "./Context/ModalContext";
@@ -61,68 +64,83 @@ function App() {
         <Route exact path="/cart" element={<Cart />} />
         <Route exact path="/designers-only" element={<DesignersOnly />} />
         <Route exact path="/designers-sign-up" element={<DesignerSignup />} />
-        <Route exact path="/profile" element={<Dashboard />}>
-          <Route
-            exact
-            path="/profile"
-            element={<Navigate to="/profile/account-information" />}
-          />
-          <Route
-            exact
-            path="/profile/account-information"
-            element={<AccountInformation />}
-          />
-          <Route exact path="/profile/body-profile" element={<BodyProfile />} />
-          <Route
-            exact
-            path="/profile/body-profile/edit"
-            element={<BodyEdit />}
-          />
-          <Route exact path="/profile/account/edit" element={<DetailsEdit />} />
-          <Route exact path="/profile/orders" element={<Orders />}>
-            <Route
-              exact
-              path="/profile/orders"
-              element={<Navigate to="/profile/orders/orders-pending" />}
-            />
-            <Route
-              exact
-              path="/profile/orders/orders-pending"
-              element={<PendingOrders />}
-            />
-            <Route
-              exact
-              path="/profile/orders/orders-complete"
-              element={<CompletedOrders />}
-            />
-          </Route>
-          <Route exact path="/profile/inbox" element={<Inbox />} />
-          <Route exact path="/profile/designer" element={<Designer />} />
-          <Route
-            exact
-            path="/profile/designer-product-upload"
-            element={<DesignerProductUpload />}
-          />
-          <Route
-            exact
-            path="/profile/designer-orders"
-            element={<DesignerOrders />}
-          >
-            <Route
-              exact
-              path="/profile/designer-orders"
-              element={<Navigate to="/profile/designer-orders/open-orders" />}
-            />
-            <Route
-              exact
-              path="/profile/designer-orders/open-orders"
-              element={<OpenOrders />}
-            />
-            <Route
-              exact
-              path="/profile/designer-orders/finished-orders"
-              element={<FinishedOrders />}
-            />
+        <Route element={<PrivateRoute />}>
+          <Route exact path="/profile" element={<Dashboard />}>
+            <Route element={<AuthorizedRoute allowedRole="customer" />}>
+              <Route
+                path="/profile/"
+                element={<Navigate to="/profile/account-information" />}
+              />
+              <Route
+                exact
+                path="/profile/account-information"
+                element={<AccountInformation />}
+              />
+              <Route
+                exact
+                path="/profile/body-profile"
+                element={<BodyProfile />}
+              />
+              <Route
+                exact
+                path="/profile/body-profile/edit"
+                element={<BodyEdit />}
+              />
+              <Route
+                exact
+                path="/profile/account/edit"
+                element={<DetailsEdit />}
+              />
+              <Route exact path="/profile/orders" element={<Orders />}>
+                <Route
+                  exact
+                  path="/profile/orders"
+                  element={<Navigate to="/profile/orders/orders-pending" />}
+                />
+                <Route
+                  exact
+                  path="/profile/orders/orders-pending"
+                  element={<PendingOrders />}
+                />
+                <Route
+                  exact
+                  path="/profile/orders/orders-complete"
+                  element={<CompletedOrders />}
+                />
+              </Route>
+              <Route exact path="/profile/inbox" element={<Inbox />} />
+            </Route>
+            <Route element={<AuthorizedRoute allowedRole="designer" />}>
+              <Route exact path="/profile/designer" element={<Designer />} />
+              <Route
+                exact
+                path="/profile/designer-product-upload"
+                element={<DesignerProductUpload />}
+              />
+              <Route
+                exact
+                path="/profile/designer-orders"
+                element={<DesignerOrders />}
+              >
+                <Route
+                  exact
+                  path="/profile/designer-orders"
+                  element={
+                    <Navigate to="/profile/designer-orders/open-orders" />
+                  }
+                />
+                <Route
+                  exact
+                  path="/profile/designer-orders/open-orders"
+                  element={<OpenOrders />}
+                />
+                <Route
+                  exact
+                  path="/profile/designer-orders/finished-orders"
+                  element={<FinishedOrders />}
+                />
+              </Route>
+            </Route>
           </Route>
         </Route>
         <Route exact path="/men" element={<MaleProducts />} />
@@ -130,6 +148,7 @@ function App() {
         <Route exact path="/women" element={<Women />} />
         <Route exact path="/accessories" element={<Accessories />} />
         <Route path="*" element={<NoMatch />} />
+        <Route path="/403" element={<Unauthorized />} />
       </Routes>
       <Footer />
     </>
