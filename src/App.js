@@ -29,7 +29,9 @@ import CompletedOrders from "./Pages/Dashboard/Customer/Orders/CompletedOrders";
 
 import Inbox from "./Pages/Dashboard/Customer/Inbox";
 
-import Designer from "./Pages/Dashboard/Designer/Designer";
+import Designer from "./Pages/Dashboard/Designer/DesignerDetails/Designer";
+import DesignerAccountDetailsEdit from "./Pages/Dashboard/Designer/DesignerDetails/DesignerAccountDetailsEdit";
+import DesignerBusinessDetailsEdit from "./Pages/Dashboard/Designer/DesignerDetails/DesignerBusinessDetailsEdit";
 import DesignerProductUpload from "./Pages/Dashboard/Designer/DesignerProductUpload";
 import DesignerOrders from "./Pages/Dashboard/Designer/Orders/DesignerOrders";
 import OpenOrders from "./Pages/Dashboard/Designer/Orders/OpenOrders";
@@ -112,6 +114,8 @@ function App() {
             </Route>
             <Route element={<AuthorizedRoute allowedRole="designer" />}>
               <Route exact path="/profile/designer" element={<Designer />} />
+              <Route exact path="/profile/designer-account-details-edit" element={<DesignerAccountDetailsEdit />} />
+              <Route exact path="/profile/designer-business-details-edit" element={<DesignerBusinessDetailsEdit />} />
               <Route
                 exact
                 path="/profile/designer-product-upload"

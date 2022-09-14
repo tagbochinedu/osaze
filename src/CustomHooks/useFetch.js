@@ -7,7 +7,7 @@ const useFetch = () => {
         : null,
       headers: requestConfiguration.headers ? requestConfiguration.headers : {},
     });
-    //'authorization': `Bearer ${token}`
+    //
     const response = await httpRequestHandler.json();
     return response;
   };

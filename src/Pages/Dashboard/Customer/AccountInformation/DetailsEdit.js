@@ -84,11 +84,11 @@ const DetailsEdit = () => {
   return (
     <Card pageTitle="Edit Details" className="min-h-[80vh]">
       <form className=" px-6 py-10 relative h-full" onSubmit={submitHander}>
-        {DUMMY_DATA.map((data) => {
+        {DUMMY_DATA.map((data, i) => {
           return (
             <div
               className="grid grid-cols-2 grid-rows-2 gap-6 mb-24"
-              key={data.signupData.firstName}
+              key={i}
             >
               <div className="relative z-0 mb-6">
                 <input

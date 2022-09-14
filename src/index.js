@@ -4,6 +4,7 @@ import { AuthenticationProvider } from "./Context/AuthenticationContext";
 import { ModalProvider } from "./Context/ModalContext";
 import { ImageProvider } from "./Context/ImageContext";
 import { BrowserRouter } from "react-router-dom";
+import ScrollToTop from "./Components/ScrollToTop";
 import "./index.css";
 import App from "./App";
 
@@ -13,6 +14,7 @@ root.render(
     <ModalProvider>
       <BrowserRouter>
         <ImageProvider>
+          <ScrollToTop/>
           <App />
         </ImageProvider>
       </BrowserRouter>

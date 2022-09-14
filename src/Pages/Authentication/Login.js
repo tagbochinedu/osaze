@@ -8,7 +8,7 @@ const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
-  const { setUserData, loading, setLoading } = useAuth();
+  const { setUserData, setToken, loading, setLoading } = useAuth();
   const emailRef = useRef();
   const passwordRef = useRef();
   //error state
@@ -32,30 +32,52 @@ const Login = () => {
       };
       const response = await fetchHandler(endpoint, requestConfiguration);
       const userObject = {
-        firstName: response.designer.userObject.firstName,
-        lastName: response.designer.userObject.lastName,
-        email: response.designer.userObject.email,
-        phoneNumber: response.designer.userObject.phoneNumber,
-        country: response.designer.address.country,
-        state: response.designer.address.state,
-        city: response.designer.address.city,
-        houseAddress: response.designer.address.houseAddress,
-        sketch: response.designer.businessInfo.sketch,
-        sketchSkill: response.designer.businessInfo.sketchSkill,
-        sew: response.designer.businessInfo.sew,
-        sewSkill: response.designer.businessInfo.sewSkill,
-        brandName: response.designer.businessInfo.brandName,
-        brandLocation: response.designer.businessInfo.brandLocation,
-        brandInfo: response.designer.businessInfo.brandInfo,
-        url: "",
-        role: response.designer.userObject.role,
-        id: response.designer.id
+        firstName: response.user.userObject.firstName,
+        lastName: response.user.userObject.lastName,
+        email: response.user.userObject.email,
+        phoneNumber: response.user.userObject.phoneNumber,
+        country: response.user.address.country,
+        state: response.user.address.state,
+        city: response.user.address.city,
+        houseAddress: response.user.address.houseAddress,
+        sketch: response.user.businessInfo
+          ? response.user.businessInfo.sketch
+          : null,
+        sketchSkill: response.user.businessInfo
+          ? response.user.businessInfo.sketchSkill
+          : null,
+        sew: response.user.businessInfo ? response.user.businessInfo.sew : null,
+        sewSkill: response.user.businessInfo
+          ? response.user.businessInfo.sewSkill
+          : null,
+        brandName: response.user.businessInfo
+          ? response.user.businessInfo.brandName
+          : null,
+        brandLocation: response.user.businessInfo
+          ? response.user.businessInfo.brandLocation
+          : null,
+        brandInfo: response.user.businessInfo
+          ? response.user.businessInfo.brandInf
+          : null,
+        url: response.user.businessInfo ? response.user.businessInfo.url : null,
+        cart: response.user.cart ? response.user.cart : null,
+        orders: response.user.orders ? response.user.orders : null,
+        messages: response.user.messages ? response.user.messages : null,
+        role: response.user.userObject.role,
+        id: response.user.userId,
       };
+      console.log(userObject, response);
+
       localStorage.setItem("userObject", JSON.stringify(userObject));
-      console.log(response);
       const userData = localStorage.getItem("userObject");
       setUserData(JSON.parse(userData));
+
+      localStorage.setItem("token", JSON.stringify(response.token));
+      const accessToken = localStorage.getItem("token");
+      setToken(JSON.parse(accessToken));
+
       if (response.status === "success") {
+        console.log(response.status, response.token);
         setLoading(false);
         navigate(from, { replace: true });
       } else {
@@ -65,10 +87,12 @@ const Login = () => {
           setErr(false);
           setErrMsg("");
         }, 3000);
-        setLoading(false)
+        setLoading(false);
       }
-    } catch {}
-    setLoading(false)
+    } catch (err) {
+      console.log(err.message);
+    }
+    setLoading(false);
   };
 
   return (
@@ -131,7 +155,9 @@ const Login = () => {
                   className="spinner-border animate-spin inline-block w-8 h-8 border-4 rounded-full"
                   role="status"
                 >
-                  <span className="bg-header ml-2 text-xs text-header">Load</span>
+                  <span className="bg-inherit ml-2 text-xs text-header">
+                    Load
+                  </span>
                 </div>
               </div>
             ) : (
