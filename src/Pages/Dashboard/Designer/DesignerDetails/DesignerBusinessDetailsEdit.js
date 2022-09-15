@@ -13,7 +13,7 @@ const DesignerBusinessDetailsEdit = () => {
   const [brandLocation, setBrandLocation] = useState(userData.brandLocation);
   const [brandInfo, setBrandInfo] = useState(userData.brandInfo);
 
-  const submitHander = async (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault();
     const editDetails = {
       brandName: brandName,
@@ -24,8 +24,8 @@ const DesignerBusinessDetailsEdit = () => {
       const endpoint =
         "https://osazeapi.herokuapp.com/api/designer/updatebusinessinfo";
       const requestConfiguration = {
-        method: "PATCH",
-        headers: { "Content-type": "application/json", 'Authorization': `Bearer ${token}`, },
+        method: "patch",
+        headers: { "Content-type": "application/json", 'Authorization': `Bearer ${token}` },
         body: editDetails,
       };
       const response = await fetchHandler(endpoint, requestConfiguration);
@@ -39,7 +39,7 @@ const DesignerBusinessDetailsEdit = () => {
   };
   return (
     <Card pageTitle="Edit Business Details" className="min-h-fit">
-      <form className=" px-6 py-10 relative h-full" onSubmit={submitHander}>
+      <form className=" px-6 py-10 relative h-full" onSubmit={submitHandler}>
         <>
           <div className="relative z-0 mb-6 w-full group">
             <input

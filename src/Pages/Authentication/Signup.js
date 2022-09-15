@@ -1,9 +1,11 @@
 import { useState, useRef } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import useFetch from "../../CustomHooks/useFetch";
+import { useAuth } from "../../Context/AuthenticationContext";
 
 const Signup = () => {
   const fetchHandler = useFetch();
+  const {loading, setLoading} = useAuth()
   const [phoneNumberCode, setPhoneNumberCode] = useState();
   //password visibility state
   const [passwordShown, setPasswordShown] = useState(false);
@@ -83,6 +85,7 @@ const Signup = () => {
   };
   const submitHandler = async (e) => {
     e.preventDefault();
+    setLoading(true)
     if (emailIsValid && passwordConfirmIsValid && passwordIsValid) {
       const customerData ={
           firstName: firstNameRef.current.value,
@@ -105,6 +108,7 @@ const Signup = () => {
         const response = await fetchHandler(endpoint, requestConfiguration);
         console.log(response)
         if (response.status === "success") {
+          setLoading(false)
           navigate("/login");
         } else {
           setErrMsg(response.message);
@@ -113,6 +117,7 @@ const Signup = () => {
             setErr(false);
             setErrMsg("");
           }, 3000);
+          setLoading(false)
         }
       } catch {}
     } else if (!emailIsValid) {
@@ -682,7 +687,20 @@ const Signup = () => {
             type="submit"
             className="text-white bg-header active:bg-headerHover mx-1 transition ease-in-out duration-150 font-medium rounded-lg text-sm block w-full px-5 py-2.5 text-center"
           >
-            Create Account
+            {loading ? (
+              <div className="flex justify-center items-center">
+                <div
+                  className="spinner-border animate-spin inline-block w-8 h-8 border-4 rounded-full"
+                  role="status"
+                >
+                  <span className="bg-inherit ml-2 text-xs text-header">
+                    Load
+                  </span>
+                </div>
+              </div>
+            ) : (
+              <p>Submit</p>
+            )}
           </button>
           <div>
             <div className="flex items-center my-4 before:flex-1 before:border-t before:border-gray-300 before:mt-0.5 after:flex-1 after:border-t after:border-gray-300 after:mt-0.5">

@@ -12,7 +12,7 @@ const Designer = () => {
       {userdata.map((designer) => {
         return (
           <div className="px-6 py-4 grid grid-cols-2 gap-4"  key={designer.id}>
-            <div className="border-2 border-border-gray-300 rounded-sm max-h-40 mb-6">
+            <div className="border-2 border-gray-300 rounded-sm max-h-40 mb-6">
               <div className=" border-b-2 border-gray-300 flex justify-between py-1 px-2 ">
                 <h2 className="w-11/12 text-lg font-semibold">
                   Account Information
