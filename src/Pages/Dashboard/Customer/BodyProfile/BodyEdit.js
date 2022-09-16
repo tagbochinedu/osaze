@@ -8,7 +8,7 @@ const navigate = useNavigate()
     const submitHander = (e)=> {
         e.preventDefault()
 
-        navigate('/profile/:id/body-profile')
+        navigate('/profile/body-profile')
 
     }
   return (

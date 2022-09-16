@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-import { DUMMY_DATA } from "../../../../DummyData";
+import {useAuth} from '../../../../Context/AuthenticationContext'
 
 import Card from "../../../../Components/UI/Card";
 
 const BodyProfile = () => {
+  const {userData} = useAuth()
   const [images, setImages] = useState([]);
   const [imageUpload, setImageUpload] = useState(undefined);
   const submitHandler = (e) => {
@@ -21,7 +22,7 @@ const BodyProfile = () => {
         <div className="border-2 border-gray-300 rounded-sm">
           <div className=" border-b-2 border-gray-300 flex justify-between py-1 px-2">
             <h2 className="w-11/12 text-lg font-semibold">Measurements (cm)</h2>
-            <Link to="/profile/:id/body-profile/edit">
+            <Link to="/profile/body/edit">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 512 512"
@@ -32,28 +33,28 @@ const BodyProfile = () => {
               </svg>
             </Link>
           </div>
-          {DUMMY_DATA.map((size) => {
+          {userData.bodyProfile.map((body) => {
             return (
               <div className="grid grid-cols-2 gap-4 px-4 py-6" key="1">
                 <div className="border-gray-300 border-2 px-3 py-2 max-h-min">
                   <h2 className="text-center font-semibold">Upper Body</h2>
                   <div className="grid grid-cols-2 gap-4">
                     <div className="p-2 border-b border-gray-400 rounded">
-                      Bust:<div>{size.bodyData.bust}</div>
+                      Bust:<div>{body.bust}</div>
                     </div>
                     <div className="p-2 border-b border-gray-400 rounded">
-                      Shoulder Length:<div>{size.bodyData.shoulderLength}</div>{" "}
+                      Shoulder Length:<div>{body.shoulderLength}</div>{" "}
                     </div>
                     <div className="p-2 border-b border-gray-400 rounded">
                       Front Waist Length:
-                      <div>{size.bodyData.frontWaistLength}</div>
+                      <div>{body.frontWaistLength}</div>
                     </div>
                     <div className="p-2 border-b border-gray-400 rounded">
                       Back Waist Length:
-                      <div>{size.bodyData.backWaistLength}</div>
+                      <div>{body.backWaistLength}</div>
                     </div>
                     <div className="p-2 border-b border-gray-400 rounded">
-                      Arm Length:<div>{size.bodyData.armLength}</div>{" "}
+                      Arm Length:<div>{body.armLength}</div>{" "}
                     </div>
                   </div>
                 </div>
@@ -61,28 +62,28 @@ const BodyProfile = () => {
                   <h2 className="text-center font-semibold">Lower Body</h2>
                   <div className="grid grid-cols-2 gap-4">
                     <div className="p-2 border-b border-gray-400 rounded">
-                      Waist:<div>{size.bodyData.waist}</div>
+                      Waist:<div>{body.waist}</div>
                     </div>
                     <div className="p-2 border-b border-gray-400 rounded">
-                      Hip:<div>{size.bodyData.hip}</div>{" "}
+                      Hip:<div>{body.hip}</div>{" "}
                     </div>
                     <div className="p-2 border-b border-gray-400 rounded">
-                      Hip Dip:<div>{size.bodyData.hipDip}</div>
+                      Hip Dip:<div>{body.hipDip}</div>
                     </div>
                     <div className="p-2 border-b border-gray-400 rounded">
-                      Thigh:<div>{size.bodyData.thigh}</div>
+                      Thigh:<div>{body.thigh}</div>
                     </div>
                     <div className="p-2 border-b border-gray-400 rounded">
-                      Ankle:<div>{size.bodyData.ankle}</div>{" "}
+                      Ankle:<div>{body.ankle}</div>{" "}
                     </div>
                     <div className="p-2 border-b border-gray-400 rounded">
-                      Inseam:<div>{size.bodyData.inSeam}</div>{" "}
+                      Inseam:<div>{body.inSeam}</div>{" "}
                     </div>
                     <div className="p-2 border-b border-gray-400 rounded">
-                      Outseam:<div>{size.bodyData.outSeam}</div>{" "}
+                      Outseam:<div>{body.outSeam}</div>{" "}
                     </div>
                     <div className="p-2 border-b border-gray-400 rounded">
-                      Crotch Depth:<div>{size.bodyData.crotchDepth}</div>{" "}
+                      Crotch Depth:<div>{body.crotchDepth}</div>{" "}
                     </div>
                   </div>
                 </div>

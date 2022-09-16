@@ -85,7 +85,7 @@ function App() {
               />
               <Route
                 exact
-                path="/profile/body-profile/edit"
+                path="/profile/body/edit"
                 element={<BodyEdit />}
               />
               <Route

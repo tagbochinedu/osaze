@@ -5,7 +5,7 @@ import Card from "../../../../Components/UI/Card";
 const Orders = () => {
   return (
     <Card pageTitle="Orders">
-      <div className="px-6 py-4 border-2 border-border-gray-300 rounded-sm my-6 mx-4">
+      <div className="px-6 py-4 border-2 border-border-gray-300 rounded-sm my-6 mx-4 min-h-[50vh]">
         <ul className="flex justify-center py-3">
           <li className="mx-4 font-semibold">
             <NavLink

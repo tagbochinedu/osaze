@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import ReactPaginate from "react-paginate";
+import FilterButton from "../../../Components/UI/FilterButton";
 
 import { DUMMY_DATA2 } from "../../../DummyData";
 import { XIcon } from "@heroicons/react/solid";
@@ -130,24 +131,11 @@ const MaleProducts = () => {
 
   return (
     <>
-      <div className="fixed rounded-full p-2 z-10 bg-black max-w-max xl:hidden text-center mt-6 top-10 lg:top-28 left-2 shadow-md shadow-gray-300 cursor-pointer">
-        <button
-          onClick={() => {
-            setFilter(true);
-          }}
-          className="flex justify-center items-center "
-        >
-          {" "}
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 512 512"
-            fill="white"
-            className="w-6 h-6"
-          >
-            <path d="M3.853 54.87C10.47 40.9 24.54 32 40 32H472C487.5 32 501.5 40.9 508.1 54.87C514.8 68.84 512.7 85.37 502.1 97.33L320 320.9V448C320 460.1 313.2 471.2 302.3 476.6C291.5 482 278.5 480.9 268.8 473.6L204.8 425.6C196.7 419.6 192 410.1 192 400V320.9L9.042 97.33C-.745 85.37-2.765 68.84 3.854 54.87L3.853 54.87z" />
-          </svg>
-        </button>
-      </div>
+      <FilterButton
+        onClick={() => {
+          setFilter(true);
+        }}
+      />
       <div className="flex justify-center lg:justify-between">
         {width > 1024 ? (
           <div className="w-3/12 bg-black text-white hidden xl:block font-merri">
@@ -549,13 +537,16 @@ const MaleProducts = () => {
             </div>
           </div>
         )}
-        <div className="w-full xl:w-9/12 w-full">
-          <div className=" justify-items-center text-white grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 px-2 py-4">
+        <div className="w-full xl:w-9/12 w-full bg-black text-white pb-6">
+          <div className="flex justify-center my-2">
+            <h1 className="text-2xl font-julius font-semibold">Men's Page</h1>
+          </div>
+          <div className=" justify-items-center text-white grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-y-4 px-2 py-4">
             {" "}
             {currentItems.map((gridImage) => {
               return (
                 <div
-                  className="flip-card w-44 md:w-56 h-80 mx-1 md:mx-2  my-0 md:my-4 hover:rounded-sm cursor-pointer"
+                  className="flip-card w-52 md:w-56 h-80 hover:rounded-sm cursor-pointer"
                   key={gridImage.id}
                   onClick={() => {
                     navigate(`/men/${gridImage.id}`, {
@@ -599,11 +590,11 @@ const MaleProducts = () => {
             pageCount={pageCount}
             previousLabel="previous"
             renderOnZeroPageCount={null}
-            containerClassName=' text-white w-4/12 mx-auto flex bg-black'
-            pageClassName='border-x-2 border-white px-4 py-2'
-            previousClassName='border-x-2 border-white px-4 py-3'
-            nextClassName='border-x-2 border-white px-4 py-3'
-            activeLinkClassName='active'
+            containerClassName="min-w-fit justify-center flex mt-2"
+            pageLinkClassName="text-text-white mx-1.5 border border-white px-4 py-2"
+            previousLinkClassName="border border-white px-4 py-2 mx-1.5"
+            nextLinkClassName="border border-white px-4 py-2 mx-1.5"
+            activeLinkClassName="bg-white text-black"
           />
         </div>
       </div>

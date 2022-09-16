@@ -57,7 +57,7 @@ const Login = () => {
           ? response.user.businessInfo.brandLocation
           : null,
         brandInfo: response.user.businessInfo
-          ? response.user.businessInfo.brandInf
+          ? response.user.businessInfo.brandInfo
           : null,
         url: response.user.businessInfo ? response.user.businessInfo.url : null,
         cart: response.user.cart ? response.user.cart : null,
