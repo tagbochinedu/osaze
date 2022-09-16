@@ -555,7 +555,7 @@ const MaleProducts = () => {
                   }}
                 >
                   <div className="flip-card-inner h-full w-full relative text-center rounded-sm">
-                    <div className="flip-card-front absolute w-full h-full rounded-md text-black">
+                    <div className="flip-card-front absolute w-full h-full rounded-sm text-black">
                       <img
                         src={gridImage.url}
                         alt={gridImage.name}

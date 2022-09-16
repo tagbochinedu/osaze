@@ -36,10 +36,10 @@ const Login = () => {
         lastName: response.user.userObject.lastName,
         email: response.user.userObject.email,
         phoneNumber: response.user.userObject.phoneNumber,
-        country: response.user.address.country,
-        state: response.user.address.state,
-        city: response.user.address.city,
-        houseAddress: response.user.address.houseAddress,
+        country: response.user.userObject.country,
+        state: response.user.userObject.state,
+        city: response.user.userObject.city,
+        houseAddress: response.user.userObject.houseAddress,
         sketch: response.user.businessInfo
           ? response.user.businessInfo.sketch
           : null,
@@ -97,7 +97,9 @@ const Login = () => {
 
   return (
     <div className="w-full">
-      <div className="text-center fixed top-32 right-[45%] z-20">
+      
+      <div className="max-w-xs md:max-w-lg border-2 rounded-sm md:rounded-lg my-10 shadow-lg glass pt-4 pb-8 px-6 text-sm shadow-gray-200 mx-auto">
+      <div className="text-center flex justify-center">
         {err && (
           <div
             className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4"
@@ -107,7 +109,6 @@ const Login = () => {
           </div>
         )}
       </div>
-      <div className=" max-w-md md:max-w-lg border-2 rounded-lg my-20 shadow-lg glass pt-4 pb-8 px-6 shadow-gray-200 mx-auto">
         <h1 className="text-2xl text-center text-header my-6 font-bold font-julius">
           Sign In
         </h1>

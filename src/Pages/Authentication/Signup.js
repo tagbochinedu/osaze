@@ -5,7 +5,7 @@ import { useAuth } from "../../Context/AuthenticationContext";
 
 const Signup = () => {
   const fetchHandler = useFetch();
-  const {loading, setLoading} = useAuth()
+  const { loading, setLoading } = useAuth();
   const [phoneNumberCode, setPhoneNumberCode] = useState();
   //password visibility state
   const [passwordShown, setPasswordShown] = useState(false);
@@ -32,7 +32,7 @@ const Signup = () => {
   const houseAddressRef = useRef();
 
   const navigate = useNavigate();
-  
+
   //error state
   const [errMsg, setErrMsg] = useState("");
   const [err, setErr] = useState(false);
@@ -49,8 +49,8 @@ const Signup = () => {
       setEmailIsValid(true);
     } else if (emailRef.current.value.trim() !== "") {
       setEmailIsValid(false);
-    } else if(emailRef.current.value.trim() ==='') {
-      setEmailIsValid(true)
+    } else if (emailRef.current.value.trim() === "") {
+      setEmailIsValid(true);
     }
     setEmailFocus(false);
   };
@@ -64,8 +64,8 @@ const Signup = () => {
       setPasswordIsValid(true);
     } else if (passwordRef.current.value.trim() !== "") {
       setPasswordIsValid(false);
-    } else if(passwordRef.current.value.trim() ==='') {
-      setPasswordIsValid(true)
+    } else if (passwordRef.current.value.trim() === "") {
+      setPasswordIsValid(true);
     }
     setPasswordFocus(false);
   };
@@ -78,26 +78,26 @@ const Signup = () => {
       setPasswordConfirmIsValid(true);
     } else if (passwordConfirmRef.current.value.trim() !== "") {
       setPasswordConfirmIsValid(false);
-    } else if(passwordConfirmRef.current.value.trim() ==='') {
-      setPasswordConfirmIsValid(true)
+    } else if (passwordConfirmRef.current.value.trim() === "") {
+      setPasswordConfirmIsValid(true);
     }
     setPasswordConfirmFocus(false);
   };
   const submitHandler = async (e) => {
     e.preventDefault();
-    setLoading(true)
+    setLoading(true);
     if (emailIsValid && passwordConfirmIsValid && passwordIsValid) {
-      const customerData ={
-          firstName: firstNameRef.current.value,
-          lastName: lastNameRef.current.value,
-          email: emailRef.current.value,
-          phoneNumber: phoneNumberCode + phoneNumberRef.current.value,
-          country: countryRef.current.value,
-          state: stateRef.current.value,
-          city: cityRef.current.value,
-          houseAddress: houseAddressRef.current.value,
-          password: passwordRef.current.value,
-        };
+      const customerData = {
+        firstName: firstNameRef.current.value,
+        lastName: lastNameRef.current.value,
+        email: emailRef.current.value,
+        phoneNumber: phoneNumberCode + phoneNumberRef.current.value,
+        country: countryRef.current.value,
+        state: stateRef.current.value,
+        city: cityRef.current.value,
+        houseAddress: houseAddressRef.current.value,
+        password: passwordRef.current.value,
+      };
       try {
         const endpoint = "https://osazeapi.herokuapp.com/api/customer/signup";
         const requestConfiguration = {
@@ -106,9 +106,9 @@ const Signup = () => {
           body: customerData,
         };
         const response = await fetchHandler(endpoint, requestConfiguration);
-        console.log(response)
+        console.log(response);
         if (response.status === "success") {
-          setLoading(false)
+          setLoading(false);
           navigate("/login");
         } else {
           setErrMsg(response.message);
@@ -117,7 +117,7 @@ const Signup = () => {
             setErr(false);
             setErrMsg("");
           }, 3000);
-          setLoading(false)
+          setLoading(false);
         }
       } catch {}
     } else if (!emailIsValid) {
@@ -140,11 +140,11 @@ const Signup = () => {
           </div>
         )}
       </div>
-      <div className="max-w-md md:max-w-lg border-2 rounded-lg my-20 shadow-lg glass pt-4 pb-8 px-6 shadow-gray-200 mx-auto">
+      <div className="max-w-xs md:max-w-lg border-2 rounded-sm md:rounded-lg my-10 shadow-lg glass pt-4 pb-8 px-6 text-sm shadow-gray-200 mx-auto">
         <h1 className="text-2xl text-center text-header my-6 font-bold font-julius">
           Create Account
         </h1>
-        <form onSubmit={submitHandler} autoComplete='off'>
+        <form onSubmit={submitHandler} autoComplete="off">
           <div className="grid md:grid-cols-2 md:gap-6">
             <div className="relative z-0 mb-6 w-full group">
               <input
@@ -197,9 +197,9 @@ const Signup = () => {
               onFocus={() => {
                 setEmailFocus(true);
               }}
-              ari-describedby='emailNote'
+              ari-describedby="emailNote"
             />
-                        <p
+            <p
               id="emailNote"
               className={
                 !emailFocus && !emailIsValid
@@ -614,8 +614,7 @@ const Signup = () => {
                 type={passwordConfirmShown ? "text" : "password"}
                 id="floating_confirmpassword"
                 className={`${"block py-2.5 px-0 font-merri w-full text-md  border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-header peer"} ${
-                  !passwordConfirmFocus &&
-                  !passwordConfirmIsValid
+                  !passwordConfirmFocus && !passwordConfirmIsValid
                     ? "bg-red-200 text-red-800"
                     : "bg-transparent text-header"
                 }`}
