@@ -18,6 +18,8 @@ import Accessories from "./Pages/Products/Accessories";
 
 import Dashboard from "./Pages/Dashboard/Dashboard";
 import AccountInformation from "./Pages/Dashboard/Customer/AccountInformation/AccountInformation";
+import Account from "./Pages/Dashboard/Customer/AccountInformation/MobileView/Account";
+import Edit from "./Pages/Dashboard/Customer/AccountInformation/MobileView/Edit";
 import DetailsEdit from "./Pages/Dashboard/Customer/AccountInformation/DetailsEdit";
 
 import BodyProfile from "./Pages/Dashboard/Customer/BodyProfile/BodyProfile";
@@ -67,6 +69,10 @@ function App() {
         <Route exact path="/designers-only" element={<DesignersOnly />} />
         <Route exact path="/designers-sign-up" element={<DesignerSignup />} />
         <Route element={<PrivateRoute />}>
+          <Route element={<AuthorizedRoute allowedRole="customer" />}>
+            <Route exact path="/profile/account" element={<Account />} />
+            <Route exact path="/profile/account/edit" element={<Edit />} />
+          </Route>
           <Route exact path="/profile" element={<Dashboard />}>
             <Route element={<AuthorizedRoute allowedRole="customer" />}>
               <Route
@@ -83,14 +89,10 @@ function App() {
                 path="/profile/body-profile"
                 element={<BodyProfile />}
               />
+              <Route exact path="/profile/body/edit" element={<BodyEdit />} />
               <Route
                 exact
-                path="/profile/body/edit"
-                element={<BodyEdit />}
-              />
-              <Route
-                exact
-                path="/profile/account/edit"
+                path="/profile/account-information/edit"
                 element={<DetailsEdit />}
               />
               <Route exact path="/profile/orders" element={<Orders />}>
@@ -114,8 +116,16 @@ function App() {
             </Route>
             <Route element={<AuthorizedRoute allowedRole="designer" />}>
               <Route exact path="/profile/designer" element={<Designer />} />
-              <Route exact path="/profile/designer-account-details-edit" element={<DesignerAccountDetailsEdit />} />
-              <Route exact path="/profile/designer-business-details-edit" element={<DesignerBusinessDetailsEdit />} />
+              <Route
+                exact
+                path="/profile/designer-account-details-edit"
+                element={<DesignerAccountDetailsEdit />}
+              />
+              <Route
+                exact
+                path="/profile/designer-business-details-edit"
+                element={<DesignerBusinessDetailsEdit />}
+              />
               <Route
                 exact
                 path="/profile/designer-product-upload"
