@@ -6,9 +6,8 @@ import useFetch from "../../../../CustomHooks/useFetch";
 import Card from "../../../../Components/UI/Card";
 
 const DesignerBusinessDetailsEdit = () => {
-  const { fetchHandler } = useFetch();
-  const { userData,token } = useAuth();
-  const navigate = useNavigate();
+  const { userData, token } = useAuth();
+
   const [brandName, setBrandName] = useState(userData.brandName);
   const [brandLocation, setBrandLocation] = useState(userData.brandLocation);
   const [brandInfo, setBrandInfo] = useState(userData.brandInfo);
@@ -21,19 +20,24 @@ const DesignerBusinessDetailsEdit = () => {
       brandInfo: brandInfo,
     };
     try {
-      const endpoint =
-        "https://osazeapi.herokuapp.com/api/designer/updatebusinessinfo";
-      const requestConfiguration = {
-        method: "patch",
-        headers: { "Content-type": "application/json", 'Authorization': `Bearer ${token}` },
-        body: editDetails,
-      };
-      const response = await fetchHandler(endpoint, requestConfiguration);
-      console.log('hello');
-      if (response) {
-        navigate("/profile/designer");
+      const request = await fetch(
+        "https://osazeapi.herokuapp.com/api/designer/updatebusinessinfo",
+        {
+          method: "PATCH",
+          headers: {
+            'Content-type': 'application/json',
+          },
+          body: editDetails,
+        }
+      );
+      const response = await request.json();
+
+      console.log(response);
+      if (response.success === "success") {
+       
+        alert("item has been created");
       } else {
-        console.log("e no work oh");
+        
       }
     } catch {}
   };

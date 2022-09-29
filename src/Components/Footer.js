@@ -6,9 +6,9 @@ const Footer = () => {
   const [accordion, setAccordion] = useState(false);
 
   return (
-    <div className="footer md:flex justify-between px-6 py-12">
-      <div className="md:flex justify-between w-full md:w-1/2">
-        <div className='text-center md:my-0 my-7 md:text-start'>
+    <div className="footer md:flex justify-between px-1.5 py-3 md:p-6 ">
+      <div className="flex flex-wrap justify-around w-full md:w-1/2">
+        <div className='text-center md:my-0 my-7 md:text-start hidden md:block'>
           <h4 className="text-2xl text-white font-semibold font-julius">Shop</h4>
           <ul className="text-white text-xl font-semibold">
             <li className="my-3">
@@ -22,7 +22,7 @@ const Footer = () => {
             </li>
           </ul>
         </div>
-        <div className='md:my-0 my-7'>
+        <div className='md:my-0 my-3.5'>
           <h4 className="text-2xl text-white font-semibold text-center font-julius">
             Hours
           </h4>
@@ -31,12 +31,12 @@ const Footer = () => {
             <li className="my-3">10am - 6pm</li>
           </ul>
         </div>
-        <div className='md:my-0 my-7'>
+        <div className='md:my-0 my-3.5'>
           <h4 className="text-2xl text-white font-semibold text-center font-julius">
             Follow
           </h4>
-          <ul>
-            <li>
+          <ul className="flex md:block">
+            <li className='mx-1'>
               <a href="/">
                 <svg
                   aria-hidden="true"
@@ -55,7 +55,7 @@ const Footer = () => {
                 </svg>
               </a>
             </li>
-            <li>
+            <li className='mx-1'>
               <a href="/">
                 <svg
                   aria-hidden="true"
@@ -74,7 +74,7 @@ const Footer = () => {
                 </svg>
               </a>
             </li>
-            <li>
+            <li className='mx-1'>
               <a href="/">
                 <svg
                   aria-hidden="true"
@@ -96,7 +96,7 @@ const Footer = () => {
           </ul>
         </div>
       </div>
-      <div className="w-full md:w-5/12 md:my-0 my-7">
+      <div className="w-full md:w-5/12 md:my-0 my-3.5">
         <h4 className="text-3xl text-white font-semibold text-center mb-6 text-start font-julius">
           Osaze - Your Personalize Store
         </h4>

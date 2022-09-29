@@ -330,7 +330,9 @@ const MaleProducts = () => {
                 />
               </div>
             </div>
-            <button onClick={filterHandler}>button</button>
+            <div className="flex justify-center p-6">
+              <button className='bg-header active:bg-headerHover active:font-semibold p-1 rounded-sm w-full' onClick={filterHandler}>Apply</button>
+            </div>
           </div>
         ) : (
           <div
@@ -537,16 +539,16 @@ const MaleProducts = () => {
             </div>
           </div>
         )}
-        <div className="w-full xl:w-9/12 w-full bg-black text-white pb-6">
+        <div className="w-full xl:w-9/12 w-full bg-black text-white pb-6 relative">
           <div className="flex justify-center my-2">
             <h1 className="text-2xl font-julius font-semibold">Men's Page</h1>
           </div>
-          <div className=" justify-items-center text-white grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-y-4 px-2 py-4">
+          <div className=" justify-items-center text-white grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-y-4 px-2 py-4 mb-10">
             {" "}
             {currentItems.map((gridImage) => {
               return (
                 <div
-                  className="flip-card w-52 md:w-56 h-80 hover:rounded-sm cursor-pointer"
+                  className="flip-card w-44 md:w-56 h-80 my-2 mx-auto hover:rounded-sm cursor-pointer"
                   key={gridImage.id}
                   onClick={() => {
                     navigate(`/men/${gridImage.id}`, {
@@ -582,20 +584,22 @@ const MaleProducts = () => {
               );
             })}
           </div>
-          <ReactPaginate
-            breakLabel="..."
-            nextLabel="next"
-            onPageChange={handlePageClick}
-            pageRangeDisplayed={2}
-            pageCount={pageCount}
-            previousLabel="previous"
-            renderOnZeroPageCount={null}
-            containerClassName="min-w-fit justify-center flex mt-2"
-            pageLinkClassName="text-text-white mx-1.5 border border-white px-4 py-2"
-            previousLinkClassName="border border-white px-4 py-2 mx-1.5"
-            nextLinkClassName="border border-white px-4 py-2 mx-1.5"
-            activeLinkClassName="bg-white text-black"
-          />
+          <div className="absolute bottom-5 right-0 left-0">
+            <ReactPaginate
+              breakLabel="..."
+              nextLabel="next"
+              onPageChange={handlePageClick}
+              pageRangeDisplayed={2}
+              pageCount={pageCount}
+              previousLabel="previous"
+              renderOnZeroPageCount={null}
+              containerClassName="min-w-fit justify-center flex mt-2"
+              pageLinkClassName="text-text-white mx-1.5 border border-white px-4 py-2 "
+              previousLinkClassName="border border-white px-4 py-2 mx-1.5"
+              nextLinkClassName="border border-white px-4 py-2 mx-1.5"
+              activeLinkClassName="bg-white text-black"
+            />
+          </div>
         </div>
       </div>
     </>

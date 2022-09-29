@@ -7,8 +7,9 @@ const useFetch = () => {
         : null,
       headers: requestConfiguration.headers ? requestConfiguration.headers : {},
     });
-    //
+    console.log('no')
     const response = await httpRequestHandler.json();
+    
     return response;
   };
   return fetchHandler;

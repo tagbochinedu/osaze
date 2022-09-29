@@ -96,9 +96,9 @@ const Login = () => {
   };
 
   return (
-    <div className="w-full">
+    <div className="w-full px-3">
       
-      <div className="max-w-xs md:max-w-lg border-2 rounded-sm md:rounded-lg my-10 shadow-lg glass pt-4 pb-8 px-6 text-sm shadow-gray-200 mx-auto">
+      <div className="max-w-md md:max-w-xl border-2 rounded-sm md:rounded-lg my-10 shadow-lg glass pt-4 pb-8 px-6 text-sm shadow-gray-200 mx-auto">
       <div className="text-center flex justify-center">
         {err && (
           <div

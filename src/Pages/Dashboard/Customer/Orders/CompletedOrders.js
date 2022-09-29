@@ -1,4 +1,4 @@
-import React from "react";
+import { useEffect } from "react";
 
 import { useAuth } from "../../../../Context/AuthenticationContext";
 
@@ -7,8 +7,12 @@ import { useModalAuth } from "../../../../Context/ModalContext";
 const CompletedOrders = () => {
   const { setReviewModal } = useModalAuth();
   const { userData } = useAuth();
+  useEffect(() => {
+    console.log(userData);
+  }, [userData]);
+
   return (
-    <div className='min-h-[45vh] flex justify-center items-center text-gray-300 text-xl animate-pulse'>
+    <div className="min-h-[45vh] flex justify-center items-center text-gray-300 text-xl animate-pulse">
       {userData.orders.length === 0 ? (
         <div>
           <p>No orders have been completed</p>

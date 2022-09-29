@@ -1,3 +1,5 @@
+
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../../../Context/AuthenticationContext";
 
@@ -6,6 +8,9 @@ import Card from "../../../../Components/UI/Card";
 const AccountInformation = () => {
   const { userData } = useAuth();
   const userdata = [userData];
+  useEffect(() => {
+    console.log(userData);
+  }, [userData]);
   return (
     <Card className="" pageTitle="Account Information">
       {userdata.map((data) => {

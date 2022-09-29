@@ -1,11 +1,15 @@
-import { useModalAuth } from "../../../../Context/ModalContext";
+
+
 import { useAuth } from "../../../../Context/AuthenticationContext";
+
+import { useModalAuth } from "../../../../Context/ModalContext";
 
 const PendingOrders = () => {
   const { setStatusModal } = useModalAuth();
   const { userData } = useAuth();
+ 
   return (
-    <div className='min-h-[45vh] flex justify-center items-center text-gray-300 text-xl animate-pulse'>
+    <div className="min-h-[45vh] flex justify-center items-center text-gray-300 text-xl animate-pulse">
       {userData.orders.length === 0 ? (
         <div>
           <p>No orders have been placed</p>
@@ -43,6 +47,6 @@ const PendingOrders = () => {
       )}
     </div>
   );
-}
+};
 
-export default PendingOrders
+export default PendingOrders;

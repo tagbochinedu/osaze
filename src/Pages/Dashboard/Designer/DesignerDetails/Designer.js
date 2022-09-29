@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 
 import { useAuth } from "../../../../Context/AuthenticationContext";
@@ -5,13 +6,32 @@ import { useAuth } from "../../../../Context/AuthenticationContext";
 import Card from "../../../../Components/UI/Card";
 
 const Designer = () => {
-  const { userData } = useAuth();
+  const { userData, token } = useAuth();
   const userdata = [userData];
+  useEffect(() => {
+    const fetchHandler = async () => {
+      try {
+        const request = await fetch(
+          "https://osazeapi.herokuapp.com/api/designer/getprofile",
+          {
+            method: "GET",
+            headers: {
+              "Content-type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        const response = await request.json();
+        console.log(response);
+      } catch {}
+    };
+    fetchHandler()
+  }, [token]);
   return (
     <Card pageTitle="Designer">
       {userdata.map((designer) => {
         return (
-          <div className="px-6 py-4 grid grid-cols-2 gap-4"  key={designer.id}>
+          <div className="px-6 py-4 grid grid-cols-2 gap-4" key={designer.id}>
             <div className="border-2 border-gray-300 rounded-sm max-h-40 mb-6">
               <div className=" border-b-2 border-gray-300 flex justify-between py-1 px-2 ">
                 <h2 className="w-11/12 text-lg font-semibold">

@@ -129,7 +129,7 @@ const Signup = () => {
     }
   };
   return (
-    <div className="w-full">
+    <div className="w-full px-3">
       <div className="text-center fixed top-32 right-[45%] z-20">
         {err && (
           <div
@@ -140,7 +140,7 @@ const Signup = () => {
           </div>
         )}
       </div>
-      <div className="max-w-xs md:max-w-lg border-2 rounded-sm md:rounded-lg my-10 shadow-lg glass pt-4 pb-8 px-6 text-sm shadow-gray-200 mx-auto">
+      <div className="max-w-md md:max-w-xl border-2 rounded-sm md:rounded-lg my-10 shadow-lg glass pt-4 pb-8 px-6 text-sm shadow-gray-200 mx-auto">
         <h1 className="text-2xl text-center text-header my-6 font-bold font-julius">
           Create Account
         </h1>

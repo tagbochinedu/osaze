@@ -116,6 +116,12 @@ code {
   height: 100%;
 }
 
+@media (max-width: 768px) {
+  .slider1, .slider2, .slider3, .slider4{
+    background-size: cover;
+  }
+}
+
 @media (max-width: 1024px) {
   .swiper {
     width: 100%;
@@ -236,4 +242,25 @@ input[type=range]::-ms-thumb {
 }
 .designers-only6 {
   transform: translate3d(344px, 428px, 0px);
+}
+
+@media(max-width:768px) {
+  .designers-only1 {
+    transform: translate3d(3px, 0px, 0px);
+  }
+  .designers-only2 {
+    transform: translate3d(96px, 0px, 0px);
+  }
+  .designers-only3 {
+    transform: translate3d(189px, 0px, 0px);
+  }
+  .designers-only4 {
+    transform: translate3d(282px, 0px, 0px);
+  }
+  .designers-only5 {
+    transform: translate3d(3px, 67px, 0px);
+  }
+  .designers-only6 {
+    transform: translate3d(96px, 115px, 0px);
+  }
 }

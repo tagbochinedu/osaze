@@ -26,7 +26,7 @@ export default function Carousel() {
       >
         <SwiperSlide>
           <div className="slider1 px-8 md:px-20 overflow-hidden">
-            <div className="bg-white text-black w-max rounded-tl-md rounded-br-md rounded-tr-3xl rounded-bl-3xl pt-4 pb-10 px-6 relative top-56">
+            <div className="bg-white text-black w-max rounded-tl-md rounded-br-md rounded-tr-3xl rounded-bl-3xl pt-4 pb-10 px-6 relative top-80">
               <h4 className="text-4xl font-bold">Women</h4>
               <p className="mt-4 mb-6 text-xl">
                 Shop trends across the world
@@ -42,7 +42,7 @@ export default function Carousel() {
         </SwiperSlide>
         <SwiperSlide>
           <div className="slider2 px-8 md:px-20 overflow-hidden">
-            <div className="bg-white text-black lg:w-max rounded-tl-md rounded-br-md rounded-tr-3xl rounded-bl-3xl pt-4 pb-10 px-6 relative top-56">
+            <div className="bg-white text-black lg:w-max rounded-tl-md rounded-br-md rounded-tr-3xl rounded-bl-3xl pt-4 pb-10 px-6 relative top-80">
               <h4 className="text-4xl font-bold">Men</h4>
               <p className="mt-4 mb-6 text-xl">
                 Step out in game changing designs that make you look the best
@@ -58,7 +58,7 @@ export default function Carousel() {
         </SwiperSlide>
         <SwiperSlide>
           <div className="slider3 px-8 md:px-20 overflow-hidden">
-            <div className="bg-white text-black lg:w-max rounded-tl-md rounded-br-md rounded-tr-3xl rounded-bl-3xl pt-4 pb-10 px-6 relative top-56">
+            <div className="bg-white text-black lg:w-max rounded-tl-md rounded-br-md rounded-tr-3xl rounded-bl-3xl pt-4 pb-10 px-6 relative top-80">
               <h4 className="text-4xl font-bold">Women</h4>
               <p className="mt-4 mb-6 text-xl">
                 Wear the best accessories
@@ -75,7 +75,7 @@ export default function Carousel() {
         <SwiperSlide>
           <div className="slider4 px-8 md:px-20 overflow-hidden">
             {" "}
-            <div className="bg-white text-black w-max rounded-tl-md rounded-br-md rounded-tr-3xl rounded-bl-3xl pt-4 pb-10 px-6 relative top-56">
+            <div className="bg-white text-black lg:w-max rounded-tl-md rounded-br-md rounded-tr-3xl rounded-bl-3xl pt-4 pb-10 px-6 relative top-80">
               <h4 className="text-4xl font-bold">Men</h4>
               <p className="mt-4 mb-6 text-xl">Don't just follow the trends, lead them</p>{" "}
               <Link

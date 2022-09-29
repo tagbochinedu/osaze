@@ -652,8 +652,8 @@ const DesignersSignup = () => {
               </label>
             </div>
           </div>
-          <div className="mb-6 flex">
-            <div className="md:flex w-4/12 md:w-full text-gray-500 text-center text-xs md:text-md items-center">
+          <div className="mb-8 flex justify-between">
+            <div className=" w-4/12 md:w-full text-gray-500 text-center text-xs md:text-md items-center my-2">
               <div className="w-2/12 p-1 opacity-0 mb-2 md:mb-auto">Empty</div>
               <div className="w-2/12 p-1">Satisfactory</div>
               <div className="w-2/12 p-1">Good</div>
@@ -661,11 +661,11 @@ const DesignersSignup = () => {
               <div className="w-2/12 p-1">Highly Proficient</div>
               <div className="w-2/12 p-1">Expert</div>
             </div>
-            <div className="flex flex-col w-3/12 md:w-full md:flex-row text-gray-500 items-center">
-              <div className="md:w-2/12 p-1">
+            <div className="flex flex-col w-3/12 md:w-full text-gray-500 items-center my-2">
+              <div className="p-1 text-center">
                 <p>Sketching</p>
               </div>
-              <div className="md:w-2/12 p-1 text-center flex justify-center">
+              <div className="p-1 text-center flex justify-center">
                 <input
                   className="form-check-input appearance-none rounded-full h-4 w-4 border border-gray-500 bg-white checked:bg-headerHover focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left cursor-pointer"
                   type="radio"
@@ -677,9 +677,9 @@ const DesignersSignup = () => {
                   }}
                 />
               </div>
-              <div className="md:w-2/12 p-1 text-center flex justify-center">
+              <div className="p-1 text-center flex justify-center">
                 <input
-                  className="form-check-input appearance-none rounded-full h-4 w-4 border border-gray-500 bg-white checked:bg-headerHover focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left md:mr-2 cursor-pointer"
+                  className="form-check-input appearance-none rounded-full h-4 w-4 border border-gray-500 bg-white checked:bg-headerHover focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left cursor-pointer"
                   type="radio"
                   name="sketching"
                   value="good"
@@ -688,9 +688,9 @@ const DesignersSignup = () => {
                   }}
                 />
               </div>
-              <div className="md:w-2/12 p-1 text-center flex justify-center">
+              <div className="p-1 text-center flex justify-center">
                 <input
-                  className="form-check-input appearance-none rounded-full h-4 w-4 border border-gray-500 bg-white checked:bg-headerHover focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left md:mr-2 cursor-pointer"
+                  className="form-check-input appearance-none rounded-full h-4 w-4 border border-gray-500 bg-white checked:bg-headerHover focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left cursor-pointer"
                   type="radio"
                   name="sketching"
                   value="proficient"
@@ -699,9 +699,9 @@ const DesignersSignup = () => {
                   }}
                 />
               </div>
-              <div className="md:w-2/12 p-1 text-center flex justify-center">
+              <div className="p-1 text-center flex justify-center">
                 <input
-                  className="form-check-input appearance-none rounded-full h-4 w-4 border border-gray-500 bg-white checked:bg-headerHover focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left md:mr-2 cursor-pointer"
+                  className="form-check-input appearance-none rounded-full h-4 w-4 border border-gray-500 bg-white checked:bg-headerHover focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left cursor-pointer"
                   type="radio"
                   value="highly proficient"
                   name="sketching"
@@ -710,9 +710,9 @@ const DesignersSignup = () => {
                   }}
                 />
               </div>
-              <div className="md:w-2/12 p-1 text-center flex justify-center">
+              <div className="p-1 text-center flex justify-center">
                 <input
-                  className="form-check-input appearance-none rounded-full h-4 w-4 border border-gray-500 bg-white checked:bg-headerHover focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left md:mr-2 cursor-pointer"
+                  className="form-check-input appearance-none rounded-full h-4 w-4 border border-gray-500 bg-white checked:bg-headerHover focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left cursor-pointer"
                   type="radio"
                   name="sketching"
                   value="expert"
@@ -722,11 +722,11 @@ const DesignersSignup = () => {
                 />
               </div>
             </div>
-            <div className="flex flex-col w-3/12 md:w-full md:flex-row text-gray-500 items-center">
-              <div className="md:w-2/12 p-1">
+            <div className="flex flex-col w-3/12 md:w-full text-gray-500 items-center my-2">
+              <div className="p-1">
                 <p>Sewing</p>
               </div>
-              <div className="md:w-2/12 p-1 text-center flex justify-center">
+              <div className="p-1 text-center flex justify-center">
                 <input
                   className="form-check-input appearance-none rounded-full h-4 w-4 border border-gray-500 bg-white checked:bg-headerHover focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left cursor-pointer"
                   type="radio"
@@ -738,10 +738,10 @@ const DesignersSignup = () => {
                   }}
                 />
               </div>
-              <div className="md:w-2/12 p-1 text-center flex justify-center">
+              <div className="p-1 text-center flex justify-center">
                 <input
                   className="form-check-input appearance-none rounded-full h-4 w-4 border border-gray-500 bg-white checked:bg-headerHover focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left
-                  md:mr-2 cursor-pointer"
+                  cursor-pointer"
                   type="radio"
                   name="sewing"
                   value="good"
@@ -750,9 +750,9 @@ const DesignersSignup = () => {
                   }}
                 />
               </div>
-              <div className="md:w-2/12 p-1 text-center flex justify-center">
+              <div className="p-1 text-center flex justify-center">
                 <input
-                  className="form-check-input appearance-none rounded-full h-4 w-4 border border-gray-500 bg-white checked:bg-headerHover focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left md:mr-2 cursor-pointer"
+                  className="form-check-input appearance-none rounded-full h-4 w-4 border border-gray-500 bg-white checked:bg-headerHover focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left cursor-pointer"
                   type="radio"
                   name="sewing"
                   value="proficient"
@@ -761,9 +761,9 @@ const DesignersSignup = () => {
                   }}
                 />
               </div>
-              <div className="md:w-2/12 p-1 text-center flex justify-center">
+              <div className="p-1 text-center flex justify-center">
                 <input
-                  className="form-check-input appearance-none rounded-full h-4 w-4 border border-gray-500 bg-white checked:bg-headerHover focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left md:mr-2 cursor-pointer"
+                  className="form-check-input appearance-none rounded-full h-4 w-4 border border-gray-500 bg-white checked:bg-headerHover focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left cursor-pointer"
                   type="radio"
                   name="sewing"
                   value="highly proficient"
@@ -772,9 +772,9 @@ const DesignersSignup = () => {
                   }}
                 />
               </div>
-              <div className="md:w-2/12 p-1 text-center flex justify-center">
+              <div className="p-1 text-center flex justify-center">
                 <input
-                  className="form-check-input appearance-none rounded-full h-4 w-4 border border-gray-500 bg-white checked:bg-headerHover focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left md:mr-2 cursor-pointer"
+                  className="form-check-input appearance-none rounded-full h-4 w-4 border border-gray-500 bg-white checked:bg-headerHover focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left cursor-pointer"
                   type="radio"
                   value="expert"
                   name="sewing"
@@ -906,8 +906,7 @@ const DesignersSignup = () => {
               htmlFor="url"
               className="peer-focus:font-medium font-merri absolute text-sm text-gray-500 duration-300 transform -translate-y-8 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-header peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-8"
             >
-              Submit a Link to Your Online Portfolio, Website, Pinterest or
-              Instagram Page.
+              Submit a Link to One of Your Social Media Pages.
             </label>
           </div>
           <div className="relative z-0 my-10">

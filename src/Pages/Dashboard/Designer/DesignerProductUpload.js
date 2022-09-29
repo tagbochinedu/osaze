@@ -1,9 +1,13 @@
 import { useState, useEffect } from "react";
 import { useImageAuth } from "../../../Context/ImageContext";
 import Card from "../../../Components/UI/Card";
+import useFetch from "../../../CustomHooks/useFetch";
+import { useAuth } from "../../../Context/AuthenticationContext";
 
 const DesignerProductUpload = () => {
-  const { setImageFullScreen, setImageSource} = useImageAuth();
+  const { setImageFullScreen, setImageSource } = useImageAuth();
+  const { fetchHandler } = useFetch();
+  const { loading, setLoading, token } = useAuth();
   const [images, setImages] = useState([]);
 
   //product upload state
@@ -18,16 +22,6 @@ const DesignerProductUpload = () => {
   const [image, setImage] = useState("");
   const [imageValue, setImageValue] = useState("");
   const [imageValue2, setImageValue2] = useState("");
-  const [imageDetails, setImageDetails] = useState({
-    name: "",
-    price: "",
-    description: "",
-    image: undefined,
-    sizes: [],
-    customization: [],
-    fabrics: [],
-    category: "",
-  });
 
   //state for clearing form
   const [sizeChecked1, setSizeChecked1] = useState(false);
@@ -44,10 +38,6 @@ const DesignerProductUpload = () => {
   const [customChecked5, setCustomChecked5] = useState(false);
   const [customChecked6, setCustomChecked6] = useState(false);
   const [customChecked7, setCustomChecked7] = useState(false);
-
-  useEffect(() => {
-    console.log(imageDetails);
-  }, [imageDetails]);
 
   //handler functions
   const customizationChangeHandler = (e) => {
@@ -71,20 +61,42 @@ const DesignerProductUpload = () => {
     }
   };
 
-  const submitHandler = (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault();
-    
+
     setImages((prev) => [...prev, image]);
-    setImageDetails({
-      name: name,
-      price: price,
-      description: description,
-      image: image,
-      sizes: sizes,
-      customization: customization,
-      fabrics: fabricArray,
-      category: category,
+    const formData = new FormData();
+    formData.append("name", name);
+    formData.append("price", price);
+    formData.append("description", description);
+    formData.append("image", image);
+    formData.append("customization", customization);
+    formData.append("category", category);
+    formData.append("sizes", sizes);
+    fabricArray.forEach((fabric) => {
+      formData.append("fabrics", fabric);
     });
+    try {
+      const request = fetch(
+        "https://osazeapi.herokuapp.com/api/designer/updatebusinessinfo",
+        {
+          method: "patch",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+          body: formData,
+        }
+      );
+      const response = await request.json();
+
+      console.log(response);
+      if (response.success === "success") {
+        setLoading(false);
+        alert("item has been created");
+      } else {
+        setLoading(false);
+      }
+    } catch {}
     setName("");
     setPrice(0);
     setDescription("");
@@ -175,7 +187,7 @@ const DesignerProductUpload = () => {
                       className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-header peer"
                       placeholder=" "
                       onChange={(e) => {
-                        setPrice(e.target.value);
+                        setPrice(parseInt(e.target.value));
                       }}
                       value={price}
                       required
