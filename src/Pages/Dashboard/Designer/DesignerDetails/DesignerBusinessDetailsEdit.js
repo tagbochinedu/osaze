@@ -7,7 +7,8 @@ import Card from "../../../../Components/UI/Card";
 
 const DesignerBusinessDetailsEdit = () => {
   const { userData, token } = useAuth();
-
+  const fetchHandler = useFetch();
+  const navigate = useNavigate();
   const [brandName, setBrandName] = useState(userData.brandName);
   const [brandLocation, setBrandLocation] = useState(userData.brandLocation);
   const [brandInfo, setBrandInfo] = useState(userData.brandInfo);
@@ -20,24 +21,24 @@ const DesignerBusinessDetailsEdit = () => {
       brandInfo: brandInfo,
     };
     try {
-      const request = await fetch(
-        "https://osazeapi.herokuapp.com/api/designer/updatebusinessinfo",
-        {
-          method: "PATCH",
-          headers: {
-            'Content-type': 'application/json',
-          },
-          body: editDetails,
-        }
-      );
+      const endpoint =
+        "https://osazeapi.herokuapp.com/api/designer/updatebusinessinfo";
+      const requestConfiguration = {
+        method: "PATCH",
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: editDetails,
+      };
+      const request = await fetchHandler(endpoint, requestConfiguration);
       const response = await request.json();
 
       console.log(response);
       if (response.success === "success") {
-       
         alert("item has been created");
+        navigate()
       } else {
-        
       }
     } catch {}
   };

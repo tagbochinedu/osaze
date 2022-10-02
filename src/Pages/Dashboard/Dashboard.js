@@ -19,7 +19,7 @@ const Dashboard = () => {
           Profile
         </h1>
         <ul className="md:text-sm lg:text-md">
-          {userData.role === "customer" ? (
+          {userData.role === "customer" && (
             <>
               <li className=" border-b border-gray-300 hover:bg-gray-100 hover:text-black hover:border-x-4 hover:text-sm">
                 <NavLink
@@ -70,10 +70,8 @@ const Dashboard = () => {
                 </NavLink>
               </li>
             </>
-          ) : (
-            <></>
           )}
-          {userData.role === "designer" ? (
+          {userData.role === "designer" && (
             <>
               <li className="border-b border-gray-300 hover:bg-gray-100 hover:text-black hover:border-x-4 hover:text-sm">
                 <NavLink
@@ -112,8 +110,6 @@ const Dashboard = () => {
                 </NavLink>
               </li>
             </>
-          ) : (
-            <></>
           )}
         </ul>
       </div>

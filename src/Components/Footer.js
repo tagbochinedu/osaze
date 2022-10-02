@@ -6,10 +6,15 @@ const Footer = () => {
   const [accordion, setAccordion] = useState(false);
 
   return (
-    <div className="footer md:flex justify-between px-1.5 py-3 md:p-6 ">
+    <div
+      className="footer md:flex justify-between px-1.5 py-3 md:p-6"
+      id="footer"
+    >
       <div className="flex flex-wrap justify-around w-full md:w-1/2">
-        <div className='text-center md:my-0 my-7 md:text-start hidden md:block'>
-          <h4 className="text-2xl text-white font-semibold font-julius">Shop</h4>
+        <div className="text-center md:my-0 my-7 md:text-start hidden md:block">
+          <h4 className="text-2xl text-white font-semibold font-julius">
+            Shop
+          </h4>
           <ul className="text-white text-xl font-semibold">
             <li className="my-3">
               <Link to="/Men">Men</Link>
@@ -22,7 +27,7 @@ const Footer = () => {
             </li>
           </ul>
         </div>
-        <div className='md:my-0 my-3.5'>
+        <div className="md:my-0 my-3.5">
           <h4 className="text-2xl text-white font-semibold text-center font-julius">
             Hours
           </h4>
@@ -31,12 +36,12 @@ const Footer = () => {
             <li className="my-3">10am - 6pm</li>
           </ul>
         </div>
-        <div className='md:my-0 my-3.5'>
+        <div className="md:my-0 my-3.5">
           <h4 className="text-2xl text-white font-semibold text-center font-julius">
             Follow
           </h4>
           <ul className="flex md:block">
-            <li className='mx-1'>
+            <li className="mx-1">
               <a href="/">
                 <svg
                   aria-hidden="true"
@@ -55,7 +60,7 @@ const Footer = () => {
                 </svg>
               </a>
             </li>
-            <li className='mx-1'>
+            <li className="mx-1">
               <a href="/">
                 <svg
                   aria-hidden="true"
@@ -74,7 +79,7 @@ const Footer = () => {
                 </svg>
               </a>
             </li>
-            <li className='mx-1'>
+            <li className="mx-1">
               <a href="/">
                 <svg
                   aria-hidden="true"
@@ -106,7 +111,9 @@ const Footer = () => {
               For Designers and Illustrators
             </h5>
             <PlusIcon
-              className={`${"w-6 h-6 text-white transition-all ease-in-out"} ${accordion? 'rotate-45' : ''}`}
+              className={`${"w-6 h-6 text-white transition-all ease-in-out"} ${
+                accordion ? "rotate-45" : ""
+              }`}
               onClick={() => {
                 setAccordion(!accordion);
               }}
@@ -117,14 +124,9 @@ const Footer = () => {
               accordion ? "h-[44px] opacity-100" : "h-0 opacity-0"
             }`}
           >
-            <p
-              className="text-white text-xl font-semibold mt-6 transition ease-in-out"
-            >
-              Learn why working with OSAZE beats working alone{" "}
-              <Link
-                to='/designers-only'
-                className="underline"
-              >
+            <p className="text-white text-xl font-semibold mt-6 transition ease-in-out">
+              Designer Sign Up{" "}
+              <Link to="/designers-only" className="underline">
                 here
               </Link>
             </p>
