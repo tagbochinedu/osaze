@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useImageAuth } from "../../../Context/ImageContext";
 import Card from "../../../Components/UI/Card";
 import useFetch from "../../../CustomHooks/useFetch";
@@ -7,7 +7,7 @@ import { useAuth } from "../../../Context/AuthenticationContext";
 const DesignerProductUpload = () => {
   const { setImageFullScreen, setImageSource } = useImageAuth();
   const { fetchHandler } = useFetch();
-  const { loading, setLoading, token } = useAuth();
+  const { setLoading, token } = useAuth();
   const [images, setImages] = useState([]);
 
   //product upload state
@@ -77,16 +77,17 @@ const DesignerProductUpload = () => {
       formData.append("fabrics", fabric);
     });
     try {
-      const request = fetch(
-        "https://osazeapi.herokuapp.com/api/designer/updatebusinessinfo",
-        {
-          method: "patch",
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-          body: formData,
-        }
-      );
+      const endpoint =
+        "https://osazeapi.herokuapp.com/api/designer/updatebusinessinfo";
+      const requestConfiguration = {
+        method: "PATCH",
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: formData,
+      };
+      const request = await fetchHandler(endpoint, requestConfiguration);
       const response = await request.json();
 
       console.log(response);
