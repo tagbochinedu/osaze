@@ -58,7 +58,7 @@ export default function Carousel() {
         </SwiperSlide>
         <SwiperSlide>
           <div className="slider3 px-8 md:px-20 overflow-hidden">
-            <div className="bg-white text-black lg:w-max rounded-tl-md rounded-br-md rounded-tr-3xl rounded-bl-3xl pt-4 pb-10 px-6 relative top-72">
+            <div className="bg-white text-black w-max rounded-tl-md rounded-br-md rounded-tr-3xl rounded-bl-3xl pt-4 pb-10 px-6 relative top-72">
               <h4 className="text-4xl font-bold">Women</h4>
               <p className="mt-4 mb-6 text-xl">
                 Wear the best accessories
