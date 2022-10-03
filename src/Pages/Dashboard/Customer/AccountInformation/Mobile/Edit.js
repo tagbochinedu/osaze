@@ -18,7 +18,6 @@ const Edit = () => {
   //Function Handlers
   const submitHander = async (e) => {
     e.preventDefault();
-
     setLoading(true);
     const editDetails = {
       firstName: firstName,
@@ -31,7 +30,7 @@ const Edit = () => {
     };
     try {
       const endpoint =
-        "https://osazeapi.herokuapp.com/api/customer/updateaccount";
+        "https://osazebackendapi.herokuapp.com/api/customer/updateaccount";
       const requestConfiguration = {
         method: "PATCH",
         headers: {
@@ -42,10 +41,10 @@ const Edit = () => {
       };
 
       const response = await fetchHandler(endpoint, requestConfiguration);
-      console.log("hello");
-      if (response.success === "success") {
+      if (response.status === "success") {
         setLoading(false);
-        navigate("/profile/account");
+        navigate("/profile");
+        console.log(response)
       } else {
         setLoading(false);
       }

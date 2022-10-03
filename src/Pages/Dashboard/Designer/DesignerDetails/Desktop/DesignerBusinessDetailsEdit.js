@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../../../../Context/AuthenticationContext";
-import useFetch from "../../../../CustomHooks/useFetch";
+import { useAuth } from "../../../../../Context/AuthenticationContext";
+import useFetch from "../../../../../CustomHooks/useFetch";
 
-import Card from "../../../../Components/UI/Card";
+import Card from "../../../../../Components/UI/Card";
 
 const DesignerBusinessDetailsEdit = () => {
   const { userData, token } = useAuth();
@@ -12,9 +12,11 @@ const DesignerBusinessDetailsEdit = () => {
   const [brandName, setBrandName] = useState(userData.brandName);
   const [brandLocation, setBrandLocation] = useState(userData.brandLocation);
   const [brandInfo, setBrandInfo] = useState(userData.brandInfo);
+  const [loading, setLoading] = useState(false)
 
   const submitHandler = async (e) => {
     e.preventDefault();
+setLoading((true))
     const editDetails = {
       brandName: brandName,
       brandLocation: brandLocation,
@@ -22,7 +24,7 @@ const DesignerBusinessDetailsEdit = () => {
     };
     try {
       const endpoint =
-        "https://osazeapi.herokuapp.com/api/designer/updatebusinessinfo";
+        "https://osazebackendapi.herokuapp.com/api/designer/updatebusinessinfo";
       const requestConfiguration = {
         method: "PATCH",
         headers: {
@@ -31,16 +33,17 @@ const DesignerBusinessDetailsEdit = () => {
         },
         body: editDetails,
       };
-      const request = await fetchHandler(endpoint, requestConfiguration);
-      const response = await request.json();
+      const response = await fetchHandler(endpoint, requestConfiguration);
 
       console.log(response);
-      if (response.success === "success") {
-        alert("item has been created");
-        navigate()
-      } else {
+      if (response.status === "success") {
+        setLoading(false)
+        navigate('/profile/designer')
       }
-    } catch {}
+    } catch(error) {
+      console.log(error.message)
+      setLoading(false)
+    }
   };
   return (
     <Card pageTitle="Edit Business Details" className="min-h-fit">
@@ -104,11 +107,24 @@ const DesignerBusinessDetailsEdit = () => {
         </>
 
         <button
-          type="submit"
-          className="py-2 z-20 w-full bg-header text-white font-semibold rounded-md active:bg-headerHover"
-        >
-          Submit
-        </button>
+            type="submit"
+            className="text-white bg-header active:bg-headerHover mx-1 transition ease-in-out duration-150 font-medium rounded-lg text-sm block w-full px-5 py-2.5 text-center"
+          >
+            {loading ? (
+              <div className="flex justify-center items-center">
+                <div
+                  className="spinner-border animate-spin inline-block w-8 h-8 border-4 rounded-full"
+                  role="status"
+                >
+                  <span className="bg-inherit ml-2 text-xs text-header">
+                    Load
+                  </span>
+                </div>
+              </div>
+            ) : (
+              <p>Submit</p>
+            )}
+          </button>
       </form>
     </Card>
   );

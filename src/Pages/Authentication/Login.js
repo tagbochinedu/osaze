@@ -8,13 +8,14 @@ const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
-  const { setUserData, setToken, loading, setLoading } = useAuth();
+  const { setUserData, setToken } = useAuth();
   const emailRef = useRef();
   const passwordRef = useRef();
   //error state
   const [errMsg, setErrMsg] = useState("");
   const [err, setErr] = useState(false);
   //loading state
+  const [loading, setLoading] = useState(false);
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -24,7 +25,8 @@ const Login = () => {
       password: passwordRef.current.value,
     };
     try {
-      const endpoint = "https://osazeapi.herokuapp.com/api/customer/login";
+      const endpoint =
+        "https://osazebackendapi.herokuapp.com/api/customer/login";
       const requestConfiguration = {
         method: "POST",
         headers: { "Content-type": "application/json" },
@@ -68,8 +70,8 @@ const Login = () => {
       };
       console.log(userObject, response);
 
-      localStorage.setItem("userObject", JSON.stringify(userObject));
-      const userData = localStorage.getItem("userObject");
+      localStorage.setItem("osazeUserObject", JSON.stringify(userObject));
+      const userData = localStorage.getItem("osazeUserObject");
       setUserData(JSON.parse(userData));
 
       localStorage.setItem("token", JSON.stringify(response.token));
@@ -97,18 +99,17 @@ const Login = () => {
 
   return (
     <div className="w-full px-3">
-      
       <div className="max-w-md md:max-w-xl border-2 rounded-sm md:rounded-lg my-10 shadow-lg glass pt-4 pb-8 px-6 text-sm shadow-gray-200 mx-auto">
-      <div className="text-center flex justify-center">
-        {err && (
-          <div
-            className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4"
-            role="alert"
-          >
-            <h3>{errMsg}</h3>
-          </div>
-        )}
-      </div>
+        <div className="text-center flex justify-center">
+          {err && (
+            <div
+              className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4"
+              role="alert"
+            >
+              <h3>{errMsg}</h3>
+            </div>
+          )}
+        </div>
         <h1 className="text-2xl text-center text-header my-6 font-bold font-julius">
           Sign In
         </h1>

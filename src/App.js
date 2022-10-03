@@ -17,23 +17,28 @@ import Women from "./Pages/Products/Women";
 import Accessories from "./Pages/Products/Accessories";
 
 import Dashboard from "./Pages/Dashboard/Dashboard";
-import AccountInformation from "./Pages/Dashboard/Customer/AccountInformation/AccountInformation";
-import Account from "./Pages/Dashboard/Customer/AccountInformation/MobileView/Account";
-import Edit from "./Pages/Dashboard/Customer/AccountInformation/MobileView/Edit";
-import DetailsEdit from "./Pages/Dashboard/Customer/AccountInformation/DetailsEdit";
-
+//Customer-Desktop-View
+import AccountInformation from "./Pages/Dashboard/Customer/AccountInformation/Desktop/AccountInformation";
+import DetailsEdit from "./Pages/Dashboard/Customer/AccountInformation/Desktop/DetailsEdit";
 import BodyProfile from "./Pages/Dashboard/Customer/BodyProfile/BodyProfile";
 import BodyEdit from "./Pages/Dashboard/Customer/BodyProfile/BodyEdit";
-
 import Orders from "./Pages/Dashboard/Customer/Orders/Orders";
 import PendingOrders from "./Pages/Dashboard/Customer/Orders/PendingOrders";
 import CompletedOrders from "./Pages/Dashboard/Customer/Orders/CompletedOrders";
-
 import Inbox from "./Pages/Dashboard/Customer/Inbox";
 
-import Designer from "./Pages/Dashboard/Designer/DesignerDetails/Designer";
-import DesignerAccountDetailsEdit from "./Pages/Dashboard/Designer/DesignerDetails/DesignerAccountDetailsEdit";
-import DesignerBusinessDetailsEdit from "./Pages/Dashboard/Designer/DesignerDetails/DesignerBusinessDetailsEdit";
+//Customer-Mobile-View
+import Account from "./Pages/Dashboard/Customer/AccountInformation/Mobile/Account";
+import Edit from "./Pages/Dashboard/Customer/AccountInformation/Mobile/Edit";
+
+
+
+
+
+
+import Designer from "./Pages/Dashboard/Designer/DesignerDetails/Desktop/Designer";
+import DesignerAccountDetailsEdit from "./Pages/Dashboard/Designer/DesignerDetails/Desktop/DesignerAccountDetailsEdit";
+import DesignerBusinessDetailsEdit from "./Pages/Dashboard/Designer/DesignerDetails/Desktop/DesignerBusinessDetailsEdit";
 import DesignerProductUpload from "./Pages/Dashboard/Designer/DesignerProductUpload";
 import DesignerOrders from "./Pages/Dashboard/Designer/Orders/DesignerOrders";
 import OpenOrders from "./Pages/Dashboard/Designer/Orders/OpenOrders";

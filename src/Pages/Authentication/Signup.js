@@ -99,7 +99,7 @@ const Signup = () => {
         password: passwordRef.current.value,
       };
       try {
-        const endpoint = "https://osazeapi.herokuapp.com/api/customer/signup";
+        const endpoint = "https://osazebackendapi.herokuapp.com/api/customer/signup";
         const requestConfiguration = {
           method: "POST",
           headers: { "Content-type": "application/json" },

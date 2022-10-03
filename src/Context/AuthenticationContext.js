@@ -6,13 +6,13 @@ export function useAuth() {
 }
 
 export function AuthenticationProvider({ children }) {
-  const [userData, setUserData] = useState(JSON.parse(localStorage.getItem('userObject')));
+  const [userData, setUserData] = useState(JSON.parse(localStorage.getItem('osazeUserObject')));
   const [token, setToken] = useState(JSON.parse(localStorage.getItem('token')))
   const [loading, setLoading] = useState(false);
   const Logout = () =>{
-    localStorage.removeItem('userObject')
+    localStorage.removeItem('osazeUserObject')
     localStorage.removeItem('token')
-    setUserData(JSON.parse(localStorage.getItem('userObject')))
+    setUserData(JSON.parse(localStorage.getItem('osazeUserObject')))
     setToken(JSON.parse(localStorage.getItem('token')))
   }
 

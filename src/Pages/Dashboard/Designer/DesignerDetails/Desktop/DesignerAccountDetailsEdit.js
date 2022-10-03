@@ -1,26 +1,25 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import useFetch from "../../../../CustomHooks/useFetch";
-import { useAuth } from "../../../../Context/AuthenticationContext";
-import Card from "../../../../Components/UI/Card";
+import { useAuth } from "../../../../../Context/AuthenticationContext";
+import useFetch from "../../../../../CustomHooks/useFetch";
+
+import Card from "../../../../../Components/UI/Card";
 
 const DetailsEdit = () => {
+  const fetchHandler = useFetch();
+  const { userData, token } = useAuth();
   const navigate = useNavigate();
-  const { fetchHandler } = useFetch();
-  const { userData, token, loading, setLoading } = useAuth();
   const [firstName, setFirstName] = useState(userData.firstName);
   const [lastName, setLastName] = useState(userData.lastName);
   const [country, setCountry] = useState(userData.country);
-  const [city, setCity] = useState(userData.city);
   const [state, setState] = useState(userData.state);
+  const [city, setCity] = useState(userData.city);
   const [houseAddress, setHouseAddress] = useState(userData.houseAddress);
   const [phoneNumber, setPhoneNumber] = useState(userData.phoneNumber);
-
-  //Function Handlers
+  const [loading, setLoading] = useState(false);
 
   const submitHander = async (e) => {
     e.preventDefault();
-   
     setLoading(true)
     const editDetails = {
       firstName: firstName,
@@ -32,30 +31,29 @@ const DetailsEdit = () => {
       phoneNumber: phoneNumber,
     };
     try {
-       
       const endpoint =
-        "https://osazeapi.herokuapp.com/api/customer/updateaccount";
+        "https://osazebackendapi.herokuapp.com/api/designer/updateaccount";
       const requestConfiguration = {
         method: "PATCH",
         headers: {
           "Content-type": "application/json",
-          'Authorization': `Bearer ${token}`,
+          authorization: `Bearer ${token}`,
         },
         body: editDetails,
       };
-      
       const response = await fetchHandler(endpoint, requestConfiguration);
-      console.log('hello')
-      if(response.success === 'success') {
+      if(response.status === 'success') {
         setLoading(false)
-        navigate("/profile");
-      } else{setLoading(false)}
-    } catch {}
-    
+        navigate('/profile/designer')
+      }
+    } catch (error) {
+      setLoading(false)
+      console.log(error.message);
+    }
   };
 
   return (
-    <Card pageTitle="Edit Details" className="min-h-[80vh]">
+    <Card pageTitle="Edit Account Details" className="min-h-fit">
       <form className=" px-6 py-10 relative h-full" onSubmit={submitHander}>
         <div className="grid grid-cols-2 gap-6 mb-10">
           <div className="relative z-0">
@@ -63,10 +61,10 @@ const DetailsEdit = () => {
               type="text"
               className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-header peer"
               placeholder=" "
+              value={firstName}
               onChange={(e) => {
                 setFirstName(e.target.value);
               }}
-              value={firstName}
             />
             <label
               htmlFor="floating_standard"
@@ -81,10 +79,10 @@ const DetailsEdit = () => {
               type="text"
               className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-header peer"
               placeholder=" "
+              value={lastName}
               onChange={(e) => {
                 setLastName(e.target.value);
               }}
-              value={lastName}
             />
             <label
               htmlFor="floating_standard"
@@ -94,8 +92,9 @@ const DetailsEdit = () => {
             </label>
           </div>
         </div>
+
         <div className="grid md:grid-cols-2 md:gap-6 mb-10">
-          <div className="relative z-0 w-full group mb-5">
+          <div className="relative z-0 w-full group">
             <input
               type="text"
               id="country"
@@ -153,23 +152,26 @@ const DetailsEdit = () => {
             </label>
           </div>
         </div>
-        <div className="relative z-0 mt-6 col-span-full mb-10">
+        <div className="relative z-0 mb-10 w-full group">
           <input
             type="text"
-            className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-header peer"
+            id="floating_address"
+            className="block font-merri py-2.5 px-0 w-full text-md text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-header peer"
             placeholder=" "
+            required
+            value={houseAddress}
             onChange={(e) => {
               setHouseAddress(e.target.value);
             }}
-            value={houseAddress}
           />
           <label
-            htmlFor="floating_standard"
-            className="absolute text-sm text-gray-500 duration-300 transform -translate-y-8 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-header peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-8"
+            htmlFor="floating_address"
+            className="peer-focus:font-medium font-merri absolute text-sm text-gray-500 duration-300 transform -translate-y-8 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-header peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-8"
           >
             House Address
           </label>
         </div>
+
         <div className="relative z-0 mb-6 w-full group">
           <input
             type="tel"
@@ -178,7 +180,7 @@ const DetailsEdit = () => {
             className="block py-2.5 px-0 w-full font-merri text-md text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-header peer"
             placeholder=" "
             required
-            value={phoneNumber}
+            value={`+${phoneNumber}`}
             onChange={(e) => {
               setPhoneNumber(e.target.value);
             }}
@@ -190,6 +192,7 @@ const DetailsEdit = () => {
             Phone number
           </label>
         </div>
+
         <button
             type="submit"
             className="text-white bg-header active:bg-headerHover mx-1 transition ease-in-out duration-150 font-medium rounded-lg text-sm block w-full px-5 py-2.5 text-center"

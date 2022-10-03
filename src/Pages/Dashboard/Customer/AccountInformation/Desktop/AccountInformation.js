@@ -1,16 +1,76 @@
-
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { useAuth } from "../../../../Context/AuthenticationContext";
-
-import Card from "../../../../Components/UI/Card";
+import { useAuth } from "../../../../../Context/AuthenticationContext";
+import Card from "../../../../../Components/UI/Card";
 
 const AccountInformation = () => {
-  const { userData } = useAuth();
+  const { userData, setUserData, token } = useAuth();
   const userdata = [userData];
   useEffect(() => {
-    console.log(userData);
-  }, [userData]);
+    const fetchHandler = async () => {
+      try {
+        const request = await fetch(
+          "https://osazebackendapi.herokuapp.com/api/customer/getprofile",
+          {
+            method: "GET",
+            headers: {
+              "Content-type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        const response = await request.json();
+        const userObject = {
+          firstName: response.user.userObject.firstName,
+          lastName: response.user.userObject.lastName,
+          email: response.user.userObject.email,
+          phoneNumber: response.user.userObject.phoneNumber,
+          country: response.user.userObject.country,
+          state: response.user.userObject.state,
+          city: response.user.userObject.city,
+          houseAddress: response.user.userObject.houseAddress,
+          sketch: response.user.businessInfo
+            ? response.user.businessInfo.sketch
+            : null,
+          sketchSkill: response.user.businessInfo
+            ? response.user.businessInfo.sketchSkill
+            : null,
+          sew: response.user.businessInfo
+            ? response.user.businessInfo.sew
+            : null,
+          sewSkill: response.user.businessInfo
+            ? response.user.businessInfo.sewSkill
+            : null,
+          brandName: response.user.businessInfo
+            ? response.user.businessInfo.brandName
+            : null,
+          brandLocation: response.user.businessInfo
+            ? response.user.businessInfo.brandLocation
+            : null,
+          brandInfo: response.user.businessInfo
+            ? response.user.businessInfo.brandInfo
+            : null,
+          url: response.user.businessInfo
+            ? response.user.businessInfo.url
+            : null,
+          cart: response.user.cart ? response.user.cart : null,
+          orders: response.user.orders ? response.user.orders : null,
+          messages: response.user.messages ? response.user.messages : null,
+          role: response.user.userObject.role,
+          id: response.user.userId,
+        };
+
+        let newData = localStorage.getItem("osazeUserObjecct");
+        newData = JSON.stringify(userObject)
+        localStorage.setItem("osazeUserObject", newData);
+        const userData = localStorage.getItem("osazeUserObject");
+        setUserData(JSON.parse(userData));
+      } catch (error) {
+        console.log(error.message);
+      }
+    };
+    fetchHandler();
+  }, [token, setUserData]);
   return (
     <Card className="" pageTitle="Account Information">
       {userdata.map((data) => {
@@ -60,7 +120,7 @@ const AccountInformation = () => {
                         {", "}
                         {data.country}
                       </p>
-                      <p className="text-lg mt-3">{data.phoneNumber}</p>
+                      <p className="text-lg mt-3">+{data.phoneNumber}</p>
                     </div>
                   </div>
                 </div>
