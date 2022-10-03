@@ -5,7 +5,7 @@ import { useAuth } from "../../../../../Context/AuthenticationContext";
 
 const Edit = () => {
   const navigate = useNavigate();
-  const { fetchHandler } = useFetch();
+  const fetchHandler = useFetch();
   const { userData, token, loading, setLoading } = useAuth();
   const [firstName, setFirstName] = useState(userData.firstName);
   const [lastName, setLastName] = useState(userData.lastName);
@@ -43,7 +43,7 @@ const Edit = () => {
       const response = await fetchHandler(endpoint, requestConfiguration);
       if (response.status === "success") {
         setLoading(false);
-        navigate("/profile");
+        navigate("/profile/account");
         console.log(response)
       } else {
         setLoading(false);
