@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { useImageAuth } from "../../../Context/ImageContext";
-import Card from "../../../Components/UI/Card";
-import useFetch from "../../../CustomHooks/useFetch";
-import { useAuth } from "../../../Context/AuthenticationContext";
+import { useImageAuth } from "../../../../../Context/ImageContext";
+import Card from "../../../../../Components/UI/Card";
+import useFetch from "../../../../../CustomHooks/useFetch";
+import { useAuth } from "../../../../../Context/AuthenticationContext";
 
 const DesignerProductUpload = () => {
   const { setImageFullScreen, setImageSource } = useImageAuth();

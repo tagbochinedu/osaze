@@ -31,18 +31,20 @@ import Inbox from "./Pages/Dashboard/Customer/Inbox";
 import Account from "./Pages/Dashboard/Customer/AccountInformation/Mobile/Account";
 import Edit from "./Pages/Dashboard/Customer/AccountInformation/Mobile/Edit";
 
-
-
-
-
-
+//Designer-Desktop-View
 import Designer from "./Pages/Dashboard/Designer/DesignerDetails/Desktop/Designer";
 import DesignerAccountDetailsEdit from "./Pages/Dashboard/Designer/DesignerDetails/Desktop/DesignerAccountDetailsEdit";
 import DesignerBusinessDetailsEdit from "./Pages/Dashboard/Designer/DesignerDetails/Desktop/DesignerBusinessDetailsEdit";
-import DesignerProductUpload from "./Pages/Dashboard/Designer/DesignerProductUpload";
+import DesignerProductUpload from "./Pages/Dashboard/Designer/DesignerProductUpload/Desktop/DesignerProductUpload";
 import DesignerOrders from "./Pages/Dashboard/Designer/Orders/DesignerOrders";
 import OpenOrders from "./Pages/Dashboard/Designer/Orders/OpenOrders";
 import FinishedOrders from "./Pages/Dashboard/Designer/Orders/FinishedOrders";
+
+//Designer-Mobile-view
+import Designers from "./Pages/Dashboard/Designer/DesignerDetails/Mobile/Designer";
+import DesignersAccountDetailsEdit from "./Pages/Dashboard/Designer/DesignerDetails/Mobile/DesignerAccountDetailsEdit";
+import DesignersBusinessDetailsEdit from "./Pages/Dashboard/Designer/DesignerDetails/Mobile/DesignerBusinessDetailsEdit";
+import DesignersProductUpload from "./Pages/Dashboard/Designer/DesignerProductUpload/Mobile/DesignerProductUpload";
 
 import DesignersOnly from "./Pages/DesignersOnly";
 import DesignerSignup from "./Pages/Authentication/DesignerSignup";
@@ -77,6 +79,24 @@ function App() {
           <Route element={<AuthorizedRoute allowedRole="customer" />}>
             <Route exact path="/profile/account" element={<Account />} />
             <Route exact path="/profile/account/edit" element={<Edit />} />
+          </Route>
+          <Route element={<AuthorizedRoute allowedRole="designer" />}>
+            <Route exact path="/profile/designers" element={<Designers />} />
+            <Route
+              exact
+              path="/profile/designers-account-details-edit"
+              element={<DesignersAccountDetailsEdit />}
+            />
+            <Route
+              exact
+              path="/profile/designers-business-details-edit"
+              element={<DesignersBusinessDetailsEdit />}
+            />
+            <Route
+                exact
+                path="/profile/designers-product-upload"
+                element={<DesignersProductUpload />}
+              />
           </Route>
           <Route exact path="/profile" element={<Dashboard />}>
             <Route element={<AuthorizedRoute allowedRole="customer" />}>
