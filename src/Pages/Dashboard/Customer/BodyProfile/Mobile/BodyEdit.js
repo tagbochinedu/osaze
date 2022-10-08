@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import useFetch from "../../../../../CustomHooks/useFetch";
 import { useAuth } from "../../../../../Context/AuthenticationContext";
@@ -27,12 +27,27 @@ const BodyEdit = () => {
   const [shoulderLength, setShoulderLength] = useState(
     userData.bodyProfile.shoulderLength
   );
+
   const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState("");
+  const [messageText, setMessageText] = useState("");
   const navigate = useNavigate();
+
+  useEffect(() => {
+    for (const key in userData.bodyProfile) {
+      if (userData.bodyProfile[key] === (0||'0')) {
+        setMessageText("Fill all Measurements before shopping");
+        setMessage(true);
+        setTimeout(() => {
+          setMessage(false);
+        }, 3000);
+      }
+    }
+  }, [userData.bodyProfile]);
 
   const submitHander = async (e) => {
     e.preventDefault();
-    setLoading(true)
+    setLoading(true);
     const bodyProfile = {
       bust: bust,
       waist: waist,
@@ -49,7 +64,7 @@ const BodyEdit = () => {
       shoulderLength: shoulderLength,
     };
     try {
-      console.log(bodyProfile)
+      console.log(bodyProfile);
       const endpoint =
         "https://osazebackendapi.herokuapp.com/api/customer/updatebodyprofile";
       const requestConfiguration = {
@@ -63,7 +78,7 @@ const BodyEdit = () => {
 
       const response = await fetchHandler(endpoint, requestConfiguration);
       if (response.status === "success") {
-        console.log(response)
+        console.log(response);
         setLoading(false);
         navigate("/profile/body");
       } else {
@@ -73,21 +88,22 @@ const BodyEdit = () => {
   };
   return (
     <div className="w-full lg:rounded-lg shadow-md shadow-gray-200 border border-gray-400">
-    <div className="flex justify-start items-center py-4 px-6 border-b border-gray-400 ">
-      <Link to="/profile/body">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 448 512"
-          fill="currentColor"
-          className="w-5 h-5 mr-3"
-        >
-          <path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z" />
-        </svg>
-      </Link>
-      <h1 className="font-bold text-xl uppercase text-black">
-        Body Edit
-      </h1>
-    </div>
+      <div className="flex justify-start items-center py-4 px-6 border-b border-gray-400 ">
+        <Link to="/profile/body">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 448 512"
+            fill="currentColor"
+            className="w-5 h-5 mr-3"
+          >
+            <path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z" />
+          </svg>
+        </Link>
+        <h1 className="font-bold text-xl uppercase text-black">Body Edit</h1>
+      </div>
+      <div className="fixed h-min left-0 right-0 w-full flex justify-center py-2">
+        {message && <p className='text-sm font-semibold bg-gray-300 p-1 rounded text-header'>{messageText}</p>}
+      </div>
       <form className=" px-6 py-10 relative h-full" onSubmit={submitHander}>
         <h2 className="text-center font-semibold mb-6">Upper Body</h2>
         <div className="grid grid-cols-2 gap-2 mb-6">

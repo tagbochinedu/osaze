@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import useFetch from "../../../../../CustomHooks/useFetch";
 import Card from "../../../../../Components/UI/Card";
@@ -29,11 +29,28 @@ const BodyEdit = () => {
     userData.bodyProfile.shoulderLength
   );
   const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState("");
+  const [messageText, setMessageText] = useState("");
   const navigate = useNavigate();
+
+  useEffect(() => {
+    for (const key in userData.bodyProfile) {
+      if (
+        userData.bodyProfile[key] === 0 ||
+        userData.bodyProfile[key] === "0"
+      ) {
+        setMessageText("Fill all measurements before shopping");
+        setMessage(true);
+        setTimeout(() => {
+          setMessage(false);
+        }, 3000);
+      }
+    }
+  }, [userData.bodyProfile]);
 
   const submitHander = async (e) => {
     e.preventDefault();
-    setLoading(true)
+    setLoading(true);
     const bodyProfile = {
       bust: bust,
       waist: waist,
@@ -50,7 +67,7 @@ const BodyEdit = () => {
       shoulderLength: shoulderLength,
     };
     try {
-      console.log(bodyProfile)
+      console.log(bodyProfile);
       const endpoint =
         "https://osazebackendapi.herokuapp.com/api/customer/updatebodyprofile";
       const requestConfiguration = {
@@ -64,7 +81,7 @@ const BodyEdit = () => {
 
       const response = await fetchHandler(endpoint, requestConfiguration);
       if (response.status === "success") {
-        console.log(response)
+        console.log(response);
         setLoading(false);
         navigate("/profile/body-profile");
       } else {
@@ -73,10 +90,16 @@ const BodyEdit = () => {
     } catch {}
   };
 
-  
   return (
     <Card pageTitle="Edit Measurements" className="min-h-[80vh]">
       <form className=" px-6 py-10 relative h-full" onSubmit={submitHander}>
+        <div className="absolute h-min left-0 right-0 -top-0.5 w-full flex justify-center py-2">
+          {message &&(
+            <p className="text-sm font-semibold bg-gray-300 p-1 rounded text-header">
+              {messageText}
+            </p>
+          )}
+        </div>
         <h2 className="text-center font-semibold mb-6">Upper Body</h2>
         <div className="grid grid-cols-4 grid-rows-2 gap-6 mb-6">
           <div className="relative z-0 mb-6">

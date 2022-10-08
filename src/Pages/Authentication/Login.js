@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useNavigate, Link, useLocation } from "react-router-dom";
 import useFetch from "../../CustomHooks/useFetch";
 import { useAuth } from "../../Context/AuthenticationContext";
@@ -16,6 +16,14 @@ const Login = () => {
   const [err, setErr] = useState(false);
   //loading state
   const [loading, setLoading] = useState(false);
+  const [width, setWidth] = useState(window.innerWidth);
+  //Screen-Resize Functionality
+  const handleResize = () => {
+    setWidth(window.innerWidth);
+  };
+  useEffect(() => {
+    window.addEventListener("resize", handleResize);
+  }, [width]);
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -97,9 +105,12 @@ const Login = () => {
 
       if (response.status === "success") {
         for (const key in response.user.bodyProfile) {
-          if (response.user.bodyProfile[key] === 0) {
+          if (response.user.bodyProfile[key] === 0 && width > 400) {
             setLoading(false);
             navigate("/profile/body-profile/edit");
+          } else if (response.user.bodyProfile[key] === 0 && width < 400) {
+            setLoading(false);
+            navigate("/profile/body/edit");
           } else {
             setLoading(false);
             navigate(from, { replace: true });
