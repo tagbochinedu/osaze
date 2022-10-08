@@ -30,6 +30,7 @@ import Inbox from "./Pages/Dashboard/Customer/Inbox";
 //Customer-Mobile-View
 import Account from "./Pages/Dashboard/Customer/AccountInformation/Mobile/Account";
 import Edit from "./Pages/Dashboard/Customer/AccountInformation/Mobile/Edit";
+import Body from "./Pages/Dashboard/Customer/BodyProfile/Mobile/BodyProfile";
 
 //Designer-Desktop-View
 import Designer from "./Pages/Dashboard/Designer/DesignerDetails/Desktop/Designer";
@@ -79,6 +80,11 @@ function App() {
           <Route element={<AuthorizedRoute allowedRole="customer" />}>
             <Route exact path="/profile/account" element={<Account />} />
             <Route exact path="/profile/account/edit" element={<Edit />} />
+            <Route
+              exact
+              path="/profile/body"
+              element={<Body />}
+            />
           </Route>
           <Route element={<AuthorizedRoute allowedRole="designer" />}>
             <Route exact path="/profile/designers" element={<Designers />} />
@@ -93,10 +99,10 @@ function App() {
               element={<DesignersBusinessDetailsEdit />}
             />
             <Route
-                exact
-                path="/profile/designers-product-upload"
-                element={<DesignersProductUpload />}
-              />
+              exact
+              path="/profile/designers-product-upload"
+              element={<DesignersProductUpload />}
+            />
           </Route>
           <Route exact path="/profile" element={<Dashboard />}>
             <Route element={<AuthorizedRoute allowedRole="customer" />}>
@@ -114,7 +120,11 @@ function App() {
                 path="/profile/body-profile"
                 element={<BodyProfile />}
               />
-              <Route exact path="/profile/body-profile/edit" element={<BodyEdit />} />
+              <Route
+                exact
+                path="/profile/body-profile/edit"
+                element={<BodyEdit />}
+              />
               <Route
                 exact
                 path="/profile/account-information/edit"

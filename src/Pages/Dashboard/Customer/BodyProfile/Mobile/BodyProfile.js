@@ -1,9 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-
 import { useAuth } from "../../../../../Context/AuthenticationContext";
 
-import Card from "../../../../../Components/UI/Card";
 
 const BodyProfile = () => {
   const { userData, setUserData, token } = useAuth();
@@ -101,7 +99,22 @@ const BodyProfile = () => {
   }, [token, setUserData]);
 
   return (
-    <Card pageTitle="Body Profile">
+    <div className="w-full lg:rounded-lg shadow-md shadow-gray-200 border border-gray-400">
+      <div className="flex justify-start items-center py-4 px-6 border-b border-gray-400 ">
+        <Link to="/profile">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 448 512"
+            fill="currentColor"
+            className="w-5 h-5 mr-3"
+          >
+            <path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z" />
+          </svg>
+        </Link>
+        <h1 className="font-bold text-xl uppercase text-black">
+          Account Information
+        </h1>
+      </div>
       <div className="px-6 py-4">
         <div className="border-2 border-gray-300 rounded-sm">
           <div className=" border-b-2 border-gray-300 flex justify-between py-1 px-2">
@@ -119,8 +132,8 @@ const BodyProfile = () => {
           </div>
           {userdata.map((body) => {
             return (
-              <div className="grid grid-cols-2 gap-4 px-4 py-6" key="1">
-                <div className="border-gray-300 border-2 px-3 py-2 max-h-min">
+              <div className="px-4 py-6" key="1">
+                <div className="border-gray-300 border-2 px-3 py-2 max-h-min mb-6">
                   <h2 className="text-center font-semibold">Upper Body</h2>
                   <div className="grid grid-cols-2 gap-4">
                     <div className="p-2 border-b border-gray-400 rounded">
@@ -263,7 +276,7 @@ const BodyProfile = () => {
           </div>
         </div>
       </div>
-    </Card>
+    </div>
   );
 };
 
