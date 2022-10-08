@@ -35,7 +35,8 @@ const BodyEdit = () => {
 
   useEffect(() => {
     for (const key in userData.bodyProfile) {
-      if (userData.bodyProfile[key] === (0||'0')) {
+      if (userData.bodyProfile[key] === 0 ||
+        userData.bodyProfile[key] === "0") {
         setMessageText("Fill all Measurements before shopping");
         setMessage(true);
         setTimeout(() => {
