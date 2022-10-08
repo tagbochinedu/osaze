@@ -152,7 +152,7 @@ const Account = () => {
                         {", "}
                         {data.country}
                       </p>
-                      <p className="text-lg mt-3">{data.phoneNumber}</p>
+                      <p className="text-lg mt-3">+{data.phoneNumber}</p>
                     </div>
                   </div>
                 </div>
