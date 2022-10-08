@@ -19,7 +19,7 @@ import Accessories from "./Pages/Products/Accessories";
 import Dashboard from "./Pages/Dashboard/Dashboard";
 //Customer-Desktop-View
 import AccountInformation from "./Pages/Dashboard/Customer/AccountInformation/Desktop/AccountInformation";
-import DetailsEdit from "./Pages/Dashboard/Customer/AccountInformation/Desktop/DetailsEdit";
+import AccountEdit from "./Pages/Dashboard/Customer/AccountInformation/Desktop/AccountEdit";
 import BodyProfile from "./Pages/Dashboard/Customer/BodyProfile/Desktop/BodyProfile";
 import BodyEdit from "./Pages/Dashboard/Customer/BodyProfile/Desktop/BodyEdit";
 import Orders from "./Pages/Dashboard/Customer/Orders/Orders";
@@ -28,9 +28,10 @@ import CompletedOrders from "./Pages/Dashboard/Customer/Orders/CompletedOrders";
 import Inbox from "./Pages/Dashboard/Customer/Inbox";
 
 //Customer-Mobile-View
-import Account from "./Pages/Dashboard/Customer/AccountInformation/Mobile/Account";
-import Edit from "./Pages/Dashboard/Customer/AccountInformation/Mobile/Edit";
-import Body from "./Pages/Dashboard/Customer/BodyProfile/Mobile/BodyProfile";
+import AccountInformationMobile from "./Pages/Dashboard/Customer/AccountInformation/Mobile/AccountInformation";
+import AccountEditMobile from "./Pages/Dashboard/Customer/AccountInformation/Mobile/AccountEdit";
+import BodyProfileMobile from "./Pages/Dashboard/Customer/BodyProfile/Mobile/BodyProfile";
+import BodyEditMobile from "./Pages/Dashboard/Customer/BodyProfile/Mobile/BodyEdit";
 
 //Designer-Desktop-View
 import Designer from "./Pages/Dashboard/Designer/DesignerDetails/Desktop/Designer";
@@ -77,33 +78,6 @@ function App() {
         <Route exact path="/designers-only" element={<DesignersOnly />} />
         <Route exact path="/designers-sign-up" element={<DesignerSignup />} />
         <Route element={<PrivateRoute />}>
-          <Route element={<AuthorizedRoute allowedRole="customer" />}>
-            <Route exact path="/profile/account" element={<Account />} />
-            <Route exact path="/profile/account/edit" element={<Edit />} />
-            <Route
-              exact
-              path="/profile/body"
-              element={<Body />}
-            />
-          </Route>
-          <Route element={<AuthorizedRoute allowedRole="designer" />}>
-            <Route exact path="/profile/designers" element={<Designers />} />
-            <Route
-              exact
-              path="/profile/designers-account-details-edit"
-              element={<DesignersAccountDetailsEdit />}
-            />
-            <Route
-              exact
-              path="/profile/designers-business-details-edit"
-              element={<DesignersBusinessDetailsEdit />}
-            />
-            <Route
-              exact
-              path="/profile/designers-product-upload"
-              element={<DesignersProductUpload />}
-            />
-          </Route>
           <Route exact path="/profile" element={<Dashboard />}>
             <Route element={<AuthorizedRoute allowedRole="customer" />}>
               <Route
@@ -128,7 +102,7 @@ function App() {
               <Route
                 exact
                 path="/profile/account-information/edit"
-                element={<DetailsEdit />}
+                element={<AccountEdit />}
               />
               <Route exact path="/profile/orders" element={<Orders />}>
                 <Route
@@ -190,6 +164,41 @@ function App() {
                 />
               </Route>
             </Route>
+          </Route>
+        </Route>
+        {/*The Routes wrapped in the private route below are for mobile view. Due to the outletng in the dashboard, creating separate components for them is necessary*/}
+        <Route element={<PrivateRoute />}>
+          <Route element={<AuthorizedRoute allowedRole="customer" />}>
+            <Route
+              exact
+              path="/profile/account"
+              element={<AccountInformationMobile />}
+            />
+            <Route
+              exact
+              path="/profile/account/edit"
+              element={<AccountEditMobile />}
+            />
+            <Route exact path="/profile/body" element={<BodyProfileMobile />} />
+            <Route exact path="/profile/body/edit" element={<BodyEditMobile />} />
+          </Route>
+          <Route element={<AuthorizedRoute allowedRole="designer" />}>
+            <Route exact path="/profile/designers" element={<Designers />} />
+            <Route
+              exact
+              path="/profile/designers-account-details-edit"
+              element={<DesignersAccountDetailsEdit />}
+            />
+            <Route
+              exact
+              path="/profile/designers-business-details-edit"
+              element={<DesignersBusinessDetailsEdit />}
+            />
+            <Route
+              exact
+              path="/profile/designers-product-upload"
+              element={<DesignersProductUpload />}
+            />
           </Route>
         </Route>
         <Route exact path="/men" element={<MaleProducts />} />
