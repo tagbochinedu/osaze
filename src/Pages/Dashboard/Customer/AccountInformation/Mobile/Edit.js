@@ -6,7 +6,8 @@ import { useAuth } from "../../../../../Context/AuthenticationContext";
 const Edit = () => {
   const navigate = useNavigate();
   const fetchHandler = useFetch();
-  const { userData, token, loading, setLoading } = useAuth();
+  const { userData, token} = useAuth();
+  const [loading, setLoading] = useState(false)
   const [firstName, setFirstName] = useState(userData.firstName);
   const [lastName, setLastName] = useState(userData.lastName);
   const [country, setCountry] = useState(userData.country);

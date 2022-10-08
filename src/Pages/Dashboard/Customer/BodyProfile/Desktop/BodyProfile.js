@@ -1,12 +1,13 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-import {useAuth} from '../../../../Context/AuthenticationContext'
+import { useAuth } from "../../../../../Context/AuthenticationContext";
 
-import Card from "../../../../Components/UI/Card";
+import Card from "../../../../../Components/UI/Card";
 
 const BodyProfile = () => {
-  const {userData} = useAuth()
+  const { userData, setUserData, token } = useAuth();
+  const userdata = [userData.bodyProfile];
   const [images, setImages] = useState([]);
   const [imageUpload, setImageUpload] = useState(undefined);
   const submitHandler = (e) => {
@@ -16,13 +17,96 @@ const BodyProfile = () => {
     return;
   };
 
+  useEffect(() => {
+    const fetchHandler = async () => {
+      try {
+        const request = await fetch(
+          "https://osazebackendapi.herokuapp.com/api/customer/getprofile",
+          {
+            method: "GET",
+            headers: {
+              "Content-type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        const response = await request.json();
+        const userObject = {
+          firstName: response.user.userObject.firstName,
+          lastName: response.user.userObject.lastName,
+          email: response.user.userObject.email,
+          phoneNumber: response.user.userObject.phoneNumber,
+          country: response.user.userObject.country,
+          state: response.user.userObject.state,
+          city: response.user.userObject.city,
+          houseAddress: response.user.userObject.houseAddress,
+          bodyProfile: response.user.bodyProfile
+          ? {
+              bust: response.user.bodyProfile.bust,
+              waist: response.user.bodyProfile.waist,
+              hip: response.user.bodyProfile.hip,
+              hipDip: response.user.bodyProfile.hipDip,
+              frontWaistLength: response.user.bodyProfile.frontWaistLength,
+              backWaistLength: response.user.bodyProfile.backWaistLength,
+              armLength: response.user.bodyProfile.armLength,
+              thigh: response.user.bodyProfile.thigh,
+              ankle: response.user.bodyProfile.ankle,
+              inseam: response.user.bodyProfile.inseam,
+              outseam: response.user.bodyProfile.outseam,
+              crotchDepth: response.user.bodyProfile.crotchDepth,
+              shoulderLength: response.user.bodyProfile.shoulderLength,
+            }
+          : null,
+          sketch: response.user.businessInfo
+            ? response.user.businessInfo.sketch
+            : null,
+          sketchSkill: response.user.businessInfo
+            ? response.user.businessInfo.sketchSkill
+            : null,
+          sew: response.user.businessInfo
+            ? response.user.businessInfo.sew
+            : null,
+          sewSkill: response.user.businessInfo
+            ? response.user.businessInfo.sewSkill
+            : null,
+          brandName: response.user.businessInfo
+            ? response.user.businessInfo.brandName
+            : null,
+          brandLocation: response.user.businessInfo
+            ? response.user.businessInfo.brandLocation
+            : null,
+          brandInfo: response.user.businessInfo
+            ? response.user.businessInfo.brandInfo
+            : null,
+          url: response.user.businessInfo
+            ? response.user.businessInfo.url
+            : null,
+          cart: response.user.cart ? response.user.cart : null,
+          orders: response.user.orders ? response.user.orders : null,
+          messages: response.user.messages ? response.user.messages : null,
+          role: response.user.userObject.role,
+          id: response.user.userId,
+        };
+
+        let newData = localStorage.getItem("osazeUserObjecct");
+        newData = JSON.stringify(userObject);
+        localStorage.setItem("osazeUserObject", newData);
+        const userData = localStorage.getItem("osazeUserObject");
+        setUserData(JSON.parse(userData));
+      } catch (error) {
+        console.log(error.message);
+      }
+    };
+    fetchHandler();
+  }, [token, setUserData]);
+
   return (
     <Card pageTitle="Body Profile">
       <div className="px-6 py-4">
         <div className="border-2 border-gray-300 rounded-sm">
           <div className=" border-b-2 border-gray-300 flex justify-between py-1 px-2">
             <h2 className="w-11/12 text-lg font-semibold">Measurements (cm)</h2>
-            <Link to="/profile/body/edit">
+            <Link to="/profile/body-profile/edit">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 512 512"
@@ -33,7 +117,7 @@ const BodyProfile = () => {
               </svg>
             </Link>
           </div>
-          {userData.bodyProfile.map((body) => {
+          {userdata.map((body) => {
             return (
               <div className="grid grid-cols-2 gap-4 px-4 py-6" key="1">
                 <div className="border-gray-300 border-2 px-3 py-2 max-h-min">
@@ -77,10 +161,10 @@ const BodyProfile = () => {
                       Ankle:<div>{body.ankle}</div>{" "}
                     </div>
                     <div className="p-2 border-b border-gray-400 rounded">
-                      Inseam:<div>{body.inSeam}</div>{" "}
+                      Inseam:<div>{body.inseam}</div>{" "}
                     </div>
                     <div className="p-2 border-b border-gray-400 rounded">
-                      Outseam:<div>{body.outSeam}</div>{" "}
+                      Outseam:<div>{body.outseam}</div>{" "}
                     </div>
                     <div className="p-2 border-b border-gray-400 rounded">
                       Crotch Depth:<div>{body.crotchDepth}</div>{" "}
@@ -99,7 +183,8 @@ const BodyProfile = () => {
             <div className="min-h-40">
               {images.map((img, index) => {
                 return (
-                  <img key={index}
+                  <img
+                    key={index}
                     src={URL.createObjectURL(img)}
                     className="w-2/12 h-auto"
                     alt="gallery"

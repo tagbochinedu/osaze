@@ -20,8 +20,8 @@ import Dashboard from "./Pages/Dashboard/Dashboard";
 //Customer-Desktop-View
 import AccountInformation from "./Pages/Dashboard/Customer/AccountInformation/Desktop/AccountInformation";
 import DetailsEdit from "./Pages/Dashboard/Customer/AccountInformation/Desktop/DetailsEdit";
-import BodyProfile from "./Pages/Dashboard/Customer/BodyProfile/BodyProfile";
-import BodyEdit from "./Pages/Dashboard/Customer/BodyProfile/BodyEdit";
+import BodyProfile from "./Pages/Dashboard/Customer/BodyProfile/Desktop/BodyProfile";
+import BodyEdit from "./Pages/Dashboard/Customer/BodyProfile/Desktop/BodyEdit";
 import Orders from "./Pages/Dashboard/Customer/Orders/Orders";
 import PendingOrders from "./Pages/Dashboard/Customer/Orders/PendingOrders";
 import CompletedOrders from "./Pages/Dashboard/Customer/Orders/CompletedOrders";
@@ -114,7 +114,7 @@ function App() {
                 path="/profile/body-profile"
                 element={<BodyProfile />}
               />
-              <Route exact path="/profile/body/edit" element={<BodyEdit />} />
+              <Route exact path="/profile/body-profile/edit" element={<BodyEdit />} />
               <Route
                 exact
                 path="/profile/account-information/edit"

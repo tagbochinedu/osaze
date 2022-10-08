@@ -28,6 +28,23 @@ const Account = () => {
           state: response.user.userObject.state,
           city: response.user.userObject.city,
           houseAddress: response.user.userObject.houseAddress,
+          bodyProfile: response.user.bodyProfile
+          ? {
+              bust: response.user.bodyProfile.bust,
+              waist: response.user.bodyProfile.waist,
+              hip: response.user.bodyProfile.hip,
+              hipDip: response.user.bodyProfile.hipDip,
+              frontWaistLength: response.user.bodyProfile.frontWaistLength,
+              backWaistLength: response.user.bodyProfile.backWaistLength,
+              armLength: response.user.bodyProfile.armLength,
+              thigh: response.user.bodyProfile.thigh,
+              ankle: response.user.bodyProfile.ankle,
+              inseam: response.user.bodyProfile.inseam,
+              outseam: response.user.bodyProfile.outseam,
+              crotchDepth: response.user.bodyProfile.crotchDepth,
+              shoulderLength: response.user.bodyProfile.shoulderLength,
+            }
+          : null,
           sketch: response.user.businessInfo
             ? response.user.businessInfo.sketch
             : null,

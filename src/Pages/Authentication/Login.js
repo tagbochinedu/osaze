@@ -42,6 +42,23 @@ const Login = () => {
         state: response.user.userObject.state,
         city: response.user.userObject.city,
         houseAddress: response.user.userObject.houseAddress,
+        bodyProfile: response.user.bodyProfile
+          ? {
+              bust: response.user.bodyProfile.bust,
+              waist: response.user.bodyProfile.waist,
+              hip: response.user.bodyProfile.hip,
+              hipDip: response.user.bodyProfile.hipDip,
+              frontWaistLength: response.user.bodyProfile.frontWaistLength,
+              backWaistLength: response.user.bodyProfile.backWaistLength,
+              armLength: response.user.bodyProfile.armLength,
+              thigh: response.user.bodyProfile.thigh,
+              ankle: response.user.bodyProfile.ankle,
+              inseam: response.user.bodyProfile.inseam,
+              outseam: response.user.bodyProfile.outseam,
+              crotchDepth: response.user.bodyProfile.crotchDepth,
+              shoulderLength: response.user.bodyProfile.shoulderLength,
+            }
+          : null,
         sketch: response.user.businessInfo
           ? response.user.businessInfo.sketch
           : null,
@@ -79,9 +96,15 @@ const Login = () => {
       setToken(JSON.parse(accessToken));
 
       if (response.status === "success") {
-        console.log(response.status, response.token);
-        setLoading(false);
-        navigate(from, { replace: true });
+        for (const key in response.user.bodyProfile) {
+          if (response.user.bodyProfile[key] === 0) {
+            setLoading(false);
+            navigate("/profile/body-profile/edit");
+          } else {
+            setLoading(false);
+            navigate(from, { replace: true });
+          }
+        }
       } else {
         setErrMsg(response.message);
         setErr(true);
