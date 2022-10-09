@@ -182,7 +182,7 @@ function App() {
             />
             <Route exact path="/profile/body" element={<BodyProfileMobile />} />
             <Route exact path="/profile/body/edit" element={<BodyEditMobile />} />
-            <Route exact path="/profile/body/order" element={<OrdersMobile />} >
+            <Route exact path="/profile/order" element={<OrdersMobile />} >
             <Route
                   exact
                   path="/profile/order"
