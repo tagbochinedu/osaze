@@ -1,7 +1,5 @@
 import { NavLink, Outlet, Link } from "react-router-dom";
 
-import Card from "../../../../Components/UI/Card";
-
 const Orders = () => {
   return (
     <div className="w-full lg:rounded-lg shadow-md shadow-gray-200 border border-gray-400">
