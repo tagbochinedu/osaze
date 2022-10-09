@@ -16,11 +16,11 @@ const Orders = () => {
         </Link>
         <h1 className="font-bold text-xl uppercase text-black">Orders</h1>
       </div>
-      <div className="px-6 py-4 border-2 border-border-gray-300 rounded-sm my-6 mx-4 min-h-[50vh]">
+      <div className="px-3 py-4 border-2 border-border-gray-300 rounded-sm my-6 mx-4 min-h-[50vh]">
         <ul className="flex justify-center py-3">
           <li className="mx-4 font-semibold">
             <NavLink
-              to="/profile/orders/orders-pending"
+              to="/profile/order/orders-pending"
               className={({ isActive }) =>
                 isActive ? "underline py-4" : "hover:underline"
               }
@@ -30,7 +30,7 @@ const Orders = () => {
           </li>
           <li className="mx-4 font-semibold">
             <NavLink
-              to="/profile/orders/orders-complete"
+              to="/profile/order/orders-complete"
               className={({ isActive }) =>
                 isActive ? "underline py-4" : "hover:underline"
               }

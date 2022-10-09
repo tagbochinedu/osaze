@@ -213,7 +213,11 @@ const Header = () => {
                     <li className=" py-2">
                       <NavLink
                         end
-                        to="/profile"
+                        to={
+                          width > 640
+                            ? "/profile/account-information"
+                            : "/profile/account"
+                        }
                         className="flex items-center"
                         onClick={() => {
                           setAccountDropDown(false);
@@ -234,7 +238,11 @@ const Header = () => {
                     <li className="py-2">
                       <NavLink
                         end
-                        to="/profile/orders"
+                        to={
+                          width > 640
+                            ? "/profile/orders"
+                            : "/profile/order"
+                        }
                         className="flex items-center"
                         onClick={() => {
                           setAccountDropDown(false);
