@@ -55,7 +55,11 @@ const Dashboard = () => {
               </li>
               <li className="border-b border-gray-300 hover:bg-gray-100 hover:text-black hover:border-x-4 hover:text-xs">
                 <NavLink
-                  to="/profile/orders"
+                  to={
+                    width > 640
+                      ? "/profile/orders"
+                      : "/profile/order"
+                  }
                   className={({ isActive }) =>
                     isActive
                       ? "bg-gray-100 text-black border-x-4 text-xs flex justify-center md:justify-start md:items-center py-6 md:px-5"

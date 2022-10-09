@@ -190,12 +190,12 @@ function App() {
                 />
                 <Route
                   exact
-                  path="/profile/order/order-pending"
+                  path="/profile/order/orders-pending"
                   element={<PendingOrders />}
                 />
                 <Route
                   exact
-                  path="/profile/order/order-complete"
+                  path="/profile/order/orders-complete"
                   element={<CompletedOrders />}
                 />
             </Route>
