@@ -1,24 +1,47 @@
-import { useEffect } from "react";
-
-import { useAuth } from "../../../../Context/AuthenticationContext";
-
-import { useModalAuth } from "../../../../Context/ModalContext";
+import { useEffect, useState } from "react";
+import { useAuth } from "../../../../../Context/AuthenticationContext";
+import { useModalAuth } from "../../../../../Context/ModalContext";
 
 const CompletedOrders = () => {
   const { setReviewModal } = useModalAuth();
-  const { userData } = useAuth();
+  const { token } = useAuth();
+  const [completedOrders, setCompletedOrders] = useState([]);
+
   useEffect(() => {
-    console.log(userData);
-  }, [userData]);
+    const fetchHandler = async () => {
+      try {
+        const request = await fetch(
+          "https://osazebackendapi.herokuapp.com/api/customer/allorders",
+          {
+            method: "GET",
+            headers: {
+              "Content-type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        const response = await request.json();
+        if (response.status === "success") {
+          const completed = response.allOrders.filter((order) => {
+            return order.status === "completed";
+          });
+          setCompletedOrders(completed);
+        }
+      } catch (error) {
+        console.log(error.message);
+      }
+    };
+    fetchHandler();
+  }, [token]);
 
   return (
     <div className="min-h-[45vh] flex justify-center items-center text-gray-300 text-xl animate-pulse">
-      {userData.orders.length === 0 ? (
+      {completedOrders.length === 0 ? (
         <div>
           <p>No orders have been completed</p>
         </div>
       ) : (
-        userData.orders.map((order) => {
+        completedOrders.map((order) => {
           return (
             <div
               key={order.id}

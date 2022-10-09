@@ -22,9 +22,9 @@ import AccountInformation from "./Pages/Dashboard/Customer/AccountInformation/De
 import AccountEdit from "./Pages/Dashboard/Customer/AccountInformation/Desktop/AccountEdit";
 import BodyProfile from "./Pages/Dashboard/Customer/BodyProfile/Desktop/BodyProfile";
 import BodyEdit from "./Pages/Dashboard/Customer/BodyProfile/Desktop/BodyEdit";
-import Orders from "./Pages/Dashboard/Customer/Orders/Orders";
-import PendingOrders from "./Pages/Dashboard/Customer/Orders/PendingOrders";
-import CompletedOrders from "./Pages/Dashboard/Customer/Orders/CompletedOrders";
+import Orders from "./Pages/Dashboard/Customer/Orders/Desktop/Orders";
+import PendingOrders from "./Pages/Dashboard/Customer/Orders/Desktop/PendingOrders";
+import CompletedOrders from "./Pages/Dashboard/Customer/Orders/Desktop/CompletedOrders";
 import Inbox from "./Pages/Dashboard/Customer/Inbox";
 
 //Customer-Mobile-View
@@ -32,6 +32,7 @@ import AccountInformationMobile from "./Pages/Dashboard/Customer/AccountInformat
 import AccountEditMobile from "./Pages/Dashboard/Customer/AccountInformation/Mobile/AccountEdit";
 import BodyProfileMobile from "./Pages/Dashboard/Customer/BodyProfile/Mobile/BodyProfile";
 import BodyEditMobile from "./Pages/Dashboard/Customer/BodyProfile/Mobile/BodyEdit";
+import OrdersMobile from "./Pages/Dashboard/Customer/Orders/Mobile/OrdersMobile";
 
 //Designer-Desktop-View
 import Designer from "./Pages/Dashboard/Designer/DesignerDetails/Desktop/Designer";
@@ -181,6 +182,23 @@ function App() {
             />
             <Route exact path="/profile/body" element={<BodyProfileMobile />} />
             <Route exact path="/profile/body/edit" element={<BodyEditMobile />} />
+            <Route exact path="/profile/body/order" element={<OrdersMobile />} >
+            <Route
+                  exact
+                  path="/profile/order"
+                  element={<Navigate to="/profile/order/orders-pending" />}
+                />
+                <Route
+                  exact
+                  path="/profile/order/order-pending"
+                  element={<PendingOrders />}
+                />
+                <Route
+                  exact
+                  path="/profile/order/order-complete"
+                  element={<CompletedOrders />}
+                />
+            </Route>
           </Route>
           <Route element={<AuthorizedRoute allowedRole="designer" />}>
             <Route exact path="/profile/designers" element={<Designers />} />

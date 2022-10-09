@@ -88,7 +88,6 @@ const Login = () => {
           : null,
         url: response.user.businessInfo ? response.user.businessInfo.url : null,
         cart: response.user.cart ? response.user.cart : null,
-        orders: response.user.orders ? response.user.orders : null,
         messages: response.user.messages ? response.user.messages : null,
         role: response.user.userObject.role,
         id: response.user.userId,

@@ -1,21 +1,47 @@
-
-
-import { useAuth } from "../../../../Context/AuthenticationContext";
-
-import { useModalAuth } from "../../../../Context/ModalContext";
+import {useState, useEffect} from 'react';
+import { useAuth } from "../../../../../Context/AuthenticationContext";
+import { useModalAuth } from "../../../../../Context/ModalContext";
 
 const PendingOrders = () => {
   const { setStatusModal } = useModalAuth();
-  const { userData } = useAuth();
+  const { token } = useAuth();
+  const [pendingOrders, setPendingOrders] = useState([]);
+
+  useEffect(() => {
+    const fetchHandler = async () => {
+      try {
+        const request = await fetch(
+          "https://osazebackendapi.herokuapp.com/api/customer/allorders",
+          {
+            method: "GET",
+            headers: {
+              "Content-type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        const response = await request.json();
+        if (response.status === "success") {
+          const pending = response.allOrders.filter((order) => {
+            return order.status === "pending";
+          });
+          setPendingOrders(pending);
+        }
+      } catch (error) {
+        console.log(error.message);
+      }
+    };
+    fetchHandler();
+  }, [token]);
  
   return (
     <div className="min-h-[45vh] flex justify-center items-center text-gray-300 text-xl animate-pulse">
-      {userData.orders.length === 0 ? (
+      {pendingOrders.length === 0 ? (
         <div>
           <p>No orders have been placed</p>
         </div>
       ) : (
-        userData.orders.map((order) => {
+        pendingOrders.map((order) => {
           return (
             <div
               key={order.id}
