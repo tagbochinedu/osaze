@@ -21,57 +21,57 @@ const Dashboard = () => {
         <ul className="md:text-sm lg:text-md">
           {userData.role === "customer" && (
             <>
-              <li className=" border-b border-gray-300 hover:bg-gray-100 hover:text-black hover:border-x-4 hover:text-sm">
+              <li className=" border-b border-gray-300 hover:bg-gray-100 hover:text-black hover:border-x-4 hover:text-xs">
                 <NavLink
                   to={
-                    width > 400
+                    width > 640
                       ? "/profile/account-information"
                       : "/profile/account"
                   }
                   className={({ isActive }) =>
                     isActive
-                      ? "bg-gray-100 text-black border-x-4 text-sm flex justify-center md:justify-start md:items-center py-6 md:px-5"
-                      : "flex justify-center md:justify-start md:items-center py-6 md:px-5"
+                      ? "bg-gray-100 text-black border-x-4 text-xs flex justify-center md:justify-start md:items-center py-6 md:px-5"
+                      : "flex justify-center md:justify-start md:items-center py-6 md:px-5 text-sm"
                   }
                 >
                   Account Information
                 </NavLink>
               </li>
-              <li className="border-b border-gray-300 hover:bg-gray-100 hover:text-black hover:border-x-4 hover:text-sm">
+              <li className="border-b border-gray-300 hover:bg-gray-100 hover:text-black hover:border-x-4 hover:text-xs">
                 <NavLink
                   to={
-                    width > 400
+                    width > 640
                       ? "/profile/body-profile"
                       : "/profile/body"
                   }
                   className={({ isActive }) =>
                     isActive
-                      ? "bg-gray-100 text-black border-x-4 text-sm flex justify-center md:justify-start md:items-center py-6 md:px-5"
-                      : "flex justify-center md:justify-start md:items-center py-6 md:px-5"
+                      ? "bg-gray-100 text-black border-x-4 text-xs flex justify-center md:justify-start md:items-center py-6 md:px-5"
+                      : "flex justify-center md:justify-start md:items-center py-6 md:px-5 text-sm"
                   }
                 >
                   Body Profile
                 </NavLink>
               </li>
-              <li className="border-b border-gray-300 hover:bg-gray-100 hover:text-black hover:border-x-4 hover:text-sm">
+              <li className="border-b border-gray-300 hover:bg-gray-100 hover:text-black hover:border-x-4 hover:text-xs">
                 <NavLink
                   to="/profile/orders"
                   className={({ isActive }) =>
                     isActive
-                      ? "bg-gray-100 text-black border-x-4 text-sm flex justify-center md:justify-start md:items-center py-6 md:px-5"
-                      : "flex justify-center md:justify-start md:items-center py-6 md:px-5"
+                      ? "bg-gray-100 text-black border-x-4 text-xs flex justify-center md:justify-start md:items-center py-6 md:px-5"
+                      : "flex justify-center md:justify-start md:items-center py-6 md:px-5 text-sm"
                   }
                 >
                   Orders
                 </NavLink>
               </li>
-              <li className="border-b border-gray-300 hover:bg-gray-100 hover:text-black hover:border-x-4 hover:text-sm">
+              <li className="border-b border-gray-300 hover:bg-gray-100 hover:text-black hover:border-x-4 hover:text-xs">
                 <NavLink
                   to="/profile/inbox"
                   className={({ isActive }) =>
                     isActive
-                      ? "bg-gray-100 text-black border-x-4 text-sm flex justify-center md:justify-start md:items-center py-6 md:px-5"
-                      : "flex justify-center md:justify-start md:items-center py-6 md:px-5"
+                      ? "bg-gray-100 text-black border-x-4 text-xs flex justify-center md:justify-start md:items-center py-6 md:px-5"
+                      : "flex justify-center md:justify-start md:items-center py-6 md:px-5 text-sm"
                   }
                 >
                   Inbox
@@ -81,37 +81,37 @@ const Dashboard = () => {
           )}
           {userData.role === "designer" && (
             <>
-              <li className="border-b border-gray-300 hover:bg-gray-100 hover:text-black hover:border-x-4 hover:text-sm">
+              <li className="border-b border-gray-300 hover:bg-gray-100 hover:text-black hover:border-x-4 hover:text-xs">
                 <NavLink
-                  to={width > 400 ? "/profile/designer" : "/profile/designers"}
+                  to={width > 640 ? "/profile/designer" : "/profile/designers"}
                   className={({ isActive }) =>
                     isActive
-                      ? "bg-gray-100 text-black border-x-4 text-sm flex justify-center md:justify-start md:items-center py-6 md:px-5"
-                      : "flex justify-center md:justify-start md:items-center py-6 md:px-5"
+                      ? "bg-gray-100 text-black border-x-4 text-xs flex justify-center md:justify-start md:items-center py-6 md:px-5"
+                      : "flex justify-center md:justify-start md:items-center py-6 md:px-5 text-sm"
                   }
                 >
                   Designer
                 </NavLink>
               </li>
-              <li className="border-b border-gray-300 hover:bg-gray-100 hover:text-black hover:border-x-4 hover:text-sm">
+              <li className="border-b border-gray-300 hover:bg-gray-100 hover:text-black hover:border-x-4 hover:text-xs">
                 <NavLink
-                  to={width > 400 ? "/profile/designer-product-upload" : "/profile/designers-product-upload"}
+                  to={width > 640 ? "/profile/designer-product-upload" : "/profile/designers-product-upload"}
                   className={({ isActive }) =>
                     isActive
-                      ? "bg-gray-100 text-black border-x-4 text-sm flex justify-center md:justify-start md:items-center py-6 md:px-5"
-                      : "flex justify-center md:justify-start md:items-center py-6 md:px-5"
+                      ? "bg-gray-100 text-black border-x-4 text-xs flex justify-center md:justify-start md:items-center py-6 md:px-5"
+                      : "flex justify-center md:justify-start md:items-center py-6 md:px-5 text-sm"
                   }
                 >
                   Product Upload
                 </NavLink>
               </li>
-              <li className="border-b border-gray-300 hover:bg-gray-100 hover:text-black hover:border-x-4 hover:text-sm">
+              <li className="border-b border-gray-300 hover:bg-gray-100 hover:text-black hover:border-x-4 hover:text-xs">
                 <NavLink
                   to="/profile/designer-orders"
                   className={({ isActive }) =>
                     isActive
-                      ? "bg-gray-100 text-black border-x-4 text-sm flex justify-center md:justify-start md:items-center py-6 md:px-5"
-                      : "flex justify-center md:justify-start md:items-center py-6 md:px-5"
+                      ? "bg-gray-100 text-black border-x-4 text-xs flex justify-center md:justify-start md:items-center py-6 md:px-5"
+                      : "flex justify-center md:justify-start md:items-center py-6 md:px-5 text-sm"
                   }
                 >
                   Designer Orders

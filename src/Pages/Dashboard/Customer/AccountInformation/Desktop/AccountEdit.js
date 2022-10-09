@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import useFetch from "../../../../../CustomHooks/useFetch";
 import { useAuth } from "../../../../../Context/AuthenticationContext";
+import Card from "../../../../../Components/UI/Card"
 
 
 const DetailsEdit = () => {
@@ -55,22 +56,7 @@ const DetailsEdit = () => {
   };
 
   return (
-    <div className="w-full lg:rounded-lg shadow-md shadow-gray-200 border border-gray-400">
-    <div className="flex justify-start items-center py-4 px-6 border-b border-gray-400 ">
-      <Link to="/profile">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 448 512"
-          fill="currentColor"
-          className="w-5 h-5 mr-3"
-        >
-          <path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z" />
-        </svg>
-      </Link>
-      <h1 className="font-bold text-xl uppercase text-black">
-       Edit Details
-      </h1>
-    </div>
+    <Card className="" pageTitle="Edit Details">
       <form className=" px-6 py-10 relative h-full" onSubmit={submitHander}>
         <div className="grid grid-cols-2 gap-6 mb-10">
           <div className="relative z-0">
@@ -225,7 +211,7 @@ const DetailsEdit = () => {
           )}
         </button>
       </form>
-    </div>
+    </Card>
   );
 };
 

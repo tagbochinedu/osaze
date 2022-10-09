@@ -105,10 +105,10 @@ const Login = () => {
 
       if (response.status === "success") {
         for (const key in response.user.bodyProfile) {
-          if (response.user.bodyProfile[key] === 0 && width > 400) {
+          if (response.user.bodyProfile[key] === 0 && width > 500) {
             setLoading(false);
             navigate("/profile/body-profile/edit");
-          } else if (response.user.bodyProfile[key] === 0 && width < 400) {
+          } else if (response.user.bodyProfile[key] === 0 && width < 500) {
             setLoading(false);
             navigate("/profile/body/edit");
           } else {

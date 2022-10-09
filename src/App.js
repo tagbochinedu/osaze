@@ -63,7 +63,7 @@ function App() {
   const { imageFullScreen } = useImageAuth();
 
   return (
-    <>
+    <div className='max-w-7xl mx-auto'>
       <Header />
       <div className="relative">
         {(reviewModal || statusModal || imageFullScreen) && (
@@ -209,7 +209,7 @@ function App() {
         <Route path="/403" element={<Unauthorized />} />
       </Routes>
       <Footer />
-    </>
+    </div>
   );
 }
 
