@@ -64,7 +64,7 @@ function App() {
   const { imageFullScreen } = useImageAuth();
 
   return (
-    <div className='max-w-7xl mx-auto'>
+    <div className='max-w-[1400px] mx-auto'>
       <Header />
       <div className="relative">
         {(reviewModal || statusModal || imageFullScreen) && (
