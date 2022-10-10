@@ -5,12 +5,13 @@ import { ImageGrid } from "../../../Resources/Image";
 const MaleProductItems = () => {
   const params = useParams();
   const [customizable, setCustomizable] = useState(false);
-  const [selected, setSelected] = useState("");
+  const [selectedFabric, setSelectedFabric] = useState("");
   const [size, setSize] = useState("");
-  const [custom, setCustom] = useState({});
+  const [custom, setCustom] = useState("");
   const [customDesign, setCustomDesign] = useState("not customized");
   const [fabric, setFabric] = useState("not customized");
   const [qty, setQty] = useState();
+  const [menProductItem, setMenProductItem] = useState([]);
   const [cartItem, setCartItem] = useState({
     ItemDesigner: "",
     itemName: "",
@@ -19,10 +20,9 @@ const MaleProductItems = () => {
     fabric: "",
     qty: 0,
     size: "",
-    custom: {},
+    custom: "",
   });
 
-  const [menProductItem, setMenProductItem] = useState([]);
   useEffect(() => {
     setMenProductItem(
       ImageGrid.filter((item) => {
@@ -30,9 +30,6 @@ const MaleProductItems = () => {
       })
     );
   }, [params.id]);
-  useEffect(() => {
-    console.log(cartItem);
-  }, [cartItem]);
 
   const sizeChangeHandler = (e) => {
     if (e.target.value === "custom") {
@@ -57,29 +54,30 @@ const MaleProductItems = () => {
       size: size,
       custom: custom,
     });
+    console.log(cartItem)
   };
 
   return (
-    <div className="px-6 py-4 bg-black text-white font-merri">
+    <div className="px-2 py-4 bg-black text-white font-merri">
       {menProductItem.map((menItem) => {
         return (
           <div key={menItem.id}>
-            <h1 className="text-lg font-semibold mb-6 ml-20">
+            <h1 className="text-lg font-semibold mb-1.5 px-3 lg:px-8">
               <Link to="/men" className="hover:underline">
                 Men
               </Link>
               {">"}
               {menItem.name}
             </h1>
-            <div className="flex justify-evenly">
-              <div className="w-5/12">
+            <div className="md:flex justify-between px-3 lg:px-8">
+              <div className="md:w-5/12 mb-3 md:mb-0">
                 <img
                   className="w-full h-auto"
                   src={menItem.url}
                   alt={menItem.name}
                 />
               </div>{" "}
-              <div className="w-5/12">
+              <div className="md:w-5/12">
                 <h1 className="text-4xl font-semibold mb-5">{menItem.name}</h1>
                 <p className="text-2xl my-4">{menItem.price}</p>
                 <p className="text-xl font-semibold min-h-[250px] my-4">
@@ -119,7 +117,18 @@ const MaleProductItems = () => {
                   />
                 </div>
 
-                <div>Click <span onClick={()=>{setCustomizable(!customizable)}} className='font-semibold cursor-pointer'>HERE</span> to customize</div>
+                <div>
+                  Click{" "}
+                  <span
+                    onClick={() => {
+                      setCustomizable(!customizable);
+                    }}
+                    className="font-semibold cursor-pointer"
+                  >
+                    HERE
+                  </span>{" "}
+                  to customize
+                </div>
                 {customizable ? (
                   <>
                     <select
@@ -163,7 +172,7 @@ const MaleProductItems = () => {
                                 id={fabric}
                                 required
                                 onChange={() => {
-                                  setSelected(fabric);
+                                  setSelectedFabric(fabric);
                                   setFabric(fabric);
                                 }}
                               />
@@ -171,7 +180,7 @@ const MaleProductItems = () => {
                                 src={fabric}
                                 alt="fabrics"
                                 className={`${"w-16 h-16 rounded-full"} ${
-                                  selected === fabric
+                                  selectedFabric === fabric
                                     ? "border-2 border-header"
                                     : ""
                                 }`}
@@ -185,7 +194,6 @@ const MaleProductItems = () => {
                 ) : (
                   <div></div>
                 )}
-                
 
                 <button
                   className="bg-white text-black text-md w-full hover:bg-inherit hover:outline hover:outline-white  hover:text-white transitin-all ease-in-out duration-500 font-semibold mt-6 px-2 py-2 uppercase"
