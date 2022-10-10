@@ -39,15 +39,16 @@ import Designer from "./Pages/Dashboard/Designer/DesignerDetails/Desktop/Designe
 import DesignerAccountDetailsEdit from "./Pages/Dashboard/Designer/DesignerDetails/Desktop/DesignerAccountDetailsEdit";
 import DesignerBusinessDetailsEdit from "./Pages/Dashboard/Designer/DesignerDetails/Desktop/DesignerBusinessDetailsEdit";
 import DesignerProductUpload from "./Pages/Dashboard/Designer/DesignerProductUpload/Desktop/DesignerProductUpload";
-import DesignerOrders from "./Pages/Dashboard/Designer/Orders/DesignerOrders";
-import OpenOrders from "./Pages/Dashboard/Designer/Orders/OpenOrders";
-import FinishedOrders from "./Pages/Dashboard/Designer/Orders/FinishedOrders";
+import DesignerOrders from "./Pages/Dashboard/Designer/Orders/Desktop/DesignerOrders";
+import OpenOrders from "./Pages/Dashboard/Designer/Orders/Desktop/OpenOrders";
+import ClosedOrders from "./Pages/Dashboard/Designer/Orders/Desktop/ClosedOrders";
 
 //Designer-Mobile-view
-import Designers from "./Pages/Dashboard/Designer/DesignerDetails/Mobile/Designer";
-import DesignersAccountDetailsEdit from "./Pages/Dashboard/Designer/DesignerDetails/Mobile/DesignerAccountDetailsEdit";
-import DesignersBusinessDetailsEdit from "./Pages/Dashboard/Designer/DesignerDetails/Mobile/DesignerBusinessDetailsEdit";
-import DesignersProductUpload from "./Pages/Dashboard/Designer/DesignerProductUpload/Mobile/DesignerProductUpload";
+import DesignerMobile from "./Pages/Dashboard/Designer/DesignerDetails/Mobile/DesignerMobile";
+import DesignerAccountDetailsEditMobile from "./Pages/Dashboard/Designer/DesignerDetails/Mobile/DesignerAccountDetailsEditMobile";
+import DesignerBusinessDetailsEditMobile from "./Pages/Dashboard/Designer/DesignerDetails/Mobile/DesignerBusinessDetailsEditMobile";
+import DesignerProductUploadMobile from "./Pages/Dashboard/Designer/DesignerProductUpload/Mobile/DesignerProductUploadMobile";
+import DesignerOrdersMobile from "./Pages/Dashboard/Designer/Orders/Mobile/DesignerOrdersMobile";
 
 import DesignersOnly from "./Pages/DesignersOnly";
 import DesignerSignup from "./Pages/Authentication/DesignerSignup";
@@ -161,7 +162,7 @@ function App() {
                 <Route
                   exact
                   path="/profile/designer-orders/finished-orders"
-                  element={<FinishedOrders />}
+                  element={<ClosedOrders />}
                 />
               </Route>
             </Route>
@@ -201,22 +202,45 @@ function App() {
             </Route>
           </Route>
           <Route element={<AuthorizedRoute allowedRole="designer" />}>
-            <Route exact path="/profile/designers" element={<Designers />} />
+            <Route exact path="/profile/designers" element={<DesignerMobile />} />
             <Route
               exact
               path="/profile/designers-account-details-edit"
-              element={<DesignersAccountDetailsEdit />}
+              element={<DesignerAccountDetailsEditMobile />}
             />
             <Route
               exact
               path="/profile/designers-business-details-edit"
-              element={<DesignersBusinessDetailsEdit />}
+              element={<DesignerBusinessDetailsEditMobile />}
             />
             <Route
               exact
               path="/profile/designers-product-upload"
-              element={<DesignersProductUpload />}
+              element={<DesignerProductUploadMobile />}
             />
+            <Route
+                exact
+                path="/profile/designers-orders"
+                element={<DesignerOrdersMobile />}
+              >
+                <Route
+                  exact
+                  path="/profile/designers-orders"
+                  element={
+                    <Navigate to="/profile/designers-orders/open-orders" />
+                  }
+                />
+                <Route
+                  exact
+                  path="/profile/designers-orders/open-orders"
+                  element={<OpenOrders />}
+                />
+                <Route
+                  exact
+                  path="/profile/designers-orders/finished-orders"
+                  element={<ClosedOrders />}
+                />
+              </Route>
           </Route>
         </Route>
         <Route exact path="/men" element={<MaleProducts />} />

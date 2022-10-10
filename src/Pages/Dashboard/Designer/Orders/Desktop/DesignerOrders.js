@@ -1,6 +1,6 @@
 import { NavLink, Outlet } from "react-router-dom";
 
-import Card from "../../../../Components/UI/Card";
+import Card from "../../../../../Components/UI/Card";
 
 const Orders = () => {
   return (
