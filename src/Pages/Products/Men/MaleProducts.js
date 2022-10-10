@@ -543,7 +543,7 @@ const MaleProducts = () => {
           <div className="flex justify-center my-2">
             <h1 className="text-2xl font-julius font-semibold">Men's Page</h1>
           </div>
-          <div className=" justify-items-center text-white grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-y-4 px-2 py-4 mb-10">
+          <div className=" justify-items-center text-white grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 px-2 py-4 mb-10">
             {" "}
             {currentItems.map((gridImage) => {
               return (
