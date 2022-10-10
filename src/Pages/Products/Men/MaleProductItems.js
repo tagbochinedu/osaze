@@ -1,8 +1,12 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { ImageGrid } from "../../../Resources/Image";
+import useFetch from "../../../CustomHooks/useFetch";
+import { useAuth } from "../../../Context/AuthenticationContext";
 
 const MaleProductItems = () => {
+  const fetchHandler = useFetch();
+  const { userData, token } = useAuth();
   const params = useParams();
   const [customizable, setCustomizable] = useState(false);
   const [selectedFabric, setSelectedFabric] = useState("");
@@ -12,16 +16,6 @@ const MaleProductItems = () => {
   const [fabric, setFabric] = useState("not customized");
   const [qty, setQty] = useState();
   const [menProductItem, setMenProductItem] = useState([]);
-  const [cartItem, setCartItem] = useState({
-    ItemDesigner: "",
-    itemName: "",
-    itemPrice: "",
-    customDesign: "",
-    fabric: "",
-    qty: 0,
-    size: "",
-    custom: "",
-  });
 
   useEffect(() => {
     setMenProductItem(
@@ -32,19 +26,19 @@ const MaleProductItems = () => {
   }, [params.id]);
 
   const sizeChangeHandler = (e) => {
-    if (e.target.value === "custom") {
-      setCustom();
+    if (e.target.value === "Custom") {
+      setCustom(userData.bodyProfile);
       setSize("Custom measurements are used");
     } else {
-      setCustom("Standard measurements are used");
+      setCustom({ message: "Standard measurements are used" });
       setSize(e.target.value);
     }
   };
 
   //Add-to-Cart Functionality
-  const cartHandler = () => {
-    setCartItem({
-      ItemDesigner: menProductItem.designer,
+  const cartHandler = async () => {
+    const cartItem = {
+      designer: menProductItem.designer,
       name: menProductItem.name,
       image: "",
       price: menProductItem.price,
@@ -53,8 +47,24 @@ const MaleProductItems = () => {
       qty: qty,
       size: size,
       custom: custom,
-    });
-    console.log(cartItem)
+    };
+    console.log(userData.bodyProfile)
+    try {
+      const endpoint =
+        "https://osazebackendapi.herokuapp.com/api/customer/cart/add";
+      const requestConfiguration = {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: cartItem,
+      };
+      const response = await fetchHandler(endpoint, requestConfiguration);
+      console.log(response);
+    } catch (err) {
+      console.log(err.message);
+    }
   };
 
   return (
@@ -112,7 +122,7 @@ const MaleProductItems = () => {
                     min="1"
                     className="border border-white bg-black text-white text-center h-12 w-24"
                     onChange={(e) => {
-                      setQty(e.target.value);
+                      setQty(parseInt(e.target.value));
                     }}
                   />
                 </div>
@@ -129,7 +139,7 @@ const MaleProductItems = () => {
                   </span>{" "}
                   to customize
                 </div>
-                {customizable ? (
+                {customizable && (
                   <>
                     <select
                       className="bg-black outline outline-white w-full h-12 text-xl my-4"
@@ -191,10 +201,7 @@ const MaleProductItems = () => {
                       </div>
                     </div>
                   </>
-                ) : (
-                  <div></div>
                 )}
-
                 <button
                   className="bg-white text-black text-md w-full hover:bg-inherit hover:outline hover:outline-white  hover:text-white transitin-all ease-in-out duration-500 font-semibold mt-6 px-2 py-2 uppercase"
                   onClick={cartHandler}
