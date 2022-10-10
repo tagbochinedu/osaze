@@ -4,7 +4,7 @@ const Orders = () => {
   return (
     <div className="w-full lg:rounded-lg shadow-md shadow-gray-200 border border-gray-400">
       <div className="flex justify-start items-center py-4 px-6 border-b border-gray-400 ">
-        <Link to="/profile">
+        <Link to="/profile/designer">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 448 512"
