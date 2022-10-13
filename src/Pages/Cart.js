@@ -132,7 +132,7 @@ const Cart = () => {
                 <div className='w-2/12'>
                   
                 </div>
-                <div className='w-7/12'><h1></h1></div>
+                <div className='w-7/12'><h1>hello</h1></div>
                 <div className='w-3/12'></div>
               </div>
             );
