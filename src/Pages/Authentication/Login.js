@@ -120,7 +120,7 @@ const Login = () => {
         }
       } else if (
         response.status === "success" &&
-        response.user.userObject.role === "designerer"
+        response.user.userObject.role === "designer"
       ) {
         setLoading(false);
         navigate(from, { replace: true });
