@@ -1,21 +1,96 @@
 import { useState, useEffect } from "react";
-
 import { Link } from "react-router-dom";
+import { useAuth } from "../Context/AuthenticationContext";
 
 const Cart = () => {
-  const [cart, setCart] = useState([]);
+  const { userData, setUserData, token } = useAuth();
   const [cartEmpty, setCartEmpty] = useState(true);
-  const [cartNumber, setCartNumber] = useState(0);
+  const [cartNumber] = useState(userData.cart.length);
 
   useEffect(() => {
-    if (cart.length > 0) {
-      setCartEmpty(false);
-      setCartNumber(cart.length);
-      console.log(cart.length)
-    }
-    //just to keep the setCart out of the terminal warnings. Remove once buttons are added
-    setCart(cart)
-  }, [cart]);
+    const fetchHandler = async () => {
+      try {
+        const request = await fetch(
+          "https://osazebackendapi.herokuapp.com/api/customer/getprofile",
+          {
+            method: "GET",
+            headers: {
+              "Content-type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        const response = await request.json();
+        const userObject = {
+          firstName: response.user.userObject.firstName,
+          lastName: response.user.userObject.lastName,
+          email: response.user.userObject.email,
+          phoneNumber: response.user.userObject.phoneNumber,
+          country: response.user.userObject.country,
+          state: response.user.userObject.state,
+          city: response.user.userObject.city,
+          houseAddress: response.user.userObject.houseAddress,
+          bodyProfile: response.user.bodyProfile
+            ? {
+                bust: response.user.bodyProfile.bust,
+                waist: response.user.bodyProfile.waist,
+                hip: response.user.bodyProfile.hip,
+                hipDip: response.user.bodyProfile.hipDip,
+                frontWaistLength: response.user.bodyProfile.frontWaistLength,
+                backWaistLength: response.user.bodyProfile.backWaistLength,
+                armLength: response.user.bodyProfile.armLength,
+                thigh: response.user.bodyProfile.thigh,
+                ankle: response.user.bodyProfile.ankle,
+                inseam: response.user.bodyProfile.inseam,
+                outseam: response.user.bodyProfile.outseam,
+                crotchDepth: response.user.bodyProfile.crotchDepth,
+                shoulderLength: response.user.bodyProfile.shoulderLength,
+              }
+            : null,
+          sketch: response.user.businessInfo
+            ? response.user.businessInfo.sketch
+            : null,
+          sketchSkill: response.user.businessInfo
+            ? response.user.businessInfo.sketchSkill
+            : null,
+          sew: response.user.businessInfo
+            ? response.user.businessInfo.sew
+            : null,
+          sewSkill: response.user.businessInfo
+            ? response.user.businessInfo.sewSkill
+            : null,
+          brandName: response.user.businessInfo
+            ? response.user.businessInfo.brandName
+            : null,
+          brandLocation: response.user.businessInfo
+            ? response.user.businessInfo.brandLocation
+            : null,
+          brandInfo: response.user.businessInfo
+            ? response.user.businessInfo.brandInfo
+            : null,
+          url: response.user.businessInfo
+            ? response.user.businessInfo.url
+            : null,
+          cart: response.user.cart ? response.user.cart : null,
+          messages: response.user.messages ? response.user.messages : null,
+          role: response.user.userObject.role,
+          id: response.user.userId,
+        };
+
+        let newData = JSON.stringify(userObject);
+        localStorage.setItem("osazeUserObject", newData);
+        const userData = localStorage.getItem("osazeUserObject");
+        setUserData(JSON.parse(userData));
+
+        if (cartNumber > 0) {
+          setCartEmpty(false);
+        }
+      } catch (error) {
+        console.log(error.message);
+      }
+    };
+    fetchHandler();
+  }, [token, setUserData, cartNumber]);
 
   return (
     <>
@@ -51,10 +126,14 @@ const Cart = () => {
             </Link>
           </div>
         ) : (
-          cart.map((cartItems) => {
+          userData.cart.map((cartItem) => {
             return (
-              <div className="">
-                {cartItems}
+              <div className="flex justify-between" key={cartItem.id}>
+                <div className='w-2/12'>
+                  
+                </div>
+                <div className='w-7/12'><h1></h1></div>
+                <div className='w-3/12'></div>
               </div>
             );
           })

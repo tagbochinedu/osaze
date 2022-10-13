@@ -92,7 +92,7 @@ const Login = () => {
         role: response.user.userObject.role,
         id: response.user.userId,
       };
-      console.log(userObject, response);
+      console.log(response);
 
       localStorage.setItem("osazeUserObject", JSON.stringify(userObject));
       const userData = localStorage.getItem("osazeUserObject");
@@ -102,7 +102,10 @@ const Login = () => {
       const accessToken = localStorage.getItem("token");
       setToken(JSON.parse(accessToken));
 
-      if (response.status === "success") {
+      if (
+        response.status === "success" &&
+        response.user.userObject.role === "customer"
+      ) {
         for (const key in response.user.bodyProfile) {
           if (response.user.bodyProfile[key] === 0 && width > 500) {
             setLoading(false);
@@ -115,6 +118,12 @@ const Login = () => {
             navigate(from, { replace: true });
           }
         }
+      } else if (
+        response.status === "success" &&
+        response.user.userObject.role === "designerer"
+      ) {
+        setLoading(false);
+        navigate(from, { replace: true });
       } else {
         setErrMsg(response.message);
         setErr(true);

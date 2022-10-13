@@ -19,6 +19,7 @@ const DesignerProductUpload = () => {
   const [customization, setCustomization] = useState([]);
   const [sizes, setSizes] = useState([]);
   const [category, setCategory] = useState("");
+  const [subCategory, setSubCategory] = useState("");
   const [image, setImage] = useState("");
   const [imageValue, setImageValue] = useState("");
   const [imageValue2, setImageValue2] = useState("");
@@ -72,15 +73,16 @@ const DesignerProductUpload = () => {
     formData.append("image", image);
     formData.append("customization", customization);
     formData.append("category", category);
+    formData.append("subCategory", subCategory);
     formData.append("sizes", sizes);
     fabricArray.forEach((fabric) => {
       formData.append("fabrics", fabric);
     });
     try {
       const endpoint =
-        "https://osazeapi.herokuapp.com/api/designer/updatebusinessinfo";
+        "https://osazeapi.herokuapp.com/api/designer/createproduct";
       const requestConfiguration = {
-        method: "PATCH",
+        method: "POST",
         headers: {
           "Content-type": "application/json",
           Authorization: `Bearer ${token}`,
@@ -118,6 +120,7 @@ const DesignerProductUpload = () => {
     setCustomChecked6(false);
     setCustomChecked7(false);
     setCategory("");
+    setSubCategory("");
   };
   return (
     <Card pageTitle="Product Uploader">
@@ -220,10 +223,10 @@ const DesignerProductUpload = () => {
                   </label>
                 </div>
                 <div className="flex justify-between mb-6">
-                  <div className="relative z-0 mb-2 flex w-6/12 ml-3">
+                  <div className="relative z-0 mb-2 flex items-end w-5/12">
                     <input
                       type="file"
-                      className="block py-2.5 px-0 w-10/12 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-header peer"
+                      className="block px-0 w-10/12 text-sm h-8 text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-header peer"
                       placeholder=" "
                       accept=".jpeg,.jpg,.png"
                       value={imageValue}
@@ -250,6 +253,45 @@ const DesignerProductUpload = () => {
                     >
                       ADD
                     </button>
+                  </div>
+                  <div className="w-6/12">
+                    <select
+                      className="border-2 border-gray-300 w-full h-12 text-sm text-gray-500 my-4"
+                      onChange={(e) => {
+                        setSubCategory(e.target.value);
+                      }}
+                    >
+                      <option className="h-6" defaultValue disabled>
+                        Sub Category
+                      </option>
+                      <option className="h-6" value="Button-Down Shirts">
+                        Button-Down Shirts
+                      </option>
+                      <option className="h-6" value="Suits">
+                        Suits
+                      </option>
+                      <option className="h-6" value="Trousers">
+                        Trousers
+                      </option>
+                      <option className="h-6" value="Gowns">
+                        Gowns
+                      </option>
+                      <option className="h-6" value="Shorts">
+                        Shorts
+                      </option>
+                      <option className="h-6" value="Skirts">
+                        Skirts
+                      </option>
+                      <option className="h-6" value="Blouse">
+                        Blouse
+                      </option>
+                      <option className="h-6" value="Two Piece">
+                        Two Piece
+                      </option>
+                      <option className="h-6" value="Traditional Wears">
+                        Traditional Wears
+                      </option>
+                    </select>
                   </div>
                 </div>
                 <div className="mb-8">

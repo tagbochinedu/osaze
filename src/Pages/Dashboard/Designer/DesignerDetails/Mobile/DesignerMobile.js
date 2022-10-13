@@ -60,7 +60,7 @@ const Designer = () => {
           id: response.user.userId,
         };
 
-        let newData = localStorage.getItem("osazeUserObjecct");
+        let newData = localStorage.getItem("osazeUserObject");
         newData = JSON.stringify(userObject);
         localStorage.setItem("osazeUserObject", newData);
         const userData = localStorage.getItem("osazeUserObject");

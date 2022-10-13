@@ -147,7 +147,7 @@ const MaleProductItems = () => {
                         setCustomDesign(e.target.value);
                       }}
                     >
-                      <option className="h-12" disabled defaultValue hidden>
+                      <option className="h-12" disabled defaultValue >
                         Choose A Custom Design
                       </option>
                       <option className="h-12" value="No Custom Design">
