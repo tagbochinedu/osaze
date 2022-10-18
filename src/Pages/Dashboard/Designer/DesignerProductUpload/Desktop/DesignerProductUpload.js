@@ -15,7 +15,7 @@ const DesignerProductUpload = () => {
   const [price, setPrice] = useState(0);
   const [description, setDescription] = useState("");
   const [fabric, setFabric] = useState("");
-  const [fabricArray, setFabricArray] = useState([])
+  const [fabricArray, setFabricArray] = useState([]);
   const [customization, setCustomization] = useState([]);
   const [sizes, setSizes] = useState([]);
   const [category, setCategory] = useState("");
@@ -77,14 +77,15 @@ const DesignerProductUpload = () => {
     fabricArray.forEach((fabric) => {
       formData.append("fabrics", fabric);
     });
-    console.log(formData, 'hello')
+
     try {
+      console.log("hello");
       const endpoint =
-        "https://osazeapi.herokuapp.com/api/designer/createproduct";
+        "https://osazebackendcapi.herokuapp.com/api/designer/createproduct";
       const requestConfiguration = {
         method: "POST",
         headers: {
-          'Authorization': `Bearer ${token}`,
+          Authorization: `Bearer ${token}`,
         },
         body: formData,
       };
