@@ -158,7 +158,7 @@ const DesignersSignup = () => {
           </div>
         )}
       </div>
-      <div className="max-w-md md:max-w-xl border-2 rounded-lg my-20 shadow-lg glass pt-4 pb-8 px-3  md:px-6 shadow-gray-200 mx-auto">
+      <div className="max-w-md md:max-w-lg border-2 rounded-lg my-20 shadow-lg glass pt-4 pb-8 px-3  md:px-6 shadow-gray-200 mx-auto">
         <h1 className="text-2xl text-center text-header my-6 font-bold font-julius">
           Register as a Designer
         </h1>

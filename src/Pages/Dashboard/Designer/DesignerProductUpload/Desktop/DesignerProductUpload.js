@@ -64,7 +64,6 @@ const DesignerProductUpload = () => {
 
   const submitHandler = async (e) => {
     e.preventDefault();
-
     setImages((prev) => [...prev, image]);
     const formData = new FormData();
     formData.append("name", name);
@@ -78,14 +77,14 @@ const DesignerProductUpload = () => {
     fabricArray.forEach((fabric) => {
       formData.append("fabrics", fabric);
     });
+    console.log(formData, 'hello')
     try {
       const endpoint =
         "https://osazeapi.herokuapp.com/api/designer/createproduct";
       const requestConfiguration = {
         method: "POST",
         headers: {
-          "Content-type": "application/json",
-          Authorization: `Bearer ${token}`,
+          'Authorization': `Bearer ${token}`,
         },
         body: formData,
       };

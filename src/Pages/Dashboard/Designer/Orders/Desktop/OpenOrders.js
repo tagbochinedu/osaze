@@ -11,7 +11,7 @@ const OpenOrders = () => {
     const fetchHandler = async () => {
       try {
         const request = await fetch(
-          "https://osazebackendapi.herokuapp.com/api/designer/allorders",
+          "https://osazebackendapi.herokuapp.com/api/designer/requests",
           {
             method: "GET",
             headers: {
