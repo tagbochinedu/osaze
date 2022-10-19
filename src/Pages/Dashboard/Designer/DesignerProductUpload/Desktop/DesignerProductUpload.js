@@ -65,27 +65,28 @@ const DesignerProductUpload = () => {
   const submitHandler = async (e) => {
     e.preventDefault();
     setImages((prev) => [...prev, image]);
-    const formData = new FormData();
+    let formData = new FormData();
     formData.append("name", name);
     formData.append("price", price);
     formData.append("description", description);
     formData.append("image", image);
-    formData.append("customization", customization);
+    
     formData.append("category", category);
     formData.append("subCategory", subCategory);
-    formData.append("sizes", sizes);
-    fabricArray.forEach((fabric) => {
-      formData.append("fabrics", fabric);
-    });
+    
+    
+    for(let [name, value] of formData) {
+  console.log(`${name} = ${value}`);
+}
 
     try {
-      console.log("hello");
+      console.log(name, price, description, image, customization, category, subCategory, sizes, fabric);
       const endpoint =
-        "https://osazebackendcapi.herokuapp.com/api/designer/createproduct";
+        "https://osazebackendapi.herokuapp.com/api/designer/createproduct";
       const requestConfiguration = {
         method: "POST",
         headers: {
-          Authorization: `Bearer ${token}`,
+          'Authorization': `Bearer ${token}`,
         },
         body: formData,
       };
@@ -164,7 +165,7 @@ const DesignerProductUpload = () => {
             <div className="px-3">
               <h2 className="text-center font-semibold">Product Upload Form</h2>
             </div>
-            <form onSubmit={submitHandler}>
+            <div>
               <div className="mt-6 mb-12 min-h-40 px-6">
                 <div className="grid grid-cols-2 gap-4">
                   <div className="relative z-0 mb-6">
@@ -691,7 +692,8 @@ const DesignerProductUpload = () => {
                   </label>
                 </div>
               </div>
-              <div className="px-6 ">
+             
+            </div> <div className="px-6 " onClick={submitHandler}>
                 <button
                   type="submit"
                   className="w-full bg-header text-white font-semibold py-2 rounded active:bg-headerHover"
@@ -699,7 +701,6 @@ const DesignerProductUpload = () => {
                   SUBMIT
                 </button>
               </div>
-            </form>
           </div>
         </div>
       </div>

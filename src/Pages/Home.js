@@ -15,7 +15,7 @@ const Home = () => {
         {ImagePreview.map((image) => {
           return (
             <div
-              className=" p-2 md:p-4 bg-white border-2 border-black my-4 mx-auto hover:scale-110 hover:rounded-md transition-all ease-in-out duration-300"
+              className=" bg-white border-2 border-black my-4 mx-auto hover:scale-110 transition-all ease-in-out duration-300"
               key={image.id}
             >
               <img className="h-40 md:h-64 w-36 md:w-60" src={image.url} alt="preview" />
@@ -34,16 +34,16 @@ const Home = () => {
         <div className='flex flex-wrap justify-around'>
           {ImageGrid.map((gridImage) => {
             return (
-              <div className="flip-card w-44 md:w-60 h-80  my-4 mx-auto hover:rounded-sm" key={gridImage.id}>
-                <div className="flip-card-inner h-full w-full relative text-center rounded-sm">
-                  <div className="flip-card-front absolute w-full h-full rounded-sm text-black">
+              <div className="flip-card w-44 md:w-60 h-80  my-4 mx-auto" key={gridImage.id}>
+                <div className="flip-card-inner h-full w-full relative text-center ">
+                  <div className="flip-card-front absolute w-full h-full  text-black">
                     <img
                       src={gridImage.url}
                       alt={gridImage.name}
-                      className="w-full h-full rounded-sm"
+                      className="w-full h-full "
                     />
                   </div>
-                  <div className="flip-card-back absolute w-full h-full text-black rounded-sm md:px-12 py-24">
+                  <div className="flip-card-back absolute w-full h-full text-black md:px-12 py-24">
                     <h1 className='text-2xl font-semibold font-merri'>{gridImage.name}</h1>
                     <p className='text-lg mt-4 mb-6 font-semibold'>${gridImage.price}</p>
                     <Link

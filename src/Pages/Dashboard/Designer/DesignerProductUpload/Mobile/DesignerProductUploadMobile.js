@@ -78,7 +78,7 @@ const DesignerProductUpload = () => {
     });
     try {
       const endpoint =
-        "https://osazeapi.herokuapp.com/api/designer/updatebusinessinfo";
+        "https://osazebackendapi.herokuapp.com/api/designer/createproduct";
       const requestConfiguration = {
         method: "PATCH",
         headers: {
