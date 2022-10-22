@@ -70,14 +70,12 @@ const DesignerProductUpload = () => {
     formData.append("price", price);
     formData.append("description", description);
     formData.append("image", image);
-    
+    formData.append("customization", customization);
     formData.append("category", category);
-    formData.append("subCategory", subCategory);
-    
-    
-    for(let [name, value] of formData) {
-  console.log(`${name} = ${value}`);
-}
+    formData.append("sizes", sizes);
+    fabricArray.forEach((fabric) => {
+      formData.append("fabrics", fabric);
+    });
 
     try {
       console.log(name, price, description, image, customization, category, subCategory, sizes, fabric);
@@ -161,7 +159,7 @@ const DesignerProductUpload = () => {
           </div>
         </div>
         <div className="rounded-sm mt-12 py-6">
-          <div className="border border-gray-300 rounded-sm py-6">
+          <form className="border border-gray-300 rounded-sm py-6">
             <div className="px-3">
               <h2 className="text-center font-semibold">Product Upload Form</h2>
             </div>
@@ -244,7 +242,7 @@ const DesignerProductUpload = () => {
                     </label>
                     <button
                       type="button"
-                      className="rounded text-white w-2/12 px-4 py-1 font-semibold bg-header active:bg-headerHover cursor-pointer ml-3"
+                      className="rounded text-white w-2/12 px-2 text-center py-1 font-semibold bg-header active:bg-headerHover cursor-pointer ml-3"
                       onClick={() => {
                         setImageValue("");
                         setFabricArray((prev) => [...prev, fabric]);
@@ -257,7 +255,7 @@ const DesignerProductUpload = () => {
                   </div>
                   <div className="w-6/12">
                     <select
-                      className="border-2 border-gray-300 w-full h-12 text-sm text-gray-500 my-4"
+                      className="border-2 border-gray-300 w-full h-12 text-sm text-gray-500"
                       onChange={(e) => {
                         setSubCategory(e.target.value);
                       }}
@@ -692,8 +690,7 @@ const DesignerProductUpload = () => {
                   </label>
                 </div>
               </div>
-             
-            </div> <div className="px-6 " onClick={submitHandler}>
+             <div className="px-6 " onClick={submitHandler}>
                 <button
                   type="submit"
                   className="w-full bg-header text-white font-semibold py-2 rounded active:bg-headerHover"
@@ -701,7 +698,8 @@ const DesignerProductUpload = () => {
                   SUBMIT
                 </button>
               </div>
-          </div>
+            </div> 
+          </form>
         </div>
       </div>
     </Card>
