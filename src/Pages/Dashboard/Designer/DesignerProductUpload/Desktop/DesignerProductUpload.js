@@ -72,13 +72,14 @@ const DesignerProductUpload = () => {
     formData.append("image", image);
     formData.append("customization", customization);
     formData.append("category", category);
+    formData.append("subCategory", subCategory);
     formData.append("sizes", sizes);
     fabricArray.forEach((fabric) => {
       formData.append("fabrics", fabric);
     });
+    
 
     try {
-      console.log(name, price, description, image, customization, category, subCategory, sizes, fabric);
       const endpoint =
         "https://osazebackendapi.herokuapp.com/api/designer/createproduct";
       const requestConfiguration = {
@@ -88,8 +89,7 @@ const DesignerProductUpload = () => {
         },
         body: formData,
       };
-      const request = await fetchHandler(endpoint, requestConfiguration);
-      const response = await request.json();
+      const response = await fetchHandler(endpoint, requestConfiguration)
 
       console.log(response);
       if (response.success === "success") {
@@ -120,6 +120,9 @@ const DesignerProductUpload = () => {
     setCustomChecked7(false);
     setCategory("");
     setSubCategory("");
+    setSizes([])
+    setCustomization([])
+    setFabricArray([])
   };
   return (
     <Card pageTitle="Product Uploader">
