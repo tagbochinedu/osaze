@@ -14,7 +14,7 @@ const Dashboard = () => {
   const { userData } = useAuth();
   return (
     <div className="relative flex justify-between font-merri md:px-3 md:py-1 lg:px-6 lg:py-4">
-      <div className=" max-h-[70vh] w-full md:border lg:border-2 border-gray-200 md:shadow-md shadow-gray-200 lg:rounded-lg md:w-3/12 lg:w-2/12 bg-header text-white">
+      <div className=" h-[91vh] md:h-64 w-full md:border lg:border-2 border-gray-200 md:shadow-md shadow-gray-200 lg:rounded-lg md:w-3/12 lg:w-2/12 bg-header text-white">
         <h1 className="border-b border-gray-400 font-bold py-4 px-6 text-xl uppercase text-white block md:hidden">
           Profile
         </h1>

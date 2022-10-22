@@ -38,17 +38,17 @@ const MaleProductItems = () => {
   //Add-to-Cart Functionality
   const cartHandler = async () => {
     const cartItem = {
-      designer: menProductItem.designer,
-      name: menProductItem.name,
+      designer: menProductItem[0].designer,
+      name: menProductItem[0].name,
       image: "",
-      price: menProductItem.price,
+      price: menProductItem[0].price,
       customDesign: customDesign,
       fabric: fabric,
       qty: qty,
       size: size,
       custom: custom,
     };
-    console.log(userData.bodyProfile)
+    console.log(cartItem)
     try {
       const endpoint =
         "https://osazebackendapi.herokuapp.com/api/customer/cart/add";

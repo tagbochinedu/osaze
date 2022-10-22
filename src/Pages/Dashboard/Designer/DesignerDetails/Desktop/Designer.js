@@ -101,7 +101,7 @@ const Designer = () => {
                 </div>
               </div>
             </div>
-            <div className="border-2 border-border-gray-300 rounded-sm min-h-40 mb-6">
+            <div className="border-2 border-gray-300 rounded-sm min-h-40 mb-6">
               <div className=" border-b-2 border-gray-300 flex justify-between py-1 px-2 ">
                 <h2 className="w-11/12 text-lg font-semibold">
                   Business Information
@@ -131,7 +131,7 @@ const Designer = () => {
                 </div>
               </div>
             </div>
-            <div className="border-2 border-border-gray-300 rounded-sm mb-6 ">
+            <div className="border-2 border-gray-300 rounded-sm mb-6 ">
               <div className=" border-b-2 border-gray-300 py-1 px-2">
                 <h2 className="w-11/12 text-lg font-semibold">
                   Contact Information

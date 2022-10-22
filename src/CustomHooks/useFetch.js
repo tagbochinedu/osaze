@@ -4,10 +4,10 @@ const useFetch = () => {
       method: requestConfiguration.method ? requestConfiguration.method : "GET",
       body:
         requestConfiguration.body &&
-        requestConfiguration.headers["Content-Type"]
+        requestConfiguration.headers["Content-type"]
           ? JSON.stringify(requestConfiguration.body)
           : requestConfiguration.body &&
-            !requestConfiguration.headers["Content-Type"]
+            !requestConfiguration.headers["Content-type"]
           ? requestConfiguration.body
           : null,
       headers: requestConfiguration.headers ? requestConfiguration.headers : {},

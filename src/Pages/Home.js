@@ -21,7 +21,7 @@ const Home = () => {
               <img className="h-40 md:h-64 w-36 md:w-60" src={image.url} alt="preview" />
               <div className="text-center my-2">
                 <h4 className="font-bold text-center mb-6 font-merri">{image.name}</h4>
-                <Link to="" className="bg-black text-white mt-6 px-1.5 py-1.5">
+                <Link to={`/${image.name}`} className="bg-black text-white mt-6 px-1.5 py-1.5">
                   Shop
                 </Link>
               </div>

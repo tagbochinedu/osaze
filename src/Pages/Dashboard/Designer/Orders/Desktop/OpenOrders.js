@@ -35,10 +35,10 @@ const OpenOrders = () => {
   }, [token]);
 
   return (
-    <div className="min-h-[45vh] flex justify-center items-center text-gray-300 text-xl animate-pulse">
+    <div className="min-h-[57vh] flex justify-center items-center text-gray-300 text-xl animate-pulse">
       {openOrders.length === 0 ? (
         <div>
-          <p>No orders have been completed</p>
+          <p>There are no pending orders</p>
         </div>
       ) : (
         openOrders.map((order) => {

@@ -6,9 +6,10 @@ import { useAuth } from "../../../../../Context/AuthenticationContext";
 
 const DesignerProductUpload = () => {
   const { setImageFullScreen, setImageSource } = useImageAuth();
-  const { fetchHandler } = useFetch();
-  const { setLoading, token } = useAuth();
+  const fetchHandler = useFetch();
+  const { token } = useAuth();
   const [images, setImages] = useState([]);
+  const [loading, setLoading] = useState(false)
 
   //product upload state
   const [name, setName] = useState("");
@@ -63,7 +64,7 @@ const DesignerProductUpload = () => {
 
   const submitHandler = async (e) => {
     e.preventDefault();
-
+setLoading(true)
     setImages((prev) => [...prev, image]);
     const formData = new FormData();
     formData.append("name", name);
@@ -82,7 +83,6 @@ const DesignerProductUpload = () => {
       const requestConfiguration = {
         method: "PATCH",
         headers: {
-          "Content-type": "application/json",
           Authorization: `Bearer ${token}`,
         },
         body: formData,
@@ -664,12 +664,25 @@ const DesignerProductUpload = () => {
                 </div>
               </div>
               <div className="px-6 ">
-                <button
-                  type="submit"
-                  className="w-full bg-header text-white font-semibold py-2 rounded active:bg-headerHover"
+              <button
+            type="submit"
+            className="text-white bg-header active:bg-headerHover mx-1 transition ease-in-out duration-150 font-medium rounded-lg text-sm block w-full px-5 py-2.5 text-center"
+          >
+            {loading ? (
+              <div className="flex justify-center items-center">
+                <div
+                  className="spinner-border animate-spin inline-block w-8 h-8 border-4 rounded-full"
+                  role="status"
                 >
-                  SUBMIT
-                </button>
+                  <span className="bg-inherit ml-2 text-xs text-header">
+                    Load
+                  </span>
+                </div>
+              </div>
+            ) : (
+              <p>Submit</p>
+            )}
+          </button>
               </div>
             </form>
           </div>

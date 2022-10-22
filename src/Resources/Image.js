@@ -1,7 +1,6 @@
-import Men from "../Resources/man.jpeg";
-import Women from "../Resources/woman.jpeg";
-import Couples from "../Resources/couples.jpeg";
-import Accessories from "../Resources/accessories.jpg";
+import Men from "./man.jpeg";
+import Women from "./woman.jpeg";
+import Accessories from "./accessories.jpg";
 
 import img1 from "../Resources/img1.jpeg";
 import img2 from "../Resources/img2.jpeg";
@@ -17,7 +16,6 @@ import img10 from "../Resources/img10.jpeg";
 export const ImagePreview = [
   { name: "Women", url: Women, id: 1 },
   { name: "Men", url: Men, id: 2 },
-  { name: "Couples", url: Couples, id: 3 },
   { name: "Accessories", url: Accessories, id: 4 },
 ];
 

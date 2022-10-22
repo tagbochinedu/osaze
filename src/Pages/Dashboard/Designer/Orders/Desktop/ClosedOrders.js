@@ -35,10 +35,10 @@ const   ClosedOrders = () => {
   }, [token])
  
   return (
-    <div className="min-h-[45vh] flex justify-center items-center text-gray-300 text-xl animate-pulse">
+    <div className="min-h-[57vh] flex justify-center items-center text-gray-300 text-xl animate-pulse">
       { closedOrders.length === 0 ? (
         <div>
-          <p>No orders have been placed</p>
+          <p>There are no complete orders</p>
         </div>
       ) : (
           closedOrders.map((order) => {
